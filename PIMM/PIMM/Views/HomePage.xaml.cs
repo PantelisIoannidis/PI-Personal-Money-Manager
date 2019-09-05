@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PIMM.Common.Helpers;
+using PIMM.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,13 @@ namespace PIMM
         public HomePage()
         {
             InitializeComponent();
+            
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            //label1.Text = FontAwesomeRegular.Stickynote;
+            //label1.FontFamily = FontAwesome.FontName();
         }
     }
 }
