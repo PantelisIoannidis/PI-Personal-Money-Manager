@@ -8,43 +8,46 @@ namespace PIMM.Helpers
 {
     public static class FontAwesome
     {
-
-        public static string FontName()
-        {
-            string fontName = "";
-            switch (Device.RuntimePlatform)
-            {
-                
-                case Device.Android:
-                    fontName = FontAwesomeRegular.FontNameAndroid;
-                    break;
-                case Device.iOS:
-                    fontName = FontAwesomeRegular.FontNameiOS;
-                    break;
-                case Device.UWP:
-                    fontName = FontAwesomeRegular.FontNameUWP;
-                    break;
-            }
-            return fontName;
-        }
-
-        public static string FontNameBrand()
-        {
-            string fontName = "";
-            switch (Device.RuntimePlatform)
+        public static string FontName { get
             {
 
-                case Device.Android:
-                    fontName = FontAwesomeRegular.FontNameAndroid;
-                    break;
-                case Device.iOS:
-                    fontName = FontAwesomeRegular.FontNameiOS;
-                    break;
-                case Device.UWP:
-                    fontName = FontAwesomeRegular.FontNameUWP;
-                    break;
+                switch (Device.RuntimePlatform)
+                {
+
+                    case Device.Android:
+                        return FontAwesomeSolid.FontNameAndroid;
+                        break;
+                    case Device.iOS:
+                        return FontAwesomeSolid.FontNameiOS;
+                        break;
+                    case Device.UWP:
+                        return FontAwesomeSolid.FontNameUWP;
+                        break;
+                };
+                return FontAwesomeSolid.FontNameAndroid;
+            } }
+
+
+        public static string FontNameBrand
+        {
+            get
+            {
+
+                switch (Device.RuntimePlatform)
+                {
+
+                    case Device.Android:
+                        return FontAwesomeBrand.FontNameAndroid;
+                        break;
+                    case Device.iOS:
+                        return FontAwesomeBrand.FontNameiOS;
+                        break;
+                    case Device.UWP:
+                        return FontAwesomeBrand.FontNameUWP;
+                        break;
+                };
+                return FontAwesomeBrand.FontNameAndroid;
             }
-            return fontName;
         }
 
     }

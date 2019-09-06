@@ -146,6 +146,9 @@
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="Xamarin.Forms.DataGrid">
+      <Version>3.1.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PIMM\PIMM.csproj">
@@ -154,13 +157,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Font Awesome 5 Brands-Regular-400.otf" />
+    <Content Include="Assets\FontAwesome5Brands.otf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Font Awesome 5 Free-Regular-400.otf" />
+    <Content Include="Assets\FontAwesome5Regular.otf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Font Awesome 5 Free-Solid-900.otf" />
+    <Content Include="Assets\FontAwesome5Solid.otf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

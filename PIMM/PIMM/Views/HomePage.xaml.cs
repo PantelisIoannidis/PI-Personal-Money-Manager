@@ -1,5 +1,6 @@
 ﻿using PIMM.Common.Helpers;
 using PIMM.Helpers;
+using PIMM.Model.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,12 @@ namespace PIMM
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        
         public HomePage()
         {
             InitializeComponent();
-            
-        }
+
+                    }
         protected override void OnAppearing()
         {
             base.OnAppearing();
