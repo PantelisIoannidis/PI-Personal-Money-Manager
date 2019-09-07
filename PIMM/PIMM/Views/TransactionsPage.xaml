@@ -23,15 +23,16 @@
                      Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <ContentView x:Name="PortraitView" Padding="20">
-
+        <!---->
         <dg:DataGrid x:Name="transactionDatagrid"
                      ItemsSource="{Binding Transactions}" 
                      SelectionEnabled="True" 
                      SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
-                     RowHeight="70" HeaderHeight="50" BorderColor="Transparent" HeaderBackground="#E0E6F8"
-				    PullToRefreshCommand="{Binding RefreshCommand}" 
+                     RowHeight="50" HeaderHeight="50" 
+                     BorderColor="Transparent" HeaderBackground="#E0E6F8"
+				     PullToRefreshCommand="{Binding RefreshCommand}" 
                      IsRefreshing="{Binding IsRefreshing}"
-					ActiveRowColor="#8899AA" 
+					 ActiveRowColor="#8899AA" 
                      ItemSelected="DataGrid_ItemSelected">
             <x:Arguments>
                 <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
@@ -55,16 +56,24 @@
                         </DataTemplate>
                     </dg:DataGridColumn.CellTemplate>
                 </dg:DataGridColumn>
-                <dg:DataGridColumn Title="Category" PropertyName="CategoryDescription"  Width="3*" />
-                <dg:DataGridColumn Title="Subcategory" PropertyName="SubcategoryDescription"  Width="3*"/>
+                <!--<dg:DataGridColumn Title="Category" PropertyName="CategoryDescription"  Width="3*" />
+                <dg:DataGridColumn Title="Subcategory" PropertyName="SubcategoryDescription"  Width="3*"/>-->
                 <dg:DataGridColumn Title="Description" PropertyName="Description"  Width="4*"/>
-                <dg:DataGridColumn Title="Date" PropertyName="TransactionDate"  Width="3*"/>
+                <dg:DataGridColumn Title="Date" PropertyName="TransactionDate"  Width="2*">
+                    <dg:DataGridColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentView HorizontalOptions="Fill" VerticalOptions="Fill">
+                                <Label Text="{Binding Converter={StaticResource DateFormatConverter}}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                            </ContentView>
+                        </DataTemplate>
+                    </dg:DataGridColumn.CellTemplate>
+                </dg:DataGridColumn>
                 <dg:DataGridColumn Title="Amount" PropertyName="Amount" Width="2*">
                     <dg:DataGridColumn.CellTemplate>
                         <DataTemplate>
                             <ContentView HorizontalOptions="Fill" VerticalOptions="Fill" 
 						        BackgroundColor="{Binding Converter={StaticResource AmountToColorConverter}}">
-                                <Label Text="{Binding}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                                <Label Text="{Binding Converter={StaticResource AmountFormatConverter}}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
                             </ContentView>
                         </DataTemplate>
                     </dg:DataGridColumn.CellTemplate>
@@ -79,6 +88,8 @@
             <dg:DataGrid.Resources>
                 <ResourceDictionary>
                     <conv:AmountToColorConverter x:Key="AmountToColorConverter"/>
+                    <conv:AmountFormatConverter x:Key="AmountFormatConverter"/>
+                    <conv:DateFormatConverter x:Key="DateFormatConverter"/>
                 </ResourceDictionary>
             </dg:DataGrid.Resources>
         </dg:DataGrid>

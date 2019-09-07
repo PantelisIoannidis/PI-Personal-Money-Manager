@@ -80,8 +80,8 @@ namespace PIMM.Models.ViewModels
                 return;
             SelectedTransaction = null;
 
-            var response = await _pageService.DisplayActionSheet("What do you want to do?", "Cancel", null, "Delete",
-                  "Edit");
+            var response = await _pageService.DisplayActionSheet("What do you want to do?", "Cancel", null, 
+                "Details","Delete","Edit");
 
             switch (response)
             {
