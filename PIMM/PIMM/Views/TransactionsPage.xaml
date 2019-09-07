@@ -9,17 +9,22 @@
              mc:Ignorable="d"
              x:Class="PIMM.TransactionsPage">
     <ContentView x:Name="PortraitView" Padding="20">
-        <dg:DataGrid ItemsSource="{Binding Transactions}" SelectionEnabled="True" SelectedItem="{Binding SelectedTransaction}"
+        <dg:DataGrid x:Name="transactionDatagrid"
+                     ItemsSource="{Binding Transactions}" 
+                     SelectionEnabled="True" 
+                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                      RowHeight="70" HeaderHeight="50" BorderColor="Transparent" HeaderBackground="#E0E6F8"
-						 PullToRefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
-						 ActiveRowColor="#8899AA" ItemSelected="DataGrid_ItemSelected">
+				    PullToRefreshCommand="{Binding RefreshCommand}" 
+                     IsRefreshing="{Binding IsRefreshing}"
+					ActiveRowColor="#8899AA" 
+                     ItemSelected="DataGrid_ItemSelected">
             <x:Arguments>
                 <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
             </x:Arguments>
             <dg:DataGrid.HeaderFontSize>
                 <OnIdiom  x:TypeArguments="x:Double">
                     <OnIdiom.Tablet>15</OnIdiom.Tablet>
-                    <OnIdiom.Phone>15</OnIdiom.Phone>
+                    <OnIdiom.Phone>12</OnIdiom.Phone>
                 </OnIdiom>
             </dg:DataGrid.HeaderFontSize>
             <dg:DataGrid.Columns>

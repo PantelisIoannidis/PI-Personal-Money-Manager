@@ -1,4 +1,5 @@
-﻿using PIMM.Model.ViewModels;
+﻿using PIMM.Models.ViewModels;
+using PIMM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

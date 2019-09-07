@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PIMM.Model.ViewModels
+namespace PIMM.Models.ViewModels
 {
     public class TransactionViewModel
     {

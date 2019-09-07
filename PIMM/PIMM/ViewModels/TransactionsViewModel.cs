@@ -1,4 +1,4 @@
-﻿using PIMM.Model.ViewModels;
+﻿using PIMM.ViewModels;
 using PIMM.ViewModels;
 using PIMM.Views;
 using System;
@@ -14,9 +14,12 @@ namespace PIMM.Models.ViewModels
     public class TransactionsViewModel : INotifyPropertyChanged
     {
         private List<TransactionViewModel> transactions;
-        private TransactionViewModel selectedItem;
+        private TransactionViewModel selectedTransaction;
         private readonly IPageService _pageService;
         private bool isRefreshing;
+
+        public ICommand RefreshCommand { get; set; }
+        public ICommand SelectTransactionCommand { get; private set; }
 
         public List<TransactionViewModel> Transactions
         {
@@ -26,10 +29,11 @@ namespace PIMM.Models.ViewModels
 
         public TransactionViewModel SelectedTransaction
         {
-            get { return selectedItem; }
+            get { return selectedTransaction; }
             set
             {
-                selectedItem = value;
+                selectedTransaction = value;
+                OnPropertyChanged(nameof(SelectedTransaction));
             }
         }
 
@@ -39,8 +43,7 @@ namespace PIMM.Models.ViewModels
             set { isRefreshing = value; OnPropertyChanged(nameof(IsRefreshing)); }
         }
 
-        public ICommand RefreshCommand { get; set; }
-        public ICommand SelectTransactionCommand { get; private set; }
+        
 
         public TransactionsViewModel(List<TransactionViewModel> transactions, IPageService pageService)
         {

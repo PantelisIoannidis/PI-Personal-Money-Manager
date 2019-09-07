@@ -1,6 +1,6 @@
 ﻿using PIMM.Common.Helpers;
 using PIMM.Helpers;
-using PIMM.Model.ViewModels;
+using PIMM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

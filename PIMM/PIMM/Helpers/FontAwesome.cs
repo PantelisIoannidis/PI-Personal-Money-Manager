@@ -16,13 +16,10 @@ namespace PIMM.Helpers
 
                     case Device.Android:
                         return FontAwesomeSolid.FontNameAndroid;
-                        break;
                     case Device.iOS:
                         return FontAwesomeSolid.FontNameiOS;
-                        break;
                     case Device.UWP:
                         return FontAwesomeSolid.FontNameUWP;
-                        break;
                 };
                 return FontAwesomeSolid.FontNameAndroid;
             } }
@@ -38,13 +35,10 @@ namespace PIMM.Helpers
 
                     case Device.Android:
                         return FontAwesomeBrand.FontNameAndroid;
-                        break;
                     case Device.iOS:
                         return FontAwesomeBrand.FontNameiOS;
-                        break;
                     case Device.UWP:
                         return FontAwesomeBrand.FontNameUWP;
-                        break;
                 };
                 return FontAwesomeBrand.FontNameAndroid;
             }
