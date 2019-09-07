@@ -20,6 +20,9 @@ namespace PIMM.Models.ViewModels
 
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectTransactionCommand { get; private set; }
+        public ICommand NewTransactionCommand { get; private set; }
+        public ICommand MoneyTransferCommand { get; private set; }
+        public ICommand AdjustmentCommand { get; private set; }
 
         public List<TransactionViewModel> Transactions
         {
@@ -51,6 +54,24 @@ namespace PIMM.Models.ViewModels
             _pageService = pageService;
             RefreshCommand = new Command(CmdRefresh);
             SelectTransactionCommand = new Command<TransactionViewModel>(async vm => await SelectTransaction(vm));
+            NewTransactionCommand = new Command(NewTransaction);
+            MoneyTransferCommand = new Command(MoneyTransfer);
+            AdjustmentCommand = new Command(Adjustment);
+        }
+
+        private void Adjustment()
+        {
+            
+        }
+
+        private void MoneyTransfer()
+        {
+            
+        }
+
+        private void NewTransaction()
+        {
+            
         }
 
         private async Task SelectTransaction(TransactionViewModel transaction)
@@ -58,7 +79,22 @@ namespace PIMM.Models.ViewModels
             if (transaction == null)
                 return;
             SelectedTransaction = null;
-            await _pageService.PushAsync(new TransactionDetailsPage(transaction));
+
+            var response = await _pageService.DisplayActionSheet("What do you want to do?", "Cancel", null, "Delete",
+                  "Edit");
+
+            switch (response)
+            {
+                case "Delete":
+                    var deleteConfirmation = await _pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
+                    //if(deleteConfirmation)
+                    break;
+                case "Edit":
+                    await _pageService.PushAsync(new TransactionDetailsPage(transaction));
+                    break;
+                default:
+                    break;
+            }
         }
 
         private async void CmdRefresh()

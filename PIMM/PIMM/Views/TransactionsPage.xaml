@@ -8,7 +8,22 @@
              xmlns:fa="clr-namespace:PIMM.Helpers"
              mc:Ignorable="d"
              x:Class="PIMM.TransactionsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="plus.png" 
+                     Text="New Transaction"
+                     Command="{Binding NewTransactionCommand}"
+                     Order="Primary"/>
+        <ToolbarItem Icon="plus.png" 
+                     Text="Money Transfer"
+                     Command="{Binding MoneyTransferCommand}"
+                     Order="Secondary"/>
+        <ToolbarItem Icon="plus.png" 
+                     Text="Adjustment"
+                     Command="{Binding AdjustmentCommand}" 
+                     Order="Secondary"/>
+    </ContentPage.ToolbarItems>
     <ContentView x:Name="PortraitView" Padding="20">
+
         <dg:DataGrid x:Name="transactionDatagrid"
                      ItemsSource="{Binding Transactions}" 
                      SelectionEnabled="True" 

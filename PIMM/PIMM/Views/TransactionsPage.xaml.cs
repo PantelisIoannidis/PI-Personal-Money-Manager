@@ -56,33 +56,18 @@ namespace PIMM
             }
         }
 
-        private async void DataGrid_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void DataGrid_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 
         {
-            if (transactionDatagrid.SelectedItem == null)
-                return;
-
-            var response = await DisplayActionSheet("What do you want to do?", "Cancel",null, "Delete",
-                  "Edit");
-            Debug.WriteLine("Action: " + response);
-            switch (response)
-            {
-                case "Delete":
-                    Debug.WriteLine("delete ");
-                    break;
-                case "Edit":
-                    Debug.WriteLine("edit ");
-                    (BindingContext as TransactionsViewModel).SelectTransactionCommand.Execute(e.SelectedItem);
-                    break;
-                default:
-                    Debug.WriteLine("default ");
-                    break;
-            }
-            (BindingContext as TransactionsViewModel).SelectedTransaction = null;
-
+            ViewModel.SelectTransactionCommand.Execute(e.SelectedItem);
+        }
+        public TransactionsViewModel ViewModel
+        {
+            get { return BindingContext as TransactionsViewModel; }
+            set { BindingContext = value; }
         }
 
-        private List<TransactionViewModel> GetSampleData(){
+    private List<TransactionViewModel> GetSampleData(){
             return  new List<TransactionViewModel>() {
                 new TransactionViewModel{
                     Id=1,
@@ -227,6 +212,5 @@ namespace PIMM
             };
 
         }
-
     }
 }
