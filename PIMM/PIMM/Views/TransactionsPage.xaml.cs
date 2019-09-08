@@ -79,8 +79,6 @@ namespace PIMM
                     },
                     Description = "bla Description 111",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 111",
-                    SubcategoryDescription = "bla SubCategory 111",
                     Amount= 100
                 },
                 new TransactionViewModel{
@@ -93,8 +91,6 @@ namespace PIMM
                     },
                     Description = "bla Description 222",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 222",
-                    SubcategoryDescription = "bla SubCategory 222",
                     Amount= -50
                 },
                 new TransactionViewModel{
@@ -107,8 +103,6 @@ namespace PIMM
                     },
                     Description = "bla Description 333",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 333",
-                    SubcategoryDescription = "bla SubCategory 333",
                     Amount= 0
                 },
                 new TransactionViewModel{
@@ -121,8 +115,6 @@ namespace PIMM
                     },
                     Description = "bla Description 444",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 444",
-                    SubcategoryDescription = "bla SubCategory 444",
                     Amount= -25
                 },
                 new TransactionViewModel{
@@ -135,8 +127,6 @@ namespace PIMM
                     },
                     Description = "bla Description 555",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 555",
-                    SubcategoryDescription = "bla SubCategory 555",
                     Amount= 20
                 },
                 new TransactionViewModel{
@@ -149,8 +139,6 @@ namespace PIMM
                     },
                     Description = "bla Description 666",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 666",
-                    SubcategoryDescription = "bla SubCategory 666",
                     Amount= -5
                 },
                 new TransactionViewModel{
@@ -163,8 +151,6 @@ namespace PIMM
                     },
                     Description = "bla Description 777",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 777",
-                    SubcategoryDescription = "bla SubCategory 777",
                     Amount= 0
                 },
                 new TransactionViewModel{
@@ -177,8 +163,6 @@ namespace PIMM
                     },
                     Description = "bla Description 888",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 888",
-                    SubcategoryDescription = "bla SubCategory 888",
                     Amount= -80
                 },
                 new TransactionViewModel{
@@ -191,8 +175,6 @@ namespace PIMM
                     },
                     Description = "bla Description 999",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category 999",
-                    SubcategoryDescription = "bla SubCategory 999",
                     Amount= 50.0m
                 },
                 new TransactionViewModel{
@@ -205,8 +187,6 @@ namespace PIMM
                     },
                     Description = "bla Description aaaa",
                     TransactionDate=DateTime.Now,
-                    CategoryDescription = "bla Category aaa",
-                    SubcategoryDescription = "bla SubCategory aaa",
                     Amount= 150.20m
                 },
             };

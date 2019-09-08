@@ -131,8 +131,16 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="scale-100\chartpie.png" />
     <Content Include="scale-100\clock.png" />
+    <Content Include="scale-100\creditcard.png" />
+    <Content Include="scale-100\dollarsign.png" />
+    <Content Include="scale-100\edit.png" />
+    <Content Include="scale-100\eye.png" />
+    <Content Include="scale-100\moneyBillWave.png" />
     <Content Include="scale-100\plus.png" />
+    <Content Include="scale-100\tag.png" />
+    <Content Include="scale-100\tools.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -148,9 +156,6 @@
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
-    <PackageReference Include="Xamarin.Forms.DataGrid">
-      <Version>3.1.0</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PIMM\PIMM.csproj">
@@ -166,6 +171,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\FontAwesome5Solid.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="scale-200\" />
+    <Folder Include="scale-400\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

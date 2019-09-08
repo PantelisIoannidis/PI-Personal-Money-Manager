@@ -65,12 +65,12 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
     <BundleResource Include="Resources\FontAwesome5Brands.otf" />
     <BundleResource Include="Resources\FontAwesome5Regular.otf" />
+    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -125,9 +125,6 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
-    <PackageReference Include="Xamarin.Forms.DataGrid">
-      <Version>3.1.0</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -135,6 +132,30 @@
       <Project>{2DA814E5-D5AA-42B7-8BE6-FBDD39CF727A}</Project>
       <Name>PIMM</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\clock%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\clock%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\plus.png" />
@@ -146,12 +167,27 @@
     <BundleResource Include="Resources\plus%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\clock.png" />
+    <BundleResource Include="Resources\chartpie.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\clock%402x.png" />
+    <BundleResource Include="Resources\creditcard.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\clock%403x.png" />
+    <BundleResource Include="Resources\dollarsign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\moneyBillWave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tools.png" />
   </ItemGroup>
 </Project>

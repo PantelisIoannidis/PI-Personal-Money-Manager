@@ -10,7 +10,20 @@ namespace PIMM
         {
             InitializeComponent();
 
-            MainPage =  new NavigationPage(new MainPage());
+            MainPage =  new NavigationPage(new MainPage()
+            {
+                //BarBackgroundColor = Color.FromHex("#2e2e2e"),
+                //SelectedTabColor = Color.FromHex("#454545"),
+                //UnselectedTabColor = Color.FromHex("#292929"),
+                BarBackgroundColor = Color.FromHex("#2e2e2e"),
+                BarTextColor = Color.White,
+                BackgroundColor = Color.Black,
+            })
+            {
+                BackgroundColor = Color.Black,
+                BarBackgroundColor = Color.Black,
+                BarTextColor=Color.White
+            };
         }
 
         protected override void OnStart()

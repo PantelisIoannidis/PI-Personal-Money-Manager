@@ -6,16 +6,15 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:PIMM"
              NavigationPage.HasNavigationBar="True"
+             Title="Personal Money Tracker"
              x:Class="PIMM.MainPage">
 
-    <local:HomePage Title="Home"/>
+    <local:HomePage Title="Overview" IconImageSource="chartpie.png" x:Name="overview"/>
 
-    <local:TransactionsPage Title="Transactions"/>
+    <local:TransactionsPage Title="Transactions" IconImageSource="dollarsign.png" x:Name="transactions"/>
 
-    <local:CategoriesPage Title="Categories"/>
+    <local:CategoriesPage Title="Categories" IconImageSource="tag.png" x:Name="categories"/>
 
-    <local:AccountsPage Title="Accounts"/>
-
-    <local:SettingsPage Title="Settings"/>
+    <local:SettingsPage Title="Settings" IconImageSource="tools.png" x:Name="settings"/>
 
 </TabbedPage>
