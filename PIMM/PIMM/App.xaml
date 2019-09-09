@@ -6,6 +6,28 @@
              mc:Ignorable="d"
              x:Class="PIMM.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <x:Int32 x:Key="borderRadius">20</x:Int32>
+            
+            <Color x:Key="barBackgroundColor">#7190bf</Color>
+            <Color x:Key="barTextColor">White</Color>
+            
+            <Color x:Key="backgroundColor">#abbdd9</Color>
+            <Color x:Key="textColor">Black</Color>
 
+            <Color x:Key="amountPositiveColor">#027041</Color>
+            <Color x:Key="amountNegativeColor">#9c1902</Color>
+            <Color x:Key="amountZeroColor">White</Color>
+            
+            
+            
+            <!--<Style x:Key="button" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource buttonBackgroundColor}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="Gray"/>
+                <Setter Property="BorderRadius" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>-->
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

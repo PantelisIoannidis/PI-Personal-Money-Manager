@@ -18,12 +18,12 @@ namespace PIMM.Views.Converters
             decimal amount = (decimal)value;
 
             if (amount < 0)
-                return Color.LightSalmon;
+                return (Color)Application.Current.Resources["amountNegativeColor"];
 
             if (amount > 0)
-                return Color.LightGreen;
+                return (Color)Application.Current.Resources["amountPositiveColor"];
 
-            return Color.White;
+            return (Color)Application.Current.Resources["amountZeroColor"];
 
         }
 

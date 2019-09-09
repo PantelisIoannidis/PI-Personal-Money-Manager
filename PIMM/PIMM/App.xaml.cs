@@ -10,19 +10,21 @@ namespace PIMM
         {
             InitializeComponent();
 
-            MainPage =  new NavigationPage(new MainPage()
+            MainPage = new NavigationPage(new MainPage()
             {
                 //BarBackgroundColor = Color.FromHex("#2e2e2e"),
                 //SelectedTabColor = Color.FromHex("#454545"),
                 //UnselectedTabColor = Color.FromHex("#292929"),
-                BarBackgroundColor = Color.FromHex("#2e2e2e"),
-                BarTextColor = Color.White,
-                BackgroundColor = Color.Black,
+
+                BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
+                BarBackgroundColor = (Color)Application.Current.Resources["barBackgroundColor"],
+                BarTextColor = (Color)Application.Current.Resources["barTextColor"],
+
             })
             {
-                BackgroundColor = Color.Black,
-                BarBackgroundColor = Color.Black,
-                BarTextColor=Color.White
+                BackgroundColor = (Color)Application.Current.Resources["backgroundColor"],
+                BarBackgroundColor = (Color)Application.Current.Resources["barBackgroundColor"],
+                BarTextColor = (Color)Application.Current.Resources["barTextColor"],
             };
         }
 

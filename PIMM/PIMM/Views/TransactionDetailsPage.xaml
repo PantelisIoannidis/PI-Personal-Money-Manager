@@ -6,10 +6,14 @@
              mc:Ignorable="d"
              x:Class="PIMM.Views.TransactionDetailsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical" Spacing="10">
+            <Grid>
+                
+            </Grid>
+            <Grid>
+                
+            </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

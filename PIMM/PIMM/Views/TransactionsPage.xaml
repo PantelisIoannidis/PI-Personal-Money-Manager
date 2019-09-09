@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
              xmlns:conv="clr-namespace:PIMM.Views.Converters;assembly=PIMM"
              xmlns:fa="clr-namespace:PIMM.Helpers"
              mc:Ignorable="d"
@@ -24,8 +23,6 @@
     </ContentPage.ToolbarItems>
     <ContentView x:Name="PortraitView" Padding="20">
         <ListView x:Name="listView"
-                  BackgroundColor="Black"
-                  SeparatorColor="#292929"
                     ItemsSource="{Binding Transactions}" 
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
@@ -49,7 +46,6 @@
                             <Label Grid.Column="0" Grid.Row="0"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
-                                   BackgroundColor="Black"
                                    FontSize="Large"
                                    Text="{Binding Icon.Name}"
                                    FontFamily="{Binding Icon.FontFamily}"
@@ -57,21 +53,16 @@
                             <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="Center"
-                                   BackgroundColor="Black"
-                                   TextColor="White"
                                    FontSize="Medium"
                                    Text="{Binding Description}"/>
                             <Label Grid.Column="2" Grid.Row="0"
                                    HorizontalTextAlignment="End"
                                    VerticalTextAlignment="Center"
-                                   BackgroundColor="Black"
-                                   TextColor="White"
                                    FontSize="Medium"
                                    Text="{Binding Path=TransactionDate,Converter={StaticResource DateFormatConverter}}" />
                             <Label Grid.Column="3" Grid.Row="0"
                                    HorizontalTextAlignment="End"
                                    VerticalTextAlignment="Center"
-                                   BackgroundColor="Black"
                                    FontSize="Medium"
                                    Text="{Binding Path=Amount,Converter={StaticResource AmountFormatConverter}}"
                                    TextColor="{Binding Amount, Converter={StaticResource AmountToColorConverter}}"/>

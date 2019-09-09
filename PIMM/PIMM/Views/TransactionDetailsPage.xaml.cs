@@ -20,6 +20,8 @@ namespace PIMM.Views
         {
             InitializeComponent();
             this.transaction = transaction;
+            BindingContext = transaction;
+            
         }
     }
 }
