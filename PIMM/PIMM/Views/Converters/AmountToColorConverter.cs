@@ -23,7 +23,7 @@ namespace PIMM.Views.Converters
             if (amount > 0)
                 return Color.LightGreen;
 
-            return Color.Transparent;
+            return Color.White;
 
         }
 
