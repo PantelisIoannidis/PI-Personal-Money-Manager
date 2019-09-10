@@ -16,21 +16,14 @@ namespace PIMM.Persistance
         {
             db = DependencyService.Get<ISQLiteDb>().GetConnection();
         }
+
         public List<TransactionViewModel> GetTransactions()
         {
-            List<TransactionViewModel> transactionsViewModel = new List<TransactionViewModel>() ;
-            var transactions = db.Table<Transaction>().ToList();
-            foreach (var tran in transactions)
-            {
-                var transactionViewModel = new TransactionViewModel();
-                transactionViewModel.MapTransaction(tran);
-                var category = db.Table<Category>().First(c => c.Id == tran.CategoryId);
-                transactionViewModel.MapCategory(category);
-                var icon = db.Table<FontIcon>().FirstOrDefault(c => c.Id == category.FontIconId);
-                transactionViewModel.MapFontIcon(icon);
-                transactionsViewModel.Add(transactionViewModel);
-            }
-            return transactionsViewModel;
+            var transactions = db.Query<TransactionViewModel>(
+                "SELECT TR.*,CA.Color,FO.Glyph,FO.FontFamily FROM 'Transaction' TR " +
+                "inner join Category CA on TR.CategoryId = CA.Id " +
+                "inner join FontIcon FO on FO.Id = CA.FontIconId " );
+            return transactions;
         }
 
     }

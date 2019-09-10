@@ -80,7 +80,7 @@ namespace PIMM.Persistance
             var icon = new FontIcon()
             {
                 FontFamily = fontFamily,
-                Name = fontName,
+                Description = fontName,
                 Glyph = fontGlyph
             };
             fontList.Add(icon);
@@ -119,11 +119,11 @@ namespace PIMM.Persistance
                 var infoName = info.ToString().Replace("System.String ", "");
                 if (info.IsStatic 
                     && !infoName.Contains("FontName")
-                    && fontAwesomeSolidIcons.Exists(c=>c.Name == infoName))
+                    && fontAwesomeSolidIcons.Exists(c=>c.Description == infoName))
                 {
                     fontAwesomeSolidIcons.Add(new FontIcon
                     {
-                        Name = infoName,
+                        Description = infoName,
                         Glyph = info.GetValue(null).ToString(),
                         FontFamily = FontAwesome.FontName,
                     });
