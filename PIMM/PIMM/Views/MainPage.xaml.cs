@@ -17,7 +17,7 @@ namespace PIMM
         public MainPage()
         {
             InitializeComponent();
-            var newDatabase = new InitializeDatabase();
+            
         }
 
 

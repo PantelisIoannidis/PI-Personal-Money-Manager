@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PIMM.Persistance
+namespace PIMM.Models
 {
     public enum TransactionType
     {

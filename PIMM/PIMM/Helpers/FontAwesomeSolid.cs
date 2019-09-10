@@ -15,23 +15,23 @@ namespace PIMM.Helpers
         public static string Exchangealt = $"\\uf362";
 
         public static string Dollarsign = $"\uf155";
-        public static string Shoppingcart = $"\\uf07a";
-        public static string Shoppingbasket = $"\\uf291";
-        public static string TShirt = $"\\uf553";
-        public static string Utensils = $"\\uf2e7";
-        public static string GasPump = $"\\uf52f";
-        public static string Dumbbell = $"\\uf44b";
-        public static string Cat = $"\\uf6be";
-        public static string Gamepad = $"\\uf11b";
-        public static string Asterisk = $"\\uf069";
-        public static string Gift = $"\\uf06b";
-        public static string Suitcase = $"\\uf0f2";
-        public static string Child = $"\\uf1ae";
-        public static string Subway = $"\\uf239";
-        public static string Home = $"\\uf015";
-        public static string PiggyBank = $"\\uf4d3";
-        public static string HandHoldingUsd = $"\\uf4c0";
-        public static string Tint = $"\\uf043";
+        public static string Shoppingcart = $"\uf07a";
+        public static string Shoppingbasket = $"\uf291";
+        public static string TShirt = $"\uf553";
+        public static string Utensils = $"\uf2e7";
+        public static string GasPump = $"\uf52f";
+        public static string Dumbbell = $"\uf44b";
+        public static string Cat = $"\uf6be";
+        public static string Gamepad = $"\uf11b";
+        public static string Asterisk = $"\uf069";
+        public static string Gift = $"\uf06b";
+        public static string Suitcase = $"\uf0f2";
+        public static string Child = $"\uf1ae";
+        public static string Subway = $"\uf239";
+        public static string Home = $"\uf015";
+        public static string PiggyBank = $"\uf4d3";
+        public static string HandHoldingUsd = $"\uf4c0";
+        public static string Tint = $"\uf043";
 
 
         //public static string Swimmer = $"\uf5c4";

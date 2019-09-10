@@ -1,13 +1,12 @@
-﻿using SQLite;
+﻿using PIMM.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PIMM.Persistance
+namespace PIMM.ViewModels
 {
-    public class Category
+    public class CategoryViewModel
     {
-        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public int FontIconId { get; set; }
         public string Color { get; set; }

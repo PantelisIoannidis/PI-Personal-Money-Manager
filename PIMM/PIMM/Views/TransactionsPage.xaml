@@ -47,9 +47,9 @@
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    FontSize="Large"
-                                   Text="{Binding Icon.Name}"
+                                   Text="{Binding Icon.Glyph}"
                                    FontFamily="{Binding Icon.FontFamily}"
-                                   TextColor="{Binding Icon.Color}"/>
+                                   TextColor="{Binding Category.Color}"/>
                             <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="Center"

@@ -5,10 +5,12 @@ using System.Text;
 
 namespace PIMM.Models.ViewModels
 {
-    public class IconViewModel
+    public class FontIconViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
+        public string Glyph { get; set; }
         public string FontFamily { get; set; }
-        public string Color { get; set; }
+        
     }
 }

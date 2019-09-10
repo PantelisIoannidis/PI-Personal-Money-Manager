@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
+using PIMM.Models;
 
 namespace PIMM.Persistance
 {

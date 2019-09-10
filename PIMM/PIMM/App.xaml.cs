@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PIMM.Persistance;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +10,8 @@ namespace PIMM
         public App()
         {
             InitializeComponent();
+
+            var newDatabase = new InitializeDatabase();
 
             MainPage = new NavigationPage(new MainPage()
             {
