@@ -1,5 +1,4 @@
-﻿using PIMM.Common.Helpers;
-using PIMM.Helpers;
+﻿using PIMM.Helpers;
 using PIMM.Models.ViewModels;
 using PIMM.ViewModels;
 using System;
@@ -73,7 +72,7 @@ namespace PIMM
                     Id=1,
                     Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Addressbook,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Blue"
                     },
@@ -85,7 +84,7 @@ namespace PIMM
                     Id=2,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Addresscard,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Khaki"
                     },
@@ -97,7 +96,7 @@ namespace PIMM
                     Id=3,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Bell,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Cyan"
                     },
@@ -109,7 +108,7 @@ namespace PIMM
                     Id=4,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Bellslash,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Green"
                     },
@@ -121,7 +120,7 @@ namespace PIMM
                     Id=5,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Building,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Yellow"
                     },
@@ -133,7 +132,7 @@ namespace PIMM
                     Id=6,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Table,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Blue"
                     },
@@ -145,7 +144,7 @@ namespace PIMM
                     Id=7,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Paintbrush,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Yellow"
                     },
@@ -157,7 +156,7 @@ namespace PIMM
                     Id=8,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Building,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Red"
                     },
@@ -169,7 +168,7 @@ namespace PIMM
                     Id=9,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Building,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Blue"
                     },
@@ -181,7 +180,7 @@ namespace PIMM
                     Id=10,
                      Icon = new IconViewModel()
                     {
-                        Name=FontAwesomeSolid.Building,
+                        Name=FontAwesomeSolid.Asterisk,
                         FontFamily=FontAwesome.FontName,
                         Color="Blue"
                     },

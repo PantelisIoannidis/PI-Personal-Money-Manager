@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace PIMM.Entity
+namespace PIMM.Persistance
 {
     public enum TransactionType
     {

@@ -11,12 +11,22 @@ namespace PIMM.Droid.Persistance
 {
     public class SQLiteDb : ISQLiteDb
     {
-        public SQLiteAsyncConnection GetConnection()
+        public SQLiteAsyncConnection GetAsyncConnection()
+        {
+            return new SQLiteAsyncConnection(GetPath());
+        }
+
+        public SQLiteConnection GetConnection()
+        {
+            return new SQLiteConnection(GetPath());
+        }
+
+        public string GetPath()
         {
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var path = Path.Combine(documentsPath, "PIMMv001.db3");
 
-            return new SQLiteAsyncConnection(path);
+            return path;
         }
 
     }

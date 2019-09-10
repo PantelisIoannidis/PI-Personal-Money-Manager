@@ -7,6 +7,7 @@ namespace PIMM.Persistance
 {
     public interface ISQLiteDb
     {
-        SQLiteAsyncConnection GetConnection();
+        SQLiteAsyncConnection GetAsyncConnection();
+        SQLiteConnection GetConnection();
     }
 }

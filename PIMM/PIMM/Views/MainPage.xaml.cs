@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PIMM.Persistance;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace PIMM
         public MainPage()
         {
             InitializeComponent();
-
+            var newDatabase = new InitializeDatabase();
         }
+
+
     }
 }

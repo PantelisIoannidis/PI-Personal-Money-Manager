@@ -13,11 +13,22 @@ namespace PIMM.UWP.Persistance
 {
     public class SQLiteDb : ISQLiteDb
     {
-        public SQLiteAsyncConnection GetConnection()
+        public SQLiteAsyncConnection GetAsyncConnection()
+        {
+            return new SQLiteAsyncConnection(GetPath());
+        }
+
+        public SQLiteConnection GetConnection()
+        {
+            return new SQLiteConnection(GetPath());
+        }
+
+        private string GetPath()
         {
             var documentsPath = ApplicationData.Current.LocalFolder.Path;
             var path = Path.Combine(documentsPath, "PIMMv001.db3");
-            return new SQLiteAsyncConnection(path);
+            return path;
         }
+
     }
 }
