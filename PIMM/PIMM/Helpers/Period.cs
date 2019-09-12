@@ -115,7 +115,7 @@ namespace PIMM.Helpers
                     break;
             }
             FromDate = FromDate.Date;
-            ToDate = ToDate.AddHours(23).AddMinutes(59).AddSeconds(59);
+            ToDate = ToDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
         }
 
         public void MoveToNext()

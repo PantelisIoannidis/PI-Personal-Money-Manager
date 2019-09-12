@@ -5,6 +5,7 @@ using PIMM.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,6 +30,12 @@ namespace PIMM.Models.ViewModels
         public ICommand PreviousTimePeriodCommand { get; private set; }
         public ICommand ResetTimePeriodCommand { get; private set; }
 
+        public decimal Balance { get; private set; }
+        public decimal IncomeSum { get; private set; }
+        public decimal ExpenseSum { get; private set; }
+        public decimal IncomeSumPercentage { get; private set; }
+        public decimal ExpenseSumPercentage { get; private set; }
+
         public Period DisplayPeriod
         {
             get
@@ -49,7 +56,33 @@ namespace PIMM.Models.ViewModels
                 return transactions; }
             set {
                 transactions = value;
+                CalculateSums();
                 OnPropertyChanged(nameof(Transactions)); }
+        }
+
+        private void CalculateSums()
+        {
+            IncomeSum = transactions
+                .Where(c=>c.Type==TransactionType.Income)
+                .Sum(x => x.Amount);
+            ExpenseSum = transactions
+                .Where(c => c.Type == TransactionType.Expense)
+                .Sum(x => x.Amount);
+            IncomeSumPercentage = ((IncomeSum) / (IncomeSum + ExpenseSum));
+            ExpenseSumPercentage = ((ExpenseSum) / (IncomeSum + ExpenseSum));
+
+            Balance = IncomeSum - ExpenseSum;
+            Balance += transactions
+                .Where(c => (c.Type == TransactionType.Adjustment && c.Amount>0) || (c.Type == TransactionType.Transfer && c.Amount > 0))
+                .Sum(x => x.Amount);
+            Balance -= transactions
+                .Where(c => (c.Type == TransactionType.Adjustment && c.Amount < 0) || (c.Type == TransactionType.Transfer && c.Amount < 0))
+                .Sum(x => x.Amount);
+            OnPropertyChanged(nameof(IncomeSum));
+            OnPropertyChanged(nameof(ExpenseSum));
+            OnPropertyChanged(nameof(IncomeSumPercentage));
+            OnPropertyChanged(nameof(ExpenseSumPercentage));
+            OnPropertyChanged(nameof(Balance));
         }
 
         public TransactionViewModel SelectedTransaction
@@ -83,6 +116,8 @@ namespace PIMM.Models.ViewModels
             NextTimePeriodCommand = new Command(NextTimePeriod);
             PreviousTimePeriodCommand = new Command(PreviousTimePeriod);
             ResetTimePeriodCommand = new Command(ResetTimePeriod);
+
+            CalculateSums();
 
             DisplayPeriod = (Period)period; ;
         }

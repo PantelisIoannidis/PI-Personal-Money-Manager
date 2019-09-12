@@ -24,7 +24,7 @@ namespace PIMM.Droid.Persistance
         public string GetPath()
         {
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var path = Path.Combine(documentsPath, "PIMMv002.db3");
+            var path = Path.Combine(documentsPath, "PIMMv003.db3");
 
             return path;
         }

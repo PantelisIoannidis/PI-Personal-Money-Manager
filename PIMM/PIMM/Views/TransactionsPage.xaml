@@ -8,21 +8,14 @@
              Title="xxx"
              mc:Ignorable="d"
              x:Class="PIMM.TransactionsPage">
-    <ContentPage.ToolbarItems>
-        <!--<ToolbarItem Icon="plus.png" 
-                     Text="New Transaction"
-                     Command="{Binding NewTransactionCommand}"
-                     Order="Primary"/>
-        <ToolbarItem Icon="plus.png" 
-                     Text="Money Transfer"
-                     Command="{Binding MoneyTransferCommand}"
-                     Order="Secondary"/>
-        <ToolbarItem Icon="plus.png" 
-                     Text="Adjustment"
-                     Command="{Binding AdjustmentCommand}" 
-                     Order="Secondary"/>-->
-    </ContentPage.ToolbarItems>
     <ContentView x:Name="PortraitView" Padding="10">
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <conv:AmountToColorConverter x:Key="AmountToColorConverter"/>
+                <conv:AmountFormatConverter x:Key="AmountFormatConverter"/>
+                <conv:DateFormatConverter x:Key="DateFormatConverter"/>
+            </ResourceDictionary>            
+        </ContentView.Resources>
         <StackLayout Orientation="Vertical">
             <Grid>
                 <Grid.RowDefinitions>
@@ -63,6 +56,43 @@
                 
                 <Button  Grid.Row="0" Grid.Column="1" Text="New"/>
             </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium"
+                       TextColor="{StaticResource IncomeColor}"
+                       Text="{Binding IncomeSum, 
+                            Converter={StaticResource AmountFormatConverter},
+                            StringFormat='Income {0}'}"/>
+                <Label Grid.Row="0" Grid.Column="1" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium"
+                       TextColor="{StaticResource amountZeroColor}"
+                       Text="{Binding Balance, 
+                                Converter={StaticResource AmountFormatConverter},
+                                StringFormat='Balance {0}'}"/>
+                <Label Grid.Row="0" Grid.Column="2" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium"
+                       TextColor="{StaticResource ExpenseColor}"
+                       Text="{Binding ExpenseSum, 
+                                Converter={StaticResource AmountFormatConverter},
+                                StringFormat='Expense {0}'}"/>
+            </Grid>
+            <ProgressBar x:Name="incomeBalanceBar" 
+                         Progress="{Binding IncomeSumPercentage}"
+                         ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
             <ListView
                     ItemsSource="{Binding Transactions}" 
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
