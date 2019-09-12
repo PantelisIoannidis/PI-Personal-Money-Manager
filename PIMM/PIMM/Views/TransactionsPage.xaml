@@ -5,14 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:PIMM.Views.Converters;assembly=PIMM"
              xmlns:fa="clr-namespace:PIMM.Helpers"
+             Title="xxx"
              mc:Ignorable="d"
              x:Class="PIMM.TransactionsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="plus.png" 
+        <!--<ToolbarItem Icon="plus.png" 
                      Text="New Transaction"
                      Command="{Binding NewTransactionCommand}"
                      Order="Primary"/>
-        <!--<ToolbarItem Icon="plus.png" 
+        <ToolbarItem Icon="plus.png" 
                      Text="Money Transfer"
                      Command="{Binding MoneyTransferCommand}"
                      Order="Secondary"/>
@@ -21,62 +22,96 @@
                      Command="{Binding AdjustmentCommand}" 
                      Order="Secondary"/>-->
     </ContentPage.ToolbarItems>
-    <ContentView x:Name="PortraitView" Padding="20">
-        <ListView x:Name="listView"
+    <ContentView x:Name="PortraitView" Padding="10">
+        <StackLayout Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                               
+                <Frame  Grid.Row="0" Grid.Column="0" 
+                        HorizontalOptions="CenterAndExpand"
+                        CornerRadius="10"
+                        Padding="0">
+                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
+                            <Button 
+                                Command="{Binding PreviousTimePeriodCommand}"
+                                BorderRadius="0"
+                                Text="&#xf060;"
+                                FontFamily="{x:Static fa:FontAwesome.FontName}"/>
+                            <Button 
+                                    Command="{Binding ResetTimePeriodCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf015;"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
+                            <Button 
+                                    HorizontalOptions="CenterAndExpand"
+                                    BorderRadius="0"
+                                    Text="{Binding DisplayPeriod.Description, StringFormat='{0} ▼'}"
+                                    Command="{Binding ChoosePeriodCommand}"/>
+                            <Button 
+                                    Command="{Binding NextTimePeriodCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf061;"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
+                        </StackLayout>
+                </Frame>
+                
+                <Button  Grid.Row="0" Grid.Column="1" Text="New"/>
+            </Grid>
+            <ListView
                     ItemsSource="{Binding Transactions}" 
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
                     ItemSelected="DataGrid_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid
                             RowSpacing="2"
                             ColumnSpacing="2">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="4*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0"
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    FontSize="Large"
                                    Text="{Binding Glyph}"
                                    FontFamily="{Binding FontFamily}"
-                                   TextColor="{Binding Color}"/>
-                            <Label Grid.Column="1" Grid.Row="0"
+                                   TextColor="{Binding GlyphColor}"/>
+                                <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
                                    VerticalTextAlignment="Center"
                                    FontSize="Medium"
                                    Text="{Binding Description}"/>
-                            <Label Grid.Column="2" Grid.Row="0"
+                                <Label Grid.Column="2" Grid.Row="0"
                                    HorizontalTextAlignment="End"
                                    VerticalTextAlignment="Center"
                                    FontSize="Medium"
-                                   Text="{Binding Path=TransactionDate,Converter={StaticResource DateFormatConverter}}" />
-                            <Label Grid.Column="3" Grid.Row="0"
+                                   Text="{Binding FormattedDate}" />
+                                <Label Grid.Column="3" Grid.Row="0"
                                    HorizontalTextAlignment="End"
                                    VerticalTextAlignment="Center"
                                    FontSize="Medium"
-                                   Text="{Binding Path=Amount,Converter={StaticResource AmountFormatConverter}}"
-                                   TextColor="{Binding Amount, Converter={StaticResource AmountToColorConverter}}"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.Resources>
-                <ResourceDictionary>
-                    <conv:AmountToColorConverter x:Key="AmountToColorConverter"/>
-                    <conv:AmountFormatConverter x:Key="AmountFormatConverter"/>
-                    <conv:DateFormatConverter x:Key="DateFormatConverter"/>
-                </ResourceDictionary>
-            </ListView.Resources>
-        </ListView>
+                                   Text="{Binding FormattedAmount}"
+                                   TextColor="{Binding FormattedColorAmount}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentView>
 </ContentPage>

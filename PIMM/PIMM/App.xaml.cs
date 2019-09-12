@@ -1,4 +1,5 @@
-﻿using PIMM.Persistance;
+﻿using PIMM.Helpers;
+using PIMM.Persistance;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,11 +8,17 @@ namespace PIMM
 {
     public partial class App : Application
     {
+        //Properties consts
+        private const string PeriodKey = "periodKey";
+
         public App()
         {
             InitializeComponent();
 
+            // Create and Seed Database
             var newDatabase = new InitializeDatabase();
+
+            
 
             MainPage = new NavigationPage(new MainPage()
             {
@@ -44,6 +51,23 @@ namespace PIMM
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        //Properties
+        public Period CurrentPeriod
+        {
+            get
+            {
+                if (Properties.ContainsKey(PeriodKey))
+                    return Properties[PeriodKey] as Period;
+
+                return new Period();
+            }
+
+            set
+            {
+                Properties[PeriodKey] = (Period)value;
+            }
         }
     }
 }

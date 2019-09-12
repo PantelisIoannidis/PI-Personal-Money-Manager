@@ -21,15 +21,18 @@ namespace PIMM
         private double height = 0;
 
         List<TransactionViewModel> transactions;
-        Repository repository; 
+        Repository repository;
+        Period period;
         public TransactionsPage()
         {
             InitializeComponent();
 
             repository = new Repository();
+            period = new Period();
+            period.Init(DateTime.Now, PeriodType.Month);
             transactions = repository.GetTransactions();
-
-            BindingContext = new TransactionsViewModel(transactions, new PageService());
+            
+            BindingContext = new TransactionsViewModel(transactions, new PageService(),repository, period);
 
         }
 

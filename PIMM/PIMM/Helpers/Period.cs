@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text;
 
@@ -7,13 +8,14 @@ namespace PIMM.Helpers
 {
     public enum PeriodType
     {
-        Week = 0,
-        Month = 1,
-        Year = 2,
-        All = 3
+        Day =0,
+        Week = 1,
+        Month = 2,
+        Year = 3,
+        All = 4
     }
 
-    public class Period : IPeriod
+    public class Period : IPeriod, INotifyPropertyChanged
     {
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
@@ -23,6 +25,8 @@ namespace PIMM.Helpers
         public DateTime SelectedDate { get; set; }
 
         private CultureInfo currentCulture;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public PeriodType Type { get; set; }
 
@@ -40,39 +44,59 @@ namespace PIMM.Helpers
             CalculateDates();
         }
 
+        public void ChooseNewPeriod(PeriodType type = PeriodType.Month)
+        {
+            this.Type = type;
+
+            CalculateDates();
+            OnPropertyChanged(nameof(Description));
+        }
+
         public void ResetSelectedDate(DateTime date)
         {
             SelectedDate = date;
-
             CalculateDates();
+            OnPropertyChanged(nameof(Description));
         }
 
-        public string GetDescription()
+        public string Description
         {
-            string description = "";
-            switch (Type)
+            get
             {
-                case PeriodType.Week:
-                    description = $"{FromDate.ToString("dd")} - {ToDate.ToString("dd")}  {SelectedDate.ToString("MMM")}";
-                    break;
-                case PeriodType.Month:
-                    description = $"{SelectedDate.ToString("MMMM")} {SelectedDate.Year}";
-                    break;
-                case PeriodType.Year:
-                    description = $"{SelectedDate.Year}";
-                    break;
-                case PeriodType.All:
-                    description = $"All";
-                    break;
+                string description = "";
+                switch (Type)
+                {
+                    case PeriodType.Day:
+                        description = $"{SelectedDate.ToString("d")}";
+                        break;
+                    case PeriodType.Week:
+                        description = $"{FromDate.ToString("dd")} - {ToDate.ToString("dd")}  {SelectedDate.ToString("MMM")}";
+                        break;
+                    case PeriodType.Month:
+                        description = $"{SelectedDate.ToString("MMMM")} {SelectedDate.Year}";
+                        break;
+                    case PeriodType.Year:
+                        description = $"{SelectedDate.Year}";
+                        break;
+                    case PeriodType.All:
+                        description = $"Until Now";
+                        break;
+                }
+                return description; //▼
             }
-            return description;
         }
 
-        public void CalculateDates()
+
+        private void CalculateDates()
         {
-            SelectedDate = FirstDayOfTheWeek(SelectedDate);
+            //if(Type!=PeriodType.Day)
+             //   SelectedDate = FirstDayOfTheWeek(SelectedDate);
             switch (Type)
             {
+                case PeriodType.Day:
+                    FromDate = SelectedDate;
+                    ToDate = SelectedDate;
+                    break;
                 case PeriodType.Week:
                     FromDate = FirstDayOfTheWeek(SelectedDate);
                     ToDate = LastDayOfTheWeek(SelectedDate);
@@ -90,12 +114,17 @@ namespace PIMM.Helpers
                     ToDate = DateTime.MaxValue;
                     break;
             }
+            FromDate = FromDate.Date;
+            ToDate = ToDate.AddHours(23).AddMinutes(59).AddSeconds(59);
         }
 
         public void MoveToNext()
         {
             switch (Type)
             {
+                case PeriodType.Day:
+                    SelectedDate = SelectedDate.AddDays(1);
+                    break;
                 case PeriodType.Week:
                     SelectedDate = SelectedDate.AddDays(7);
                     break;
@@ -110,12 +139,16 @@ namespace PIMM.Helpers
                     break;
             }
             CalculateDates();
+            OnPropertyChanged(nameof(Description));
         }
 
         public void MoveToPrevious()
         {
             switch (Type)
             {
+                case PeriodType.Day:
+                    SelectedDate = SelectedDate.AddDays(-1);
+                    break;
                 case PeriodType.Week:
                     SelectedDate = SelectedDate.AddDays(-7);
                     break;
@@ -130,29 +163,30 @@ namespace PIMM.Helpers
                     break;
             }
             CalculateDates();
+            OnPropertyChanged(nameof(Description));
         }
 
-        public DateTime FirstDayOfTheMonth(DateTime date)
+        private DateTime FirstDayOfTheMonth(DateTime date)
         {
             return new DateTime(date.Year, date.Month, 1);
         }
 
-        public DateTime LastDayOfTheMonth(DateTime date)
+        private DateTime LastDayOfTheMonth(DateTime date)
         {
             return FirstDayOfTheMonth(date).AddMonths(1).AddTicks(-1);
         }
 
-        public DateTime FirstDayOfTheYear(DateTime date)
+        private DateTime FirstDayOfTheYear(DateTime date)
         {
             return new DateTime(date.Year, 1, 1);
         }
 
-        public DateTime LastDayOfTheYear(DateTime date)
+        private DateTime LastDayOfTheYear(DateTime date)
         {
             return FirstDayOfTheYear(date).AddMonths(12).AddTicks(-1);
         }
 
-        public DateTime FirstDayOfTheWeek(DateTime date)
+        private DateTime FirstDayOfTheWeek(DateTime date)
         {
             if (date == DateTime.MaxValue || date == DateTime.MinValue)
                 return date;
@@ -161,12 +195,12 @@ namespace PIMM.Helpers
             return date.AddDays(-daysPassed);
         }
 
-        public DateTime LastDayOfTheWeek(DateTime date)
+        private DateTime LastDayOfTheWeek(DateTime date)
         {
             return FirstDayOfTheWeek(date).AddDays(7).AddTicks(-1);
         }
 
-        public int WeekOfTheYearNet(DateTime date)
+        private int WeekOfTheYearNet(DateTime date)
         {
             return currentCulture.Calendar.GetWeekOfYear(
                 date,
@@ -174,13 +208,19 @@ namespace PIMM.Helpers
                 currentCulture.DateTimeFormat.FirstDayOfWeek);
         }
 
-        public int WeekOfTheYear(DateTime date)
+        private int WeekOfTheYear(DateTime date)
         {
             var day = (int)currentCulture.Calendar.GetDayOfWeek(date);
             return currentCulture.Calendar.GetWeekOfYear(
                 date.AddDays(4 - (day == 0 ? 7 : day)),
                 CalendarWeekRule.FirstFourDayWeek,
                 DayOfWeek.Monday);
+        }
+
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
 

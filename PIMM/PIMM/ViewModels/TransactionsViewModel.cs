@@ -1,4 +1,5 @@
-﻿using PIMM.ViewModels;
+﻿using PIMM.Helpers;
+using PIMM.Persistance;
 using PIMM.ViewModels;
 using PIMM.Views;
 using System;
@@ -16,23 +17,45 @@ namespace PIMM.Models.ViewModels
         private List<TransactionViewModel> transactions;
         private TransactionViewModel selectedTransaction;
         private readonly IPageService _pageService;
+        private readonly IRepository _repository;
         private bool isRefreshing;
+        Period period = (Application.Current as App).CurrentPeriod;
 
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectTransactionCommand { get; private set; }
         public ICommand NewTransactionCommand { get; private set; }
-        public ICommand MoneyTransferCommand { get; private set; }
-        public ICommand AdjustmentCommand { get; private set; }
+        public ICommand ChoosePeriodCommand { get; private set; }
+        public ICommand NextTimePeriodCommand { get; private set; }
+        public ICommand PreviousTimePeriodCommand { get; private set; }
+        public ICommand ResetTimePeriodCommand { get; private set; }
+
+        public Period DisplayPeriod
+        {
+            get
+            {
+                return period;
+            }
+            set
+            {
+                period = value;
+                OnPropertyChanged(nameof(DisplayPeriod));
+            }
+        } 
+
 
         public List<TransactionViewModel> Transactions
         {
-            get { return transactions; }
-            set { transactions = value; OnPropertyChanged(nameof(Transactions)); }
+            get {
+                return transactions; }
+            set {
+                transactions = value;
+                OnPropertyChanged(nameof(Transactions)); }
         }
 
         public TransactionViewModel SelectedTransaction
         {
-            get { return selectedTransaction; }
+            get {
+                return selectedTransaction; }
             set
             {
                 selectedTransaction = value;
@@ -48,25 +71,64 @@ namespace PIMM.Models.ViewModels
 
         
 
-        public TransactionsViewModel(List<TransactionViewModel> transactions, IPageService pageService)
+        public TransactionsViewModel(List<TransactionViewModel> transactions, IPageService pageService,IRepository repository,IPeriod period)
         {
             this.transactions = transactions;
             _pageService = pageService;
+            this._repository = repository;
             RefreshCommand = new Command(CmdRefresh);
             SelectTransactionCommand = new Command<TransactionViewModel>(async vm => await SelectTransaction(vm));
             NewTransactionCommand = new Command(NewTransaction);
-            MoneyTransferCommand = new Command(MoneyTransfer);
-            AdjustmentCommand = new Command(Adjustment);
+            ChoosePeriodCommand = new Command<TransactionViewModel>(async vm => await ChoosePeriod());
+            NextTimePeriodCommand = new Command(NextTimePeriod);
+            PreviousTimePeriodCommand = new Command(PreviousTimePeriod);
+            ResetTimePeriodCommand = new Command(ResetTimePeriod);
+
+            DisplayPeriod = (Period)period; ;
         }
 
-        private void Adjustment()
+        private void ResetTimePeriod(object obj)
         {
-            
+            DisplayPeriod.ResetSelectedDate(DateTime.Now);
+            Transactions = _repository.GetTransactions(DisplayPeriod);
         }
 
-        private void MoneyTransfer()
+        private void PreviousTimePeriod()
         {
-            
+            DisplayPeriod.MoveToPrevious();
+            Transactions = _repository.GetTransactions(DisplayPeriod);
+        }
+
+        private void NextTimePeriod()
+        {
+            DisplayPeriod.MoveToNext();
+            Transactions = _repository.GetTransactions(DisplayPeriod);
+        }
+
+        private async Task ChoosePeriod()
+        {
+            var response = await _pageService.DisplayActionSheet("Choose Time Period", "Cancel", null,
+               "Day", "Week", "Month","Year","All");
+
+            switch (response)
+            {
+                case "Day":
+                    DisplayPeriod.ChooseNewPeriod(PeriodType.Day);
+                    break;
+                case "Week":
+                    DisplayPeriod.ChooseNewPeriod(PeriodType.Week);
+                    break;
+                case "Month":
+                    DisplayPeriod.ChooseNewPeriod(PeriodType.Month);
+                    break;
+                case "Year":
+                    DisplayPeriod.ChooseNewPeriod(PeriodType.Year);
+                    break;
+                case "All":
+                    DisplayPeriod.ChooseNewPeriod(PeriodType.All);
+                    break;
+            }
+            Transactions = _repository.GetTransactions(DisplayPeriod);
         }
 
         private void NewTransaction()

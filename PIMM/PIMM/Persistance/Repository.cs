@@ -1,4 +1,5 @@
-﻿using PIMM.Models;
+﻿using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.Models.ViewModels;
 using SQLite;
 using System;
@@ -20,9 +21,18 @@ namespace PIMM.Persistance
         public List<TransactionViewModel> GetTransactions()
         {
             var transactions = db.Query<TransactionViewModel>(
-                "SELECT TR.*,CA.Color,FO.Glyph,FO.FontFamily FROM 'Transaction' TR " +
+                "SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily FROM 'Transaction' TR " +
                 "inner join Category CA on TR.CategoryId = CA.Id " +
                 "inner join FontIcon FO on FO.Id = CA.FontIconId " );
+            return transactions;
+        }
+        public List<TransactionViewModel> GetTransactions(Period period)
+        {
+            var transactions = db.Query<TransactionViewModel>(
+                @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily FROM 'Transaction' TR  
+                inner join Category CA on TR.CategoryId = CA.Id  
+                inner join FontIcon FO on FO.Id = CA.FontIconId 
+                where TR.TransactionDate between ? and ? ",period.FromDate,period.ToDate);
             return transactions;
         }
 

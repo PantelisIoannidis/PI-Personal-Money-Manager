@@ -26,7 +26,7 @@ namespace PIMM.UWP.Persistance
         private string GetPath()
         {
             var documentsPath = ApplicationData.Current.LocalFolder.Path;
-            var path = Path.Combine(documentsPath, "PIMMv001.db3");
+            var path = Path.Combine(documentsPath, "PIMMv002.db3");
             return path;
         }
 

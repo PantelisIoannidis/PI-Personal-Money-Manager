@@ -8,13 +8,22 @@
              NavigationPage.HasNavigationBar="True"
              Title="Personal Money Tracker"
              x:Class="PIMM.MainPage">
-
+    
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Icon="tools.png" 
+                     Text="Settings"
+                     Order="Secondary"/>
+        <ToolbarItem Icon="eye.png" 
+                     Text="About"
+                     Order="Secondary"/>
+    </TabbedPage.ToolbarItems>
+    
     <local:HomePage Title="Overview" IconImageSource="chartpie.png" x:Name="overview"/>
 
     <local:TransactionsPage Title="Transactions" IconImageSource="dollarsign.png" x:Name="transactions"/>
 
     <local:CategoriesPage Title="Categories" IconImageSource="tag.png" x:Name="categories"/>
 
-    <local:SettingsPage Title="Settings" IconImageSource="tools.png" x:Name="settings"/>
+    <local:CategoriesPage Title="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts"/>
 
 </TabbedPage>

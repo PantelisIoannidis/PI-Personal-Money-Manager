@@ -3,6 +3,7 @@ using PIMM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace PIMM.Models.ViewModels
 {
@@ -18,9 +19,39 @@ namespace PIMM.Models.ViewModels
 
         public string FontFamily { get; set; }
         public string Glyph { get; set; }
-        public string Color { get; set; }
+        public string GlyphColor { get; set; }
 
+        public string FormattedAmount
+        { get
+            {
+                return String.Format("{0:C}", (decimal)Amount);
+            } }
 
+        public Color FormattedColorAmount
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case TransactionType.Income:
+                        return (Color)Application.Current.Resources["IncomeColor"];
+                    case TransactionType.Expense:
+                        return (Color)Application.Current.Resources["ExpenseColor"];
+                    case TransactionType.Transfer:
+                        return (Color)Application.Current.Resources["TransferColor"];
+                    case TransactionType.Adjustment:
+                        return (Color)Application.Current.Resources["AdjustmentColor"];
+                    default:
+                        return Color.Black;
+
+                }
+            }
+        }
+
+        public string FormattedDate { get
+            {
+                return String.Format("{0:d}", TransactionDate);
+            } }
 
         public void MapToViewModel(Transaction transaction,Category category,FontIcon fontIcon)
         {
@@ -45,7 +76,7 @@ namespace PIMM.Models.ViewModels
 
         public void MapCategory(Category category)
         {
-            this.Color = category.Color;
+            this.GlyphColor = category.Color;
         }
 
     }

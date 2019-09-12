@@ -7,18 +7,32 @@
              x:Class="PIMM.App">
     <Application.Resources>
         <ResourceDictionary>
-            <x:Int32 x:Key="borderRadius">20</x:Int32>
-            
+
+            <x:Int32 x:Key="controlBorderRadius">10</x:Int32>
             <Color x:Key="barBackgroundColor">#7190bf</Color>
             <Color x:Key="barTextColor">White</Color>
-            
+
+            <Color x:Key="controlBackgroundColor">#bd44c2</Color>
+            <Color x:Key="controlTextColor">White</Color>
+
             <Color x:Key="backgroundColor">#abbdd9</Color>
             <Color x:Key="textColor">Black</Color>
 
+            <!--Transaction amount colors-->
             <Color x:Key="amountPositiveColor">#027041</Color>
             <Color x:Key="amountNegativeColor">#9c1902</Color>
+            <Color x:Key="IncomeColor">#027041</Color>
+            <Color x:Key="ExpenseColor">#9c1902</Color>
+            <Color x:Key="TransferColor">Black</Color>
+            <Color x:Key="AdjustmentColor">Black</Color>
             <Color x:Key="amountZeroColor">White</Color>
             
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource controlBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource controlTextColor}"/>
+                <Setter Property="BorderRadius" Value="{StaticResource controlBorderRadius}"/>
+                <!--<Setter Property="FontAttributes" Value="None"/>-->
+            </Style>
             
             
             <!--<Style x:Key="button" TargetType="Button">

@@ -137,17 +137,19 @@ namespace PIMM.Persistance
             if (db.Table<Transaction>().Count() > 0)
                 return;
 
-            AddTransaction("Salary", 2500m);
-            AddTransaction("Home", 1200m);
-            AddTransaction("Shopping", 400m);
-            AddTransaction("Groceries", 350m);
-            AddTransaction("Loan", 100m);
-            AddTransaction("Cash", 1250m);
-            AddTransaction("Utilities", 80m);
-            AddTransaction("Eating Out", 120m);
-            AddTransaction("Entertaiment", 60m);
-            AddTransaction("Fuel", 110m);
-            AddTransaction("General", 100m);
+            var now = DateTime.Now;
+
+            AddTransaction("Salary", 2500m,now);
+            AddTransaction("Home", 1200m,now);
+            AddTransaction("Shopping", 400m,now.AddDays(-1));
+            AddTransaction("Groceries", 350m,now.AddDays(-2));
+            AddTransaction("Loan", 100m,now.AddDays(-1));
+            AddTransaction("Cash", 1250m,now);
+            AddTransaction("Utilities", 80m,now.AddDays(-10));
+            AddTransaction("Eating Out", 120m,now.AddDays(-11));
+            AddTransaction("Entertaiment", 60m, now.AddDays(-12));
+            AddTransaction("Fuel", 110m, now.AddYears(-2));
+            AddTransaction("General", 100m, now.AddYears(-2));
             AddTransaction("Vacations", 50m);
             AddTransaction("Kids", 400m);
             AddTransaction("Pets", 120m);
@@ -157,8 +159,10 @@ namespace PIMM.Persistance
 
         }
 
-        private void AddTransaction(string categoryName,decimal amount)
+        private void AddTransaction(string categoryName,decimal amount,DateTime? dt=null)
         {
+            if (dt == null)
+                dt = DateTime.Now;
             var category = db.Table<Category>().FirstOrDefault(c => c.Description == categoryName);
             var icon = db.Table<FontIcon>().FirstOrDefault(c => c.Id == category.FontIconId);
             var account = db.Table<Account>().First();
@@ -168,7 +172,7 @@ namespace PIMM.Persistance
                 CategoryId = category.Id,
                 Description= category.Description,
                 Type = category.Type,
-                TransactionDate = DateTime.Now,
+                TransactionDate = dt.Value,
                 Amount = amount
             };
             db.Insert(transaction);
