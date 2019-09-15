@@ -1,5 +1,6 @@
 ﻿using PIMM.Helpers;
 using PIMM.Models.ViewModels;
+using PIMM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,6 @@ namespace PIMM.Persistance
     {
         List<TransactionViewModel> GetTransactions();
         List<TransactionViewModel> GetTransactions(Period period);
+        NewEditTransactionViewModel PopulateTransactionWithConnectedLists(NewEditTransactionViewModel tran);
     }
 }

@@ -2,6 +2,7 @@
 using PIMM.Persistance;
 using PIMM.ViewModels;
 using PIMM.Views;
+using PIMM.Views.TransactionDetails;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,6 +30,9 @@ namespace PIMM.Models.ViewModels
         public ICommand NextTimePeriodCommand { get; private set; }
         public ICommand PreviousTimePeriodCommand { get; private set; }
         public ICommand ResetTimePeriodCommand { get; private set; }
+        public ICommand DeleteActionCommand { get; private set; }
+        public ICommand EditActionCommand { get; private set; }
+        
 
         public decimal Balance { get; private set; }
         public decimal IncomeSum { get; private set; }
@@ -68,14 +72,15 @@ namespace PIMM.Models.ViewModels
             ExpenseSum = transactions
                 .Where(c => c.Type == TransactionType.Expense)
                 .Sum(x => x.Amount);
-            IncomeSumPercentage = ((IncomeSum) / (IncomeSum + ExpenseSum));
-            ExpenseSumPercentage = ((ExpenseSum) / (IncomeSum + ExpenseSum));
+            var tempSum = IncomeSum + ExpenseSum;
+            IncomeSumPercentage = tempSum != 0 ? (IncomeSum / tempSum) : 0;
+            ExpenseSumPercentage = tempSum != 0 ? (ExpenseSum / tempSum) : 0;
 
             Balance = IncomeSum - ExpenseSum;
             Balance += transactions
                 .Where(c => (c.Type == TransactionType.Adjustment && c.Amount>0) || (c.Type == TransactionType.Transfer && c.Amount > 0))
                 .Sum(x => x.Amount);
-            Balance -= transactions
+            Balance += transactions
                 .Where(c => (c.Type == TransactionType.Adjustment && c.Amount < 0) || (c.Type == TransactionType.Transfer && c.Amount < 0))
                 .Sum(x => x.Amount);
             OnPropertyChanged(nameof(IncomeSum));
@@ -116,10 +121,23 @@ namespace PIMM.Models.ViewModels
             NextTimePeriodCommand = new Command(NextTimePeriod);
             PreviousTimePeriodCommand = new Command(PreviousTimePeriod);
             ResetTimePeriodCommand = new Command(ResetTimePeriod);
+            DeleteActionCommand = new Command<TransactionViewModel>(async vm => await DeleteAction(vm));
+            EditActionCommand = new Command<TransactionViewModel>(async vm => await EditAction(vm));
 
             CalculateSums();
 
             DisplayPeriod = (Period)period; ;
+        }
+
+
+        private async Task EditAction(TransactionViewModel vm)
+        {
+            await _pageService.PushAsync(new TransactionDetailsPage(_pageService, _repository, vm));
+        }
+
+        private async Task DeleteAction(TransactionViewModel vm)
+        {
+            var deleteConfirmation = await _pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
         }
 
         private void ResetTimePeriod(object obj)
@@ -173,25 +191,7 @@ namespace PIMM.Models.ViewModels
 
         private async Task SelectTransaction(TransactionViewModel transaction)
         {
-            if (transaction == null)
-                return;
             SelectedTransaction = null;
-
-            var response = await _pageService.DisplayActionSheet("What do you want to do?", "Cancel", null, 
-                "Details","Delete","Edit");
-
-            switch (response)
-            {
-                case "Delete":
-                    var deleteConfirmation = await _pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
-                    //if(deleteConfirmation)
-                    break;
-                case "Edit":
-                    await _pageService.PushAsync(new TransactionDetailsPage(transaction));
-                    break;
-                default:
-                    break;
-            }
         }
 
         private async void CmdRefresh()

@@ -21,6 +21,8 @@ namespace PIMM.Models.ViewModels
         public string Glyph { get; set; }
         public string GlyphColor { get; set; }
 
+        public string AccountColor { get; set; }
+
         public string FormattedAmount
         { get
             {
@@ -53,31 +55,7 @@ namespace PIMM.Models.ViewModels
                 return String.Format("{0:d}", TransactionDate);
             } }
 
-        public void MapToViewModel(Transaction transaction,Category category,FontIcon fontIcon)
-        {
-            MapTransaction(transaction);
-            MapCategory(category);
-            MapFontIcon(fontIcon);
-        }
-
-        public void MapTransaction(Transaction transaction)
-        {
-            this.Id = transaction.Id;
-            this.Description = transaction.Description;
-            this.Type = transaction.Type;
-            this.TransactionDate = transaction.TransactionDate;
-            this.Amount = transaction.Amount;
-        }
-
-        public void MapFontIcon(FontIcon icon)
-        {
-            this.Glyph = icon.Glyph;
-        }
-
-        public void MapCategory(Category category)
-        {
-            this.GlyphColor = category.Color;
-        }
+       
 
     }
 }

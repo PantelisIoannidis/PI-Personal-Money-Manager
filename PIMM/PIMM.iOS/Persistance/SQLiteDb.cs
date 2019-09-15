@@ -27,7 +27,7 @@ namespace PIMM.iOS.Persistance
         public string GetPath()
         {
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var path = Path.Combine(documentsPath, "PIMMv003.db3");
+            var path = Path.Combine(documentsPath, DatabaseConsts.DatabaseName);
 
             return path;
         }

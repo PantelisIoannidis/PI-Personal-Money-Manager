@@ -21,5 +21,10 @@ namespace PIMM.ViewModels
         {
             await Application.Current.MainPage.Navigation.PushAsync(page);
         }
+
+        public async Task PopAsync()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
     }
 }

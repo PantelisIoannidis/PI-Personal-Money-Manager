@@ -66,25 +66,16 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" 
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"
-                       FontSize="Medium"
                        TextColor="{StaticResource IncomeColor}"
                        Text="{Binding IncomeSum, 
                             Converter={StaticResource AmountFormatConverter},
                             StringFormat='Income {0}'}"/>
                 <Label Grid.Row="0" Grid.Column="1" 
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"
-                       FontSize="Medium"
                        TextColor="{StaticResource amountZeroColor}"
                        Text="{Binding Balance, 
                                 Converter={StaticResource AmountFormatConverter},
                                 StringFormat='Balance {0}'}"/>
                 <Label Grid.Row="0" Grid.Column="2" 
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"
-                       FontSize="Medium"
                        TextColor="{StaticResource ExpenseColor}"
                        Text="{Binding ExpenseSum, 
                                 Converter={StaticResource AmountFormatConverter},
@@ -93,12 +84,16 @@
             <ProgressBar x:Name="incomeBalanceBar" 
                          Progress="{Binding IncomeSumPercentage}"
                          ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
+            
             <ListView
+                    x:Name="transListView"
                     ItemsSource="{Binding Transactions}" 
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
-                    ItemSelected="DataGrid_ItemSelected">
+                    BackgroundColor="{StaticResource backgroundColor}"
+                    ItemSelected="Listview_ItemSelected">
+                
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -110,34 +105,44 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="6*"/>
                                     <ColumnDefinition Width="3*"/>
                                     <ColumnDefinition Width="4*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0"
-                                   HorizontalTextAlignment="Center"
-                                   VerticalTextAlignment="Center"
                                    FontSize="Large"
                                    Text="{Binding Glyph}"
                                    FontFamily="{Binding FontFamily}"
                                    TextColor="{Binding GlyphColor}"/>
                                 <Label Grid.Column="1" Grid.Row="0"
-                                   HorizontalTextAlignment="Start"
-                                   VerticalTextAlignment="Center"
-                                   FontSize="Medium"
-                                   Text="{Binding Description}"/>
+                                   Text="&#xf111;"
+                                   FontFamily="{x:Static fa:FontAwesome.FontName}"
+                                   TextColor="{Binding AccountColor}"/>
                                 <Label Grid.Column="2" Grid.Row="0"
-                                   HorizontalTextAlignment="End"
-                                   VerticalTextAlignment="Center"
-                                   FontSize="Medium"
-                                   Text="{Binding FormattedDate}" />
+                                   HorizontalTextAlignment="Start"
+                                   TextColor="{StaticResource textColor}"
+                                   Text="{Binding Description}"/>
                                 <Label Grid.Column="3" Grid.Row="0"
                                    HorizontalTextAlignment="End"
-                                   VerticalTextAlignment="Center"
-                                   FontSize="Medium"
+                                   Text="{Binding FormattedDate}" />
+                                <Label Grid.Column="4" Grid.Row="0"
+                                   HorizontalTextAlignment="End"
                                    Text="{Binding FormattedAmount}"
                                    TextColor="{Binding FormattedColorAmount}"/>
                             </Grid>
+                            <ViewCell.ContextActions>
+                                <MenuItem x:Name="DeleteCom" 
+                                          Text="Delete" 
+                                          IsDestructive="True" 
+                                          Command="{Binding Path=BindingContext.DeleteActionCommand, Source={x:Reference Name=transListView}}" 
+                                          CommandParameter="{Binding .}"  />
+                                <MenuItem x:Name="EditCom" 
+                                          Text="Edit" 
+                                          IsDestructive="False" 
+                                          Command="{Binding Path=BindingContext.EditActionCommand, Source={x:Reference Name=transListView}}" 
+                                          CommandParameter="{Binding .}"  />
+                            </ViewCell.ContextActions>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

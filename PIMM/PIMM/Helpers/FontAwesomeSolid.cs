@@ -20,6 +20,7 @@ namespace PIMM.Helpers
         public static string Exchangealt = $"\uf362";
         public static string Arrowleft = $"\uf060";
         public static string Arrowright = $"\uf061";
+        public static string Circle = $"\uf111";
 
         public static string Dollarsign = $"\uf155";
         public static string Shoppingcart = $"\uf07a";
@@ -159,7 +160,6 @@ namespace PIMM.Helpers
         //public static string Chevronleft = $"\uf053";
         //public static string Chevronright = $"\uf054";
         //public static string Chevronup = $"\uf077";
-        //public static string Circle = $"\uf111";
         //public static string Circlenotch = $"\uf1ce";
         //public static string Clipboard = $"\uf328";
         //public static string Clipboardcheck = $"\uf46c";

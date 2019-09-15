@@ -54,25 +54,25 @@ namespace PIMM.Persistance
 
         private void CreateCetegories()
         {
-            CreateCategory("Salary", "Black", TransactionType.Income, nameof(FontAwesomeSolid.Dollarsign), FontAwesomeSolid.Dollarsign, FontAwesome.FontName);
-            CreateCategory("Cash", "Black", TransactionType.Income, nameof(FontAwesomeSolid.PiggyBank), FontAwesomeSolid.PiggyBank, FontAwesome.FontName);
+            CreateCategory("Salary", "#5e4603", TransactionType.Income, nameof(FontAwesomeSolid.Dollarsign), FontAwesomeSolid.Dollarsign, FontAwesome.FontName);
+            CreateCategory("Cash", "#024d10", TransactionType.Income, nameof(FontAwesomeSolid.PiggyBank), FontAwesomeSolid.PiggyBank, FontAwesome.FontName);
 
-            CreateCategory("Home","Black", TransactionType.Expense, nameof(FontAwesomeSolid.Home), FontAwesomeSolid.Home, FontAwesome.FontName);
-            CreateCategory("Shopping", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Shoppingcart), FontAwesomeSolid.Shoppingcart, FontAwesome.FontName);
-            CreateCategory("Groceries", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Shoppingbasket), FontAwesomeSolid.Shoppingbasket, FontAwesome.FontName);
-            CreateCategory("Loan", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.HandHoldingUsd), FontAwesomeSolid.HandHoldingUsd, FontAwesome.FontName);
-            CreateCategory("Utilities", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Tint), FontAwesomeSolid.Tint, FontAwesome.FontName);
-            CreateCategory("Clothes", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.TShirt), FontAwesomeSolid.TShirt, FontAwesome.FontName);
-            CreateCategory("Eating Out", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Utensils), FontAwesomeSolid.Utensils, FontAwesome.FontName);
-            CreateCategory("Entertaiment", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Gamepad), FontAwesomeSolid.Gamepad, FontAwesome.FontName);
-            CreateCategory("Fuel", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.GasPump), FontAwesomeSolid.GasPump, FontAwesome.FontName);
-            CreateCategory("General", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Asterisk), FontAwesomeSolid.Shoppingbasket, FontAwesome.FontName);
-            CreateCategory("Gifts", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Gift), FontAwesomeSolid.Gift, FontAwesome.FontName);
-            CreateCategory("Vacations", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Suitcase), FontAwesomeSolid.Suitcase, FontAwesome.FontName);
-            CreateCategory("Kids", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Child), FontAwesomeSolid.Child, FontAwesome.FontName);
-            CreateCategory("Pets", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Cat), FontAwesomeSolid.Cat, FontAwesome.FontName);
-            CreateCategory("Sports", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Dumbbell), FontAwesomeSolid.Dumbbell, FontAwesome.FontName);
-            CreateCategory("Travel", "Black", TransactionType.Expense, nameof(FontAwesomeSolid.Subway), FontAwesomeSolid.Subway, FontAwesome.FontName);
+            CreateCategory("Home", "#4d0239", TransactionType.Expense, nameof(FontAwesomeSolid.Home), FontAwesomeSolid.Home, FontAwesome.FontName);
+            CreateCategory("Shopping", "#244d02", TransactionType.Expense, nameof(FontAwesomeSolid.Shoppingcart), FontAwesomeSolid.Shoppingcart, FontAwesome.FontName);
+            CreateCategory("Groceries", "#02044d", TransactionType.Expense, nameof(FontAwesomeSolid.Shoppingbasket), FontAwesomeSolid.Shoppingbasket, FontAwesome.FontName);
+            CreateCategory("Loan", "#300b2d", TransactionType.Expense, nameof(FontAwesomeSolid.HandHoldingUsd), FontAwesomeSolid.HandHoldingUsd, FontAwesome.FontName);
+            CreateCategory("Utilities", "#0b302a", TransactionType.Expense, nameof(FontAwesomeSolid.Tint), FontAwesomeSolid.Tint, FontAwesome.FontName);
+            CreateCategory("Clothes", "#30210b", TransactionType.Expense, nameof(FontAwesomeSolid.TShirt), FontAwesomeSolid.TShirt, FontAwesome.FontName);
+            CreateCategory("Eating Out", "#300d0b", TransactionType.Expense, nameof(FontAwesomeSolid.Utensils), FontAwesomeSolid.Utensils, FontAwesome.FontName);
+            CreateCategory("Entertaiment", "#300b2e", TransactionType.Expense, nameof(FontAwesomeSolid.Gamepad), FontAwesomeSolid.Gamepad, FontAwesome.FontName);
+            CreateCategory("Fuel", "#300b15", TransactionType.Expense, nameof(FontAwesomeSolid.GasPump), FontAwesomeSolid.GasPump, FontAwesome.FontName);
+            CreateCategory("General", "#0b0b30", TransactionType.Expense, nameof(FontAwesomeSolid.Asterisk), FontAwesomeSolid.Shoppingbasket, FontAwesome.FontName);
+            CreateCategory("Gifts", "#118a5b", TransactionType.Expense, nameof(FontAwesomeSolid.Gift), FontAwesomeSolid.Gift, FontAwesome.FontName);
+            CreateCategory("Vacations", "#8a1137", TransactionType.Expense, nameof(FontAwesomeSolid.Suitcase), FontAwesomeSolid.Suitcase, FontAwesome.FontName);
+            CreateCategory("Kids", "#8a8411", TransactionType.Expense, nameof(FontAwesomeSolid.Child), FontAwesomeSolid.Child, FontAwesome.FontName);
+            CreateCategory("Pets", "#381f1f", TransactionType.Expense, nameof(FontAwesomeSolid.Cat), FontAwesomeSolid.Cat, FontAwesome.FontName);
+            CreateCategory("Sports", "#0b112e", TransactionType.Expense, nameof(FontAwesomeSolid.Dumbbell), FontAwesomeSolid.Dumbbell, FontAwesome.FontName);
+            CreateCategory("Travel", "#2e0b29", TransactionType.Expense, nameof(FontAwesomeSolid.Subway), FontAwesomeSolid.Subway, FontAwesome.FontName);
         }
 
         private void CreateCategory(string categoryName,string color,TransactionType type, string fontName, string fontGlyph, string fontFamily)
@@ -98,11 +98,17 @@ namespace PIMM.Persistance
 
         private void CreateAcounts()
         {
-            var defaultAccount = new Account
-            {
-                Description = "Default"
+            var account = new Account {
+                Description = "Payroll Account",
+                Color = "#006266"
             };
-            db.Insert(defaultAccount);
+            db.Insert(account);
+            account = new Account
+            {
+                Description = "Savings Account",
+                Color = "#EE5A24"
+            };
+            db.Insert(account);
         }
 
         private List<FontIcon> PrepareIcons()
