@@ -23,9 +23,11 @@ namespace PIMM.Persistance
         public List<TransactionViewModel> GetTransactions()
         {
             var transactions = db.Query<TransactionViewModel>(
-                "SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily FROM 'Transaction' TR " +
-                "inner join Category CA on TR.CategoryId = CA.Id " +
-                "inner join FontIcon FO on FO.Id = CA.FontIconId " );
+                @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily, AC.Color as AccountColor 
+                FROM 'Transaction' TR  
+                inner join Category CA on TR.CategoryId = CA.Id  
+                inner join FontIcon FO on FO.Id = CA.FontIconId
+                inner join Account AC on AC.Id = TR.AccountId ");
             return transactions;
         }
         public List<TransactionViewModel> GetTransactions(Period period)
@@ -36,7 +38,7 @@ namespace PIMM.Persistance
                 inner join Category CA on TR.CategoryId = CA.Id  
                 inner join FontIcon FO on FO.Id = CA.FontIconId
                 inner join Account AC on AC.Id = TR.AccountId 
-                where TR.TransactionDate between ? and ? ", period.FromDate,period.ToDate);
+                where TR.TransactionDate between ? and ? ", period.FromDate, period.ToDate);
             return transactions;
         }
 
@@ -67,6 +69,43 @@ namespace PIMM.Persistance
             var categoryList = GetAllCategories();
             tran.CategoriesList = transactions;
             return tran;
+        }
+
+        public int UpdateTransaction(NewEditTransactionViewModel tranVM)
+        {
+            var mapping = new Mapping();
+            var transaction = mapping.NewEditTransactionViewModel_2_Transaction(tranVM);
+
+            return UpdateTransaction(transaction);
+        }
+        public int UpdateTransaction(Transaction transaction)
+        {
+            return db.Update(transaction);
+        }
+
+        public int AddNewTransaction(NewEditTransactionViewModel tranVM)
+        {
+            var mapping = new Mapping();
+            var transaction = mapping.NewEditTransactionViewModel_2_Transaction(tranVM);
+
+            return AddNewTransaction(transaction);
+        }
+        public int AddNewTransaction(Transaction transaction)
+        {
+
+            return db.Insert(transaction);
+        }
+
+        public int DeleteTransaction(NewEditTransactionViewModel tranVM)
+        {
+            var mapping = new Mapping();
+            var transaction = mapping.NewEditTransactionViewModel_2_Transaction(tranVM);
+
+            return DeleteTransaction(transaction);
+        }
+        public int DeleteTransaction(Transaction transaction)
+        {
+            return db.Delete(transaction);
         }
 
     }

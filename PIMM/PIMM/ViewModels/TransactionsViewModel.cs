@@ -116,7 +116,7 @@ namespace PIMM.Models.ViewModels
             this._repository = repository;
             RefreshCommand = new Command(CmdRefresh);
             SelectTransactionCommand = new Command<TransactionViewModel>(async vm => await SelectTransaction(vm));
-            NewTransactionCommand = new Command(NewTransaction);
+            NewTransactionCommand = new Command(async x => await NewTransaction());
             ChoosePeriodCommand = new Command<TransactionViewModel>(async vm => await ChoosePeriod());
             NextTimePeriodCommand = new Command(NextTimePeriod);
             PreviousTimePeriodCommand = new Command(PreviousTimePeriod);
@@ -129,6 +129,15 @@ namespace PIMM.Models.ViewModels
             DisplayPeriod = (Period)period; ;
         }
 
+        private async Task NewTransaction()
+        {
+            var vm = new TransactionViewModel()
+            {
+                Type = TransactionType.Expense,
+                TransactionDate = DateTime.Now,
+            };
+            await _pageService.PushAsync(new TransactionDetailsPage(_pageService, _repository, vm));
+        }
 
         private async Task EditAction(TransactionViewModel vm)
         {
@@ -138,6 +147,13 @@ namespace PIMM.Models.ViewModels
         private async Task DeleteAction(TransactionViewModel vm)
         {
             var deleteConfirmation = await _pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
+            var transaction = new Mapping().TransactionViewModel_2_Transaction(vm);
+            if (deleteConfirmation)
+            {
+                _repository.DeleteTransaction(transaction);
+                MessagingCenter.Send(this, "DeleteTransactions");
+            }
+                
         }
 
         private void ResetTimePeriod(object obj)
@@ -182,11 +198,6 @@ namespace PIMM.Models.ViewModels
                     break;
             }
             Transactions = _repository.GetTransactions(DisplayPeriod);
-        }
-
-        private void NewTransaction()
-        {
-            
         }
 
         private async Task SelectTransaction(TransactionViewModel transaction)

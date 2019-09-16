@@ -62,5 +62,20 @@ namespace PIMM.Helpers
             };
             return vm;
         }
+
+        public Transaction NewEditTransactionViewModel_2_Transaction(NewEditTransactionViewModel tranVM)
+        {
+            var transaction = new Transaction
+            {
+                Id = tranVM.Id,
+                AccountId = tranVM.AccountId,
+                CategoryId = tranVM.CategoryId,
+                Type = tranVM.Type,
+                TransactionDate = tranVM.TransactionDate,
+                Amount = tranVM.Amount,
+                Description = tranVM.Description
+            };
+            return transaction;
+        }
     }
 }

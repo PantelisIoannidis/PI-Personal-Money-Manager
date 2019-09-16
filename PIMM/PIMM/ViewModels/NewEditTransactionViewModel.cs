@@ -21,9 +21,6 @@ namespace PIMM.ViewModels
             }
             set {
                 type = value;
-                //OnPropertyChanged(nameof(Type));
-                //OnPropertyChanged(nameof(isIncome));
-                //OnPropertyChanged(nameof(isExpense));
             } }
         public string Description { get; set; }
         public DateTime TransactionDate { get; set; }
@@ -58,7 +55,11 @@ namespace PIMM.ViewModels
         public FontIcon CurrentIcon { get {
                 return FontsList.SingleOrDefault(x => x.Id == CurrentCategory.FontIconId); } }
         public Account CurrentAccount{ get {
-                return AccountsList.SingleOrDefault(x => x.Id == this.AccountId); } }
+                var account = AccountsList.SingleOrDefault(x => x.Id == this.AccountId);
+                if (account == null)
+                    account = AccountsList.FirstOrDefault();
+                return account;
+            } }
 
         //returns only the categories that belongs to current transaction type
         public List<TransactionDetailsCategoryViewModel> CategoryListByType{get{

@@ -5,6 +5,7 @@ using PIMM.Views.TransactionsDetails;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -41,11 +42,11 @@ namespace PIMM.ViewModels
             this.repository = repository;
             TransVM = transactionViewModel;
 
-            SaveCommand = new Command(Save);
+            SaveCommand = new Command(async x => await Save());
             IncomeSelectedCommand = new Command(IncomeSelected);
             ExpenseSelectedCommand = new Command(ExpenseSelected);
-            SelectedAccountCommand = new Command<TransactionViewModel>(async vm => await SelectedAccount());
-            SelectedCategoryCommand = new Command<TransactionViewModel>(async vm => await SelectedCategory());
+            SelectedAccountCommand = new Command(async x => await SelectedAccount());
+            SelectedCategoryCommand = new Command(async x => await SelectedCategory());
         }
 
 
@@ -87,9 +88,17 @@ namespace PIMM.ViewModels
             OnPropertyChanged(nameof(TransVM));
         }
 
-        private void Save()
+        private async Task Save()
         {
-            
+
+            if (TransVM.Id <= 0) // new transaction without id
+                repository.AddNewTransaction(TransVM);
+            else
+                repository.UpdateTransaction(TransVM);
+
+            MessagingCenter.Send(this, "NewEditTransactions");
+
+            await pageService.PopAsync();
         }
 
         private void OnPropertyChanged(string property)

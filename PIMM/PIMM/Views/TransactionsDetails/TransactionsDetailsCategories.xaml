@@ -4,10 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="Choose a Category"
              x:Class="PIMM.Views.TransactionsDetails.TransactionsDetailsCategories">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Spacing="20">
-            <Label Text="Choose a category"/>
             <ListView
                     x:Name="categoriesListView"
                     ItemsSource="{Binding CategoryListByType}" 

@@ -3,9 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:conv="clr-namespace:PIMM.Views.Converters;assembly=PIMM"
+             Title="{Binding TransVM.FormPurposeNewOrEdit}"
              mc:Ignorable="d"
              x:Class="PIMM.Views.TransactionDetails.TransactionDetailsPage">
-    <ContentPage.Content>
+    <ContentView>
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <conv:AmountToColorConverter x:Key="AmountToColorConverter"/>
+                <conv:AmountFormatConverter x:Key="AmountFormatConverter"/>
+                <conv:DateFormatConverter x:Key="DateFormatConverter"/>
+            </ResourceDictionary>
+        </ContentView.Resources>
         <StackLayout Orientation="Vertical">
             <Grid ColumnSpacing="0" Padding="0,10,0,20" IsVisible="True">
                 <Grid.RowDefinitions>
@@ -71,11 +80,11 @@
                     x:Name="transactionDatePicker"
                     Date="{Binding TransVM.TransactionDate}"
                     Format="D"
-
                     VerticalOptions="Center"/>
 
                 <Label Grid.Row="4" Grid.Column="0" Text="Amount" HorizontalOptions="End"/>
-                <Entry Grid.Row="4" Grid.Column="1" Keyboard="Numeric" Text="{Binding TransVM.FormattedAmount}"/>
+                <Entry Grid.Row="4" Grid.Column="1" Keyboard="Numeric" Text="{Binding TransVM.Amount, 
+                                Converter={StaticResource AmountFormatConverter}}"/>
 
             </Grid>
             <Button Text="Save" 
@@ -83,5 +92,5 @@
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding SaveCommand}"/>
         </StackLayout>
-    </ContentPage.Content>
+    </ContentView>
 </ContentPage>

@@ -1,7 +1,9 @@
 ﻿using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.Models.ViewModels;
 using PIMM.Persistance;
 using PIMM.ViewModels;
+using PIMM.Views.TransactionDetails;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +23,7 @@ namespace PIMM
         private double height = 0;
 
         List<TransactionViewModel> transactions;
+        TransactionsViewModel transactionsViewModel;
         Repository repository;
         Period period;
         public TransactionsPage()
@@ -31,35 +34,51 @@ namespace PIMM
             period = new Period();
             period.Init(DateTime.Now, PeriodType.Month);
             transactions = repository.GetTransactions(period);
-            
-            BindingContext = new TransactionsViewModel(transactions, new PageService(),repository, period);
+            transactionsViewModel = new TransactionsViewModel(transactions, new PageService(), repository, period);
+
+            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "NewEditTransactions", OnNewEditTransactions);
+            MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", OnDeleteTransactions);
+            BindingContext = transactionsViewModel;
 
         }
 
-        protected override void OnSizeAllocated(double width, double height)
+        private void OnDeleteTransactions(TransactionsViewModel obj)
         {
-            base.OnSizeAllocated(width, height);
-
-            if (this.width != width || this.height != height)
-            {
-                this.width = width;
-                this.height = height;
-
-                UpdateLayout();
-            }
+            transactions = repository.GetTransactions(period);
+            transactionsViewModel.Transactions = transactions;
         }
 
-        private void UpdateLayout()
+        private void OnNewEditTransactions(TransactionsDetailsViewModel obj)
         {
-            if (width > height)
-            {
-                Content = PortraitView;
-            }
-            else
-            {
-                Content = PortraitView;
-            }
+            transactions = repository.GetTransactions(period);
+            transactionsViewModel.Transactions = transactions;
         }
+
+
+        //protected override void OnSizeAllocated(double width, double height)
+        //{
+        //    base.OnSizeAllocated(width, height);
+
+        //    if (this.width != width || this.height != height)
+        //    {
+        //        this.width = width;
+        //        this.height = height;
+
+        //        UpdateLayout();
+        //    }
+        //}
+
+        //private void UpdateLayout()
+        //{
+        //    if (width > height)
+        //    {
+        //        Content = PortraitView;
+        //    }
+        //    else
+        //    {
+        //        Content = PortraitView;
+        //    }
+        //}
 
         private void Listview_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 

@@ -18,7 +18,14 @@ namespace PIMM.Views.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value == null)
+                return null;
+            decimal amount = 0m;
+            NumberStyles style = NumberStyles.AllowCurrencySymbol | NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
+            CultureInfo culrure = CultureInfo.CurrentCulture;
+            decimal.TryParse((string)value, style,culrure, out amount);
+
+            return amount;
         }
     }
 }

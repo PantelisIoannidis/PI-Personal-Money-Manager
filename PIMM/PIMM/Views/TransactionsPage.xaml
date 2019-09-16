@@ -53,8 +53,8 @@
                                     FontFamily="{x:Static fa:FontAwesome.FontName}"/>
                         </StackLayout>
                 </Frame>
-                
-                <Button  Grid.Row="0" Grid.Column="1" Text="New"/>
+
+                <Button  Grid.Row="0" Grid.Column="1" Text="New" Command="{Binding NewTransactionCommand}"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
