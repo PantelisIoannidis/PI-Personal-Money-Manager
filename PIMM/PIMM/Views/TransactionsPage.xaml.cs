@@ -36,7 +36,7 @@ namespace PIMM
             transactions = repository.GetTransactions(period);
             transactionsViewModel = new TransactionsViewModel(transactions, new PageService(), repository, period);
 
-            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "NewEditTransactions", OnNewEditTransactions);
+            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", OnNewEditTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", OnDeleteTransactions);
             BindingContext = transactionsViewModel;
 

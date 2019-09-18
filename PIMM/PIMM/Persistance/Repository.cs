@@ -80,20 +80,14 @@ namespace PIMM.Persistance
         }
         public int UpdateTransaction(Transaction transaction)
         {
-            return db.Update(transaction);
-        }
-
-        public int AddNewTransaction(NewEditTransactionViewModel tranVM)
-        {
-            var mapping = new Mapping();
-            var transaction = mapping.NewEditTransactionViewModel_2_Transaction(tranVM);
-
-            return AddNewTransaction(transaction);
-        }
-        public int AddNewTransaction(Transaction transaction)
-        {
-
-            return db.Insert(transaction);
+            if (transaction.Id <= 0)
+            {
+                return db.Insert(transaction);
+            }else
+            {
+                return db.Update(transaction);
+            }
+            
         }
 
         public int DeleteTransaction(NewEditTransactionViewModel tranVM)

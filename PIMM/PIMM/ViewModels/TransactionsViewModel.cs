@@ -16,6 +16,7 @@ namespace PIMM.Models.ViewModels
 {
     public class TransactionsViewModel : INotifyPropertyChanged
     {
+        private Func<TransactionViewModel, bool> filter;
         private List<TransactionViewModel> transactions;
         private TransactionViewModel selectedTransaction;
         private readonly IPageService _pageService;
@@ -32,9 +33,10 @@ namespace PIMM.Models.ViewModels
         public ICommand ResetTimePeriodCommand { get; private set; }
         public ICommand DeleteActionCommand { get; private set; }
         public ICommand EditActionCommand { get; private set; }
-        
+        public ICommand SearchCommand { get; private set; }
 
-        public decimal Balance { get; private set; }
+
+    public decimal Balance { get; private set; }
         public decimal IncomeSum { get; private set; }
         public decimal ExpenseSum { get; private set; }
         public decimal IncomeSumPercentage { get; private set; }
@@ -51,13 +53,13 @@ namespace PIMM.Models.ViewModels
                 period = value;
                 OnPropertyChanged(nameof(DisplayPeriod));
             }
-        } 
+        }
 
 
         public List<TransactionViewModel> Transactions
         {
             get {
-                return transactions; }
+                return transactions.Where(filter).ToList(); }
             set {
                 transactions = value;
                 CalculateSums();
@@ -112,6 +114,7 @@ namespace PIMM.Models.ViewModels
         public TransactionsViewModel(List<TransactionViewModel> transactions, IPageService pageService,IRepository repository,IPeriod period)
         {
             this.transactions = transactions;
+            this.filter = (x) => { return true; };
             _pageService = pageService;
             this._repository = repository;
             RefreshCommand = new Command(CmdRefresh);
@@ -123,10 +126,23 @@ namespace PIMM.Models.ViewModels
             ResetTimePeriodCommand = new Command(ResetTimePeriod);
             DeleteActionCommand = new Command<TransactionViewModel>(async vm => await DeleteAction(vm));
             EditActionCommand = new Command<TransactionViewModel>(async vm => await EditAction(vm));
+            SearchCommand = new Command<string>(s => Search(s));
 
             CalculateSums();
 
             DisplayPeriod = (Period)period; ;
+        }
+
+        private void Search(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                this.filter = (x) => { return true; };
+            } else
+            {
+                this.filter = (x) => { return x.Description.Contains(s); };
+            }
+            OnPropertyChanged(nameof(Transactions));
         }
 
         private async Task NewTransaction()

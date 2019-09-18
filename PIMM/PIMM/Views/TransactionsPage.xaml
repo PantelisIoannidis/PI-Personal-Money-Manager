@@ -84,6 +84,15 @@
             <ProgressBar x:Name="incomeBalanceBar" 
                          Progress="{Binding IncomeSumPercentage}"
                          ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
+            <StackLayout Orientation="Horizontal">
+                <SearchBar x:Name="SearchBar" 
+                           SearchCommand="{Binding SearchCommand}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
+                    <SearchBar.Behaviors>
+                        <fa:TextChangedBehavior />
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </StackLayout>
             
             <ListView
                     x:Name="transListView"

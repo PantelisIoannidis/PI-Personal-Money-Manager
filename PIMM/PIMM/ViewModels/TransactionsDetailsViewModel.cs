@@ -90,14 +90,8 @@ namespace PIMM.ViewModels
 
         private async Task Save()
         {
-
-            if (TransVM.Id <= 0) // new transaction without id
-                repository.AddNewTransaction(TransVM);
-            else
-                repository.UpdateTransaction(TransVM);
-
-            MessagingCenter.Send(this, "NewEditTransactions");
-
+            repository.UpdateTransaction(TransVM);
+            MessagingCenter.Send(this, "UpdateTransactions");
             await pageService.PopAsync();
         }
 
