@@ -36,19 +36,22 @@ namespace PIMM
             transactions = repository.GetTransactions(period);
             transactionsViewModel = new TransactionsViewModel(transactions, new PageService(), repository, period);
 
-            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", OnNewEditTransactions);
-            MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", OnDeleteTransactions);
+            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", RefreshTransactions);
+            MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", RefreshTransactions);
+            MessagingCenter.Subscribe<TransactionsViewModel>(this, "RefreshTransactions", RefreshTransactions);
             BindingContext = transactionsViewModel;
 
         }
 
-        private void OnDeleteTransactions(TransactionsViewModel obj)
+
+
+        private void RefreshTransactions(TransactionsViewModel obj)
         {
             transactions = repository.GetTransactions(period);
             transactionsViewModel.Transactions = transactions;
         }
 
-        private void OnNewEditTransactions(TransactionsDetailsViewModel obj)
+        private void RefreshTransactions(TransactionsDetailsViewModel obj)
         {
             transactions = repository.GetTransactions(period);
             transactionsViewModel.Transactions = transactions;
@@ -89,6 +92,12 @@ namespace PIMM
         {
             get { return BindingContext as TransactionsViewModel; }
             set { BindingContext = value; }
+        }
+
+        private void ChooseDate_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            if(e.NewDate!=e.OldDate)
+                ViewModel.SetDateCommand.Execute(e.NewDate);
         }
     }
 }

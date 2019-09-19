@@ -23,6 +23,8 @@ namespace PIMM.Models.ViewModels
         private readonly IRepository _repository;
         private bool isRefreshing;
         Period period = (Application.Current as App).CurrentPeriod;
+        private bool isSearchVisible;
+        private bool isSetDateVisible;
 
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectTransactionCommand { get; private set; }
@@ -34,9 +36,12 @@ namespace PIMM.Models.ViewModels
         public ICommand DeleteActionCommand { get; private set; }
         public ICommand EditActionCommand { get; private set; }
         public ICommand SearchCommand { get; private set; }
+        public ICommand ShowSearchFieldCommand { get; private set; }
+        public ICommand ShowSetDateCommand { get; private set; }
+        public ICommand SetDateCommand { get; private set; }
 
-
-    public decimal Balance { get; private set; }
+        
+        public decimal Balance { get; private set; }
         public decimal IncomeSum { get; private set; }
         public decimal ExpenseSum { get; private set; }
         public decimal IncomeSumPercentage { get; private set; }
@@ -48,11 +53,21 @@ namespace PIMM.Models.ViewModels
             {
                 return period;
             }
-            set
-            {
-                period = value;
-                OnPropertyChanged(nameof(DisplayPeriod));
-            }
+            set{ period = value;OnPropertyChanged(nameof(DisplayPeriod));}
+        }
+
+
+        public bool IsSetDateVisible
+        {
+            get { return isSetDateVisible; }
+            set { isSetDateVisible = value; OnPropertyChanged(nameof(IsSetDateVisible)); }
+        }
+
+        public bool IsSearchVisible
+        {
+            get { return isSearchVisible; }
+            set { isSearchVisible = value;
+                OnPropertyChanged(nameof(IsSearchVisible));}
         }
 
 
@@ -119,18 +134,37 @@ namespace PIMM.Models.ViewModels
             this._repository = repository;
             RefreshCommand = new Command(CmdRefresh);
             SelectTransactionCommand = new Command<TransactionViewModel>(async vm => await SelectTransaction(vm));
-            NewTransactionCommand = new Command(async x => await NewTransaction());
-            ChoosePeriodCommand = new Command<TransactionViewModel>(async vm => await ChoosePeriod());
+            NewTransactionCommand = new Command(async vm => await NewTransaction());
+            ChoosePeriodCommand = new Command(async vm => await ChoosePeriod());
             NextTimePeriodCommand = new Command(NextTimePeriod);
             PreviousTimePeriodCommand = new Command(PreviousTimePeriod);
             ResetTimePeriodCommand = new Command(ResetTimePeriod);
             DeleteActionCommand = new Command<TransactionViewModel>(async vm => await DeleteAction(vm));
             EditActionCommand = new Command<TransactionViewModel>(async vm => await EditAction(vm));
             SearchCommand = new Command<string>(s => Search(s));
+            ShowSearchFieldCommand = new Command(ShowSearchField);
+            ShowSetDateCommand = new Command(ShowSetDate);
+            SetDateCommand = new Command(async s =>await SetDate(s));
 
             CalculateSums();
 
             DisplayPeriod = (Period)period; ;
+        }
+
+        private async Task SetDate(object newDate)
+        {
+            DisplayPeriod.ResetSelectedDate((DateTime)newDate);
+            Transactions = _repository.GetTransactions(DisplayPeriod);
+        }
+
+        private void ShowSetDate()
+        {
+            IsSetDateVisible = !IsSetDateVisible;
+        }
+
+        private void ShowSearchField()
+        {
+            IsSearchVisible = !IsSearchVisible;
         }
 
         private void Search(string s)
@@ -140,7 +174,7 @@ namespace PIMM.Models.ViewModels
                 this.filter = (x) => { return true; };
             } else
             {
-                this.filter = (x) => { return x.Description.Contains(s); };
+                this.filter = (x) => { return x.Description.ToLower().Contains(s.ToLower()); };
             }
             OnPropertyChanged(nameof(Transactions));
         }
@@ -221,10 +255,10 @@ namespace PIMM.Models.ViewModels
             SelectedTransaction = null;
         }
 
-        private async void CmdRefresh()
+        private void CmdRefresh()
         {
             IsRefreshing = true;
-            await Task.Delay(3000);
+            MessagingCenter.Send(this, "RefreshTransactions");
             IsRefreshing = false;
         }
 

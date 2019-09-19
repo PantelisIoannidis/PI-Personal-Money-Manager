@@ -17,6 +17,7 @@
             <Color x:Key="barBackgroundColor">#192a56</Color>
             <Color x:Key="barTextColor">White</Color>
 
+            <Color x:Key="controlSelectedBackgroundColor">#192a56</Color>
             <Color x:Key="controlBackgroundColor">#273c75</Color>
             <Color x:Key="controlTextColor">White</Color>
 

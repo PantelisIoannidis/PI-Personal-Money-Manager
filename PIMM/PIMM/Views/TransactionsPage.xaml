@@ -17,45 +17,128 @@
             </ResourceDictionary>            
         </ContentView.Resources>
         <StackLayout Orientation="Vertical">
-            <Grid>
+            <Grid ColumnSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                                
-                <Frame  Grid.Row="0" Grid.Column="0" 
-                        HorizontalOptions="CenterAndExpand"
-                        CornerRadius="10"
-                        Padding="0">
-                        <StackLayout Orientation="Horizontal" Spacing="0" Padding="0">
-                            <Button 
+                <Button Grid.Row="0" Grid.Column="0" 
                                 Command="{Binding PreviousTimePeriodCommand}"
                                 BorderRadius="0"
                                 Text="&#xf060;"
                                 FontFamily="{x:Static fa:FontAwesome.FontName}"/>
-                            <Button 
+                <Button Grid.Row="0" Grid.Column="1" 
                                     Command="{Binding ResetTimePeriodCommand}"
                                     BorderRadius="0"
                                     Text="&#xf015;"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}"/>
-                            <Button 
-                                    HorizontalOptions="CenterAndExpand"
+                <Button Grid.Row="0" Grid.Column="2" 
+                                    Command="{Binding ShowSetDateCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf133;"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsSetDateVisible}"
+                                    Value="true">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlSelectedBackgroundColor}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsSetDateVisible}"
+                                    Value="false">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlBackgroundColor}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Grid.Row="0" Grid.Column="3" 
                                     BorderRadius="0"
                                     Text="{Binding DisplayPeriod.Description, StringFormat='{0} ▼'}"
                                     Command="{Binding ChoosePeriodCommand}"/>
-                            <Button 
+                <Button Grid.Row="0" Grid.Column="4" 
                                     Command="{Binding NextTimePeriodCommand}"
                                     BorderRadius="0"
                                     Text="&#xf061;"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}"/>
-                        </StackLayout>
-                </Frame>
-
-                <Button  Grid.Row="0" Grid.Column="1" Text="New" Command="{Binding NewTransactionCommand}"/>
+                <Button Grid.Row="0" Grid.Column="5" 
+                                    Command="{Binding ShowSearchFieldCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf002;"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsSearchVisible}"
+                                    Value="true">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlSelectedBackgroundColor}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsSearchVisible}"
+                                    Value="false">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlBackgroundColor}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button  Grid.Row="0" Grid.Column="6" 
+                         Text="&#xf067;" 
+                         FontFamily="{x:Static fa:FontAwesome.FontName}" 
+                         Command="{Binding NewTransactionCommand}"/>
             </Grid>
+            <StackLayout Orientation="Vertical">
+                <DatePicker DateSelected="ChooseDate_DateSelected"
+                                IsVisible="False"
+                                x:Name="chooseDate"
+                                Date="{Binding TransVM.TransactionDate}"
+                                Format="D">
+                    <DatePicker.Triggers>
+                        <DataTrigger TargetType="DatePicker"
+                                     Binding="{Binding IsSetDateVisible}"
+                                        Value="true">
+                            <Setter Property="IsVisible"
+                                        Value="True" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="DatePicker"
+                                     Binding="{Binding IsSetDateVisible}"
+                                        Value="false">
+                            <Setter Property="IsVisible"
+                                        Value="False" />
+                        </DataTrigger>
+                    </DatePicker.Triggers>
+                </DatePicker>
+                <SearchBar x:Name="SearchBar" 
+                           IsVisible="False"
+                           SearchCommand="{Binding SearchCommand}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
+                    <SearchBar.Triggers>
+                        <DataTrigger TargetType="SearchBar"
+                                 Binding="{Binding IsSearchVisible}"
+                                    Value="true">
+                            <Setter Property="IsVisible"
+                                    Value="True" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="SearchBar"
+                                 Binding="{Binding IsSearchVisible}"
+                                    Value="false">
+                            <Setter Property="IsVisible"
+                                    Value="False" />
+                        </DataTrigger>
+                    </SearchBar.Triggers>
+                    <SearchBar.Behaviors>
+                        <fa:TextChangedBehavior />
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -84,15 +167,6 @@
             <ProgressBar x:Name="incomeBalanceBar" 
                          Progress="{Binding IncomeSumPercentage}"
                          ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
-            <StackLayout Orientation="Horizontal">
-                <SearchBar x:Name="SearchBar" 
-                           SearchCommand="{Binding SearchCommand}" 
-                           SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
-                    <SearchBar.Behaviors>
-                        <fa:TextChangedBehavior />
-                    </SearchBar.Behaviors>
-                </SearchBar>
-            </StackLayout>
             
             <ListView
                     x:Name="transListView"
@@ -115,8 +189,8 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="6*"/>
-                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="4*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0"
