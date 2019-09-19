@@ -23,7 +23,7 @@ namespace PIMM.Persistance
         public List<TransactionViewModel> GetTransactions()
         {
             var transactions = db.Query<TransactionViewModel>(
-                @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily, AC.Color as AccountColor 
+                @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily, AC.Color as AccountColor, CA.Description as CategoryDescription 
                 FROM 'Transaction' TR  
                 inner join Category CA on TR.CategoryId = CA.Id  
                 inner join FontIcon FO on FO.Id = CA.FontIconId
@@ -33,7 +33,7 @@ namespace PIMM.Persistance
         public List<TransactionViewModel> GetTransactions(Period period)
         {
             var transactions = db.Query<TransactionViewModel>(
-                @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily, AC.Color as AccountColor 
+                @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily, AC.Color as AccountColor, CA.Description as CategoryDescription  
                 FROM 'Transaction' TR  
                 inner join Category CA on TR.CategoryId = CA.Id  
                 inner join FontIcon FO on FO.Id = CA.FontIconId
@@ -80,12 +80,15 @@ namespace PIMM.Persistance
         }
         public int UpdateTransaction(Transaction transaction)
         {
+            int rows = 0;
             if (transaction.Id <= 0)
             {
-                return db.Insert(transaction);
+                rows = db.Insert(transaction);
+                return rows;
             }else
             {
-                return db.Update(transaction);
+                rows = db.Update(transaction);
+                return rows;
             }
             
         }

@@ -7,7 +7,7 @@
              Title="{Binding TransVM.FormPurposeNewOrEdit}"
              mc:Ignorable="d"
              x:Class="PIMM.Views.TransactionDetails.TransactionDetailsPage">
-    <ContentView>
+    <ContentView Padding="20">
         <ContentView.Resources>
             <ResourceDictionary>
                 <conv:AmountToColorConverter x:Key="AmountToColorConverter"/>
@@ -73,7 +73,17 @@
                 <Button Grid.Row="1" Grid.Column="1" Text="{Binding TransVM.CurrentCategory.Description, StringFormat='{0} ▼'}" Command="{Binding SelectedCategoryCommand}"/>
 
                 <Label Grid.Row="2" Grid.Column="0" Text="Description" HorizontalOptions="End"/>
-                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding TransVM.Description}"/>
+                <Entry x:Name="descriptionEntry" Grid.Row="2" Grid.Column="1" Text="{Binding TransVM.Description}">
+                    <Entry.Triggers>
+                        <MultiTrigger TargetType="Entry">
+                            <MultiTrigger.Conditions>
+                                <PropertyCondition  Property="Text" Value=""/>
+                                <PropertyCondition Property="IsFocused" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter  Property="BackgroundColor" Value="Red" />
+                        </MultiTrigger>
+                       </Entry.Triggers>
+                </Entry>
 
                 <Label Grid.Row="3" Grid.Column="0" Text="Date" HorizontalOptions="End"/>
                 <DatePicker Grid.Row="3" Grid.Column="1"
@@ -88,7 +98,7 @@
 
             </Grid>
             <Button Text="Save" 
-                    Padding="0,20,0,0"
+                    Margin="20"
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding SaveCommand}"/>
         </StackLayout>

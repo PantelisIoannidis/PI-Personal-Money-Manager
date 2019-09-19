@@ -174,7 +174,8 @@ namespace PIMM.Models.ViewModels
                 this.filter = (x) => { return true; };
             } else
             {
-                this.filter = (x) => { return x.Description.ToLower().Contains(s.ToLower()); };
+                this.filter = (x) => { return ((x.Description.ToLower().Contains(s.ToLower()))
+                    || (x.CategoryDescription.ToLower().Contains(s.ToLower()))); };
             }
             OnPropertyChanged(nameof(Transactions));
         }
@@ -183,6 +184,7 @@ namespace PIMM.Models.ViewModels
         {
             var vm = new TransactionViewModel()
             {
+                
                 Type = TransactionType.Expense,
                 TransactionDate = DateTime.Now,
             };

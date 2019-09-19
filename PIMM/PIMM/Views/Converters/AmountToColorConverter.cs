@@ -14,11 +14,10 @@ namespace PIMM.Views.Converters
             if (value == null)
                 return Color.Transparent;
 
-            decimal amount = (value as TransactionViewModel).Amount;
+            if (!(value is decimal))
+                return Color.Transparent;
 
-            //if (!(value is decimal))
-            //    return Color.Transparent;
-
+            decimal amount = (decimal)value;
 
             if (amount < 0)
                 return (Color)Application.Current.Resources["amountNegativeColor"];

@@ -24,13 +24,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                                
+                
                 <Button Grid.Row="0" Grid.Column="0" 
                                 Command="{Binding PreviousTimePeriodCommand}"
                                 BorderRadius="0"
@@ -42,9 +43,20 @@
                                     Text="&#xf015;"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}"/>
                 <Button Grid.Row="0" Grid.Column="2" 
+                                    BorderRadius="0"
+                                    Text="{Binding DisplayPeriod.Description, StringFormat='{0} ▼'}"
+                                    Command="{Binding ChoosePeriodCommand}"/>
+                <Button Grid.Row="0" Grid.Column="3" 
+                                    Command="{Binding NextTimePeriodCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf061;"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
+                <Button Grid.Row="0" Grid.Column="4" 
                                     Command="{Binding ShowSetDateCommand}"
                                     BorderRadius="0"
                                     Text="&#xf133;"
+                                    BorderColor="{StaticResource backgroundColor}"
+                                    BorderWidth="3"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button"
@@ -61,19 +73,12 @@
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="3" 
-                                    BorderRadius="0"
-                                    Text="{Binding DisplayPeriod.Description, StringFormat='{0} ▼'}"
-                                    Command="{Binding ChoosePeriodCommand}"/>
-                <Button Grid.Row="0" Grid.Column="4" 
-                                    Command="{Binding NextTimePeriodCommand}"
-                                    BorderRadius="0"
-                                    Text="&#xf061;"
-                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
                 <Button Grid.Row="0" Grid.Column="5" 
                                     Command="{Binding ShowSearchFieldCommand}"
                                     BorderRadius="0"
                                     Text="&#xf002;"
+                                    BorderColor="{StaticResource backgroundColor}"
+                                    BorderWidth="3"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button"
@@ -95,6 +100,9 @@
                          FontFamily="{x:Static fa:FontAwesome.FontName}" 
                          Command="{Binding NewTransactionCommand}"/>
             </Grid>
+            
+            
+            
             <StackLayout Orientation="Vertical">
                 <DatePicker DateSelected="ChooseDate_DateSelected"
                                 IsVisible="False"
@@ -139,6 +147,9 @@
                     </SearchBar.Behaviors>
                 </SearchBar>
             </StackLayout>
+            
+            
+            
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -168,13 +179,18 @@
                          Progress="{Binding IncomeSumPercentage}"
                          ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
             
+            
+            
             <ListView
                     x:Name="transListView"
+                    CachingStrategy="RecycleElementAndDataTemplate"
                     ItemsSource="{Binding Transactions}" 
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
                     BackgroundColor="{StaticResource backgroundColor}"
+                    SeparatorVisibility="Default"
+                    SeparatorColor="{StaticResource seperatorColor}"
                     ItemSelected="Listview_ItemSelected">
                 
                 <ListView.ItemTemplate>

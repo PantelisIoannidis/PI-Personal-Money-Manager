@@ -14,9 +14,5 @@ namespace PIMM.Models
         public TransactionType Type { get; set; }
         public string Description { get; set; }
 
-        public static explicit operator Category(List<Category> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

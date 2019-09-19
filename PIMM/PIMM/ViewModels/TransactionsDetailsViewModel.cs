@@ -58,6 +58,7 @@ namespace PIMM.ViewModels
             page.CategoriesListView.ItemSelected += async (source, args) =>
             {
                 TransVM.CategoryId = (args.SelectedItem as Category).Id;
+                TransVM.Description = (args.SelectedItem as Category).Description;
                 OnPropertyChanged(nameof(TransVM));
                 await pageService.PopAsync();
             };
@@ -79,12 +80,14 @@ namespace PIMM.ViewModels
         private void ExpenseSelected()
         {
             TransVM.Type = TransactionType.Expense;
+            TransVM.Description = TransVM.CurrentCategory.Description;
             OnPropertyChanged(nameof(TransVM));
         }
 
         private void IncomeSelected()
         {
             TransVM.Type = TransactionType.Income;
+            TransVM.Description = TransVM.CurrentCategory.Description;
             OnPropertyChanged(nameof(TransVM));
         }
 

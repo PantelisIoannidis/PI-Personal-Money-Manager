@@ -13,25 +13,28 @@
     <Application.Resources>
         <ResourceDictionary>
 
-            <x:Int32 x:Key="controlBorderRadius">20</x:Int32>
+            
             <Color x:Key="barBackgroundColor">#192a56</Color>
             <Color x:Key="barTextColor">White</Color>
 
+            <x:Int32 x:Key="controlBorderRadius">20</x:Int32>
             <Color x:Key="controlSelectedBackgroundColor">#192a56</Color>
             <Color x:Key="controlBackgroundColor">#273c75</Color>
             <Color x:Key="controlTextColor">White</Color>
+            <Color x:Key="seperatorColor">#05002e</Color>
 
             <Color x:Key="backgroundColor">#95afc0</Color>
             <Color x:Key="textColor">Black</Color>
 
             <!--Transaction amount colors-->
-            <Color x:Key="amountPositiveColor">#0a3d62</Color>
-            <Color x:Key="amountNegativeColor">#b71540</Color>
-            <Color x:Key="IncomeColor">#0a3d62</Color>
-            <Color x:Key="ExpenseColor">#b71540</Color>
+            <Color x:Key="amountPositiveColor">#041f08</Color>
+            <Color x:Key="amountNegativeColor">#400000</Color>
+            <Color x:Key="amountZeroColor">White</Color>
+            <Color x:Key="IncomeColor">#00300b</Color>
+            <Color x:Key="ExpenseColor">#570303</Color>
             <Color x:Key="TransferColor">Black</Color>
             <Color x:Key="AdjustmentColor">Black</Color>
-            <Color x:Key="amountZeroColor">White</Color>
+            
             
             <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource controlBackgroundColor}"/>

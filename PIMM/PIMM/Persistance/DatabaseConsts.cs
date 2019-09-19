@@ -6,6 +6,6 @@ namespace PIMM.Persistance
 {
     public static class DatabaseConsts
     {
-        public static string DatabaseName = "PIMMv008.db3";
+        public static string DatabaseName = "PIMMv009.db3";
     }
 }

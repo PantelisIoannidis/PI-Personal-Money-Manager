@@ -17,6 +17,7 @@ namespace PIMM.Models.ViewModels
         public DateTime TransactionDate { get; set; }
         public decimal Amount { get; set; }
 
+        public string CategoryDescription { get; set; }
         public string FontFamily { get; set; }
         public string Glyph { get; set; }
         public string GlyphColor { get; set; }
