@@ -8,15 +8,19 @@ namespace PIMM.Persistance
 {
     public interface IRepository
     {
-        int DeleteTransaction(NewEditTransactionViewModel tranVM);
+        int DeleteAccount(Account account);
         int DeleteTransaction(Transaction transaction);
+        int DeleteTransaction(UpdateTransactionViewModel tranVM);
+        List<AccountViewModel> GetAccountsAsViewModels();
         List<Account> GetAllAccounts();
         List<Category> GetAllCategories();
         List<FontIcon> GetAllFontIcons();
         List<TransactionViewModel> GetTransactions();
         List<TransactionViewModel> GetTransactions(Period period);
-        NewEditTransactionViewModel PopulateTransactionWithConnectedLists(NewEditTransactionViewModel tran);
-        int UpdateTransaction(NewEditTransactionViewModel tranVM);
+        UpdateTransactionViewModel PopulateTransactionWithConnectedLists(UpdateTransactionViewModel tran);
+        int UpdateAccount(Account account);
+        int UpdateAccount(AccountViewModel vm);
         int UpdateTransaction(Transaction transaction);
+        int UpdateTransaction(UpdateTransactionViewModel tranVM);
     }
 }

@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:PIMM.Views.Converters;assembly=PIMM"
              xmlns:fa="clr-namespace:PIMM.Helpers"
-             Title="xxx"
+             Title="Transactions Page"
              mc:Ignorable="d"
              x:Class="PIMM.TransactionsPage">
     <ContentView x:Name="PortraitView" Padding="10">

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="{Binding FormPurposeNewOrEdit}"
+             x:Class="PIMM.Views.AccountsDetails.AccountsDetailsPage"
+             xmlns:lc="clr-namespace:PIMM.Extensions;assembly=PIMM">
+    <ContentPage.Content>
+        <StackLayout Padding="20" Orientation="Vertical">
+
+            <Grid ColumnSpacing="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Description" HorizontalOptions="End"/>
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Description}"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Color" HorizontalOptions="End"/>
+                <lc:ColorPicker x:Name="myWebView" Grid.Row="1" Grid.Column="1"
+                                       Color="{Binding Color}" 
+                                       Backcolor="{StaticResource backgroundColor}"/>
+
+            </Grid>
+
+            <Button x:Name="SaveButton"
+                    Text="Save" 
+                    Margin="20"
+                    HorizontalOptions="FillAndExpand" 
+                    Clicked="SaveButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace PIMM.ViewModels
 {
-    public class NewEditTransactionViewModel : INotifyPropertyChanged
+    public class UpdateTransactionViewModel : INotifyPropertyChanged
     { 
         public int Id { get; set; }
         public int CategoryId { get; set; }

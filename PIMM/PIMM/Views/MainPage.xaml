@@ -24,6 +24,6 @@
 
     <local:CategoriesPage Title="Categories" IconImageSource="tag.png" x:Name="categories"/>
 
-    <local:CategoriesPage Title="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts"/>
+    <local:AccountsPage Title="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts"/>
 
 </TabbedPage>

@@ -42,6 +42,13 @@ namespace PIMM.Persistance
             return transactions;
         }
 
+        public List<AccountViewModel> GetAccountsAsViewModels()
+        {
+            var accounts = db.Query<AccountViewModel>(
+                @"SELECT * FROM Account ");
+            return accounts;
+        }
+
         public List<Account> GetAllAccounts()
         {
             return db.Table<Account>().ToList();
@@ -57,7 +64,7 @@ namespace PIMM.Persistance
             return db.Table<Category>().ToList();
         }
 
-        public NewEditTransactionViewModel PopulateTransactionWithConnectedLists(NewEditTransactionViewModel tran)
+        public UpdateTransactionViewModel PopulateTransactionWithConnectedLists(UpdateTransactionViewModel tran)
         {
             var transactions = db.Query<TransactionDetailsCategoryViewModel>(
                 @"SELECT CA.*, FO.Glyph, FO.FontFamily    
@@ -71,10 +78,10 @@ namespace PIMM.Persistance
             return tran;
         }
 
-        public int UpdateTransaction(NewEditTransactionViewModel tranVM)
+        public int UpdateTransaction(UpdateTransactionViewModel tranVM)
         {
             var mapping = new Mapping();
-            var transaction = mapping.NewEditTransactionViewModel_2_Transaction(tranVM);
+            var transaction = mapping.UpdateTransactionViewModel_2_Transaction(tranVM);
 
             return UpdateTransaction(transaction);
         }
@@ -85,24 +92,53 @@ namespace PIMM.Persistance
             {
                 rows = db.Insert(transaction);
                 return rows;
-            }else
+            }
+            else
             {
                 rows = db.Update(transaction);
                 return rows;
             }
-            
+
         }
 
-        public int DeleteTransaction(NewEditTransactionViewModel tranVM)
+        public int DeleteTransaction(UpdateTransactionViewModel tranVM)
         {
             var mapping = new Mapping();
-            var transaction = mapping.NewEditTransactionViewModel_2_Transaction(tranVM);
+            var transaction = mapping.UpdateTransactionViewModel_2_Transaction(tranVM);
 
             return DeleteTransaction(transaction);
         }
         public int DeleteTransaction(Transaction transaction)
         {
             return db.Delete(transaction);
+        }
+
+        public int UpdateAccount(AccountViewModel vm)
+        {
+            var mapping = new Mapping();
+            var account = mapping.AccountViewModel_2_Account(vm);
+
+            return UpdateAccount(account);
+        }
+        public int UpdateAccount(Account account)
+        {
+            int rows = 0;
+            if (account.Id <= 0)
+            {
+                rows = db.Insert(account);
+                return rows;
+            }
+            else
+            {
+                rows = db.Update(account);
+                return rows;
+            }
+
+        }
+
+        public int DeleteAccount(Account account)
+        {
+            return db.Delete(account);
         }
 
     }

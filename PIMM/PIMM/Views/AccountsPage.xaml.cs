@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PIMM.Persistance;
+using PIMM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,39 @@ namespace PIMM
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountsPage : ContentPage
     {
+        List<AccountViewModel> accounts;
+        AccountsViewModel accountsViewModel;
+        Repository repository;
+
         public AccountsPage()
         {
             InitializeComponent();
+
+            repository = new Repository();
+            accounts = repository.GetAccountsAsViewModels();
+            accountsViewModel = new AccountsViewModel(accounts, new PageService(), repository);
+
+            MessagingCenter.Subscribe<AccountsViewModel>(this, "DeleteAccounts", RefreshAccounts);
+            MessagingCenter.Subscribe<AccountsViewModel>(this, "RefreshAccounts", RefreshAccounts);
+            BindingContext = accountsViewModel;
+        }
+
+        private void RefreshAccounts(AccountsViewModel obj)
+        {
+            accounts = repository.GetAccountsAsViewModels();
+            accountsViewModel.Accounts = accounts;
+        }
+
+
+        private void AccountsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ViewModel.SelectAccountCommand.Execute(e.SelectedItem);
+        }
+
+        public AccountsViewModel ViewModel
+        {
+            get { return BindingContext as AccountsViewModel; }
+            set { BindingContext = value; }
         }
     }
 }

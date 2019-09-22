@@ -13,9 +13,9 @@ namespace PIMM.Views.TransactionsDetails
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TransactionsDetailsCategories : ContentPage
     {
-        private readonly NewEditTransactionViewModel transVM;
+        private readonly UpdateTransactionViewModel transVM;
 
-        public TransactionsDetailsCategories(NewEditTransactionViewModel transVM)
+        public TransactionsDetailsCategories(UpdateTransactionViewModel transVM)
         {
             InitializeComponent();
             this.transVM = transVM;

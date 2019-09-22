@@ -17,7 +17,7 @@ namespace PIMM.ViewModels
     {
         private readonly IPageService pageService;
         private readonly IRepository repository;
-        private NewEditTransactionViewModel transVM;
+        private UpdateTransactionViewModel transVM;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -28,7 +28,7 @@ namespace PIMM.ViewModels
         public ICommand SelectedCategoryCommand { get; set; }
         
 
-        public NewEditTransactionViewModel TransVM { get {
+        public UpdateTransactionViewModel TransVM { get {
                 return transVM;
                 }
             set {
@@ -36,7 +36,7 @@ namespace PIMM.ViewModels
                 OnPropertyChanged(nameof(TransVM));
             } }
 
-        public TransactionsDetailsViewModel(IPageService pageService, IRepository repository, NewEditTransactionViewModel transactionViewModel)
+        public TransactionsDetailsViewModel(IPageService pageService, IRepository repository, UpdateTransactionViewModel transactionViewModel)
         {
             this.pageService = pageService;
             this.repository = repository;

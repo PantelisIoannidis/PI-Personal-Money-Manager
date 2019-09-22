@@ -10,9 +10,18 @@ namespace PIMM.Helpers
 {
     public class Mapping
     {
-        public NewEditTransactionViewModel TransactionViewModel_2_NewEditTransactionViewModel(TransactionViewModel vm)
+
+        public Account AccountViewModel_2_Account(AccountViewModel vm)
         {
-            var newVM = new NewEditTransactionViewModel()
+            return new Account {
+                 Id=vm.Id,
+                 Color=vm.Color,
+                 Description=vm.Description
+            };
+        }
+        public UpdateTransactionViewModel TransactionViewModel_2_UpdateTransactionViewModel(TransactionViewModel vm)
+        {
+            var newVM = new UpdateTransactionViewModel()
             {
                 Id = vm.Id,
                 AccountId = vm.AccountId,
@@ -63,7 +72,7 @@ namespace PIMM.Helpers
             return vm;
         }
 
-        public Transaction NewEditTransactionViewModel_2_Transaction(NewEditTransactionViewModel tranVM)
+        public Transaction UpdateTransactionViewModel_2_Transaction(UpdateTransactionViewModel tranVM)
         {
             var transaction = new Transaction
             {

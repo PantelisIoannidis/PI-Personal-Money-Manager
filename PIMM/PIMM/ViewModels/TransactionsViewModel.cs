@@ -128,7 +128,7 @@ namespace PIMM.Models.ViewModels
 
         public TransactionsViewModel(List<TransactionViewModel> transactions, IPageService pageService,IRepository repository,IPeriod period)
         {
-            this.transactions = transactions;
+            this.Transactions = transactions;
             this.filter = (x) => { return true; };
             _pageService = pageService;
             this._repository = repository;
@@ -199,10 +199,10 @@ namespace PIMM.Models.ViewModels
         private async Task DeleteAction(TransactionViewModel vm)
         {
             var deleteConfirmation = await _pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
-            var transaction = new Mapping().TransactionViewModel_2_Transaction(vm);
+            var transactions = new Mapping().TransactionViewModel_2_Transaction(vm);
             if (deleteConfirmation)
             {
-                _repository.DeleteTransaction(transaction);
+                _repository.DeleteTransaction(transactions);
                 MessagingCenter.Send(this, "DeleteTransactions");
             }
                 
