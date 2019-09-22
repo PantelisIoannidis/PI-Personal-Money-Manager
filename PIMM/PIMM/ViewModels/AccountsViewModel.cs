@@ -44,7 +44,7 @@ namespace PIMM.ViewModels
             EditActionCommand = new Command<AccountViewModel>(async vm => await EditAction(vm));
             NewTransactionCommand = new Command<AccountViewModel>(async vm => await NewAction());
             SearchCommand = new Command<string>(s => Search(s));
-            MessagingCenter.Subscribe<AccountsDetailsPage,AccountViewModel>(this, "UpdateAccount", UpdateAccount);
+            MessagingCenter.Subscribe<AccountsDetailsPage,AccountViewModel>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });
         }
 
         private async Task NewAction()
@@ -56,9 +56,9 @@ namespace PIMM.ViewModels
             await _pageService.PushAsync(new AccountsDetailsPage(_pageService, _repository, vm));
         }
 
-        private void UpdateAccount(AccountsDetailsPage arg1, AccountViewModel vm)
+        private async Task UpdateAccount(AccountsDetailsPage page, AccountViewModel vm)
         {
-            _pageService.PopAsync().Wait();
+            await _pageService.PopAsync();
             _repository.UpdateAccount(vm);
             MessagingCenter.Send(this, "RefreshAccounts");
         }
@@ -74,8 +74,14 @@ namespace PIMM.ViewModels
             var account = new Mapping().AccountViewModel_2_Account(vm);
             if (deleteConfirmation)
             {
-                _repository.DeleteAccount(account);
-                MessagingCenter.Send(this, "DeleteAccounts");
+                var status =_repository.DeleteAccount(account);
+                if (status != "OK")
+                {
+                    await _pageService.DisplayAlert("Erase canceled", status, "OK");
+                }
+                else { 
+                    MessagingCenter.Send(this, "DeleteAccounts");
+                }
             }
         }
         public bool IsRefreshing

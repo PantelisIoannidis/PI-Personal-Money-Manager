@@ -101,16 +101,17 @@ namespace PIMM.Persistance
 
         }
 
-        public int DeleteTransaction(UpdateTransactionViewModel tranVM)
+        public string DeleteTransaction(UpdateTransactionViewModel tranVM)
         {
             var mapping = new Mapping();
             var transaction = mapping.UpdateTransactionViewModel_2_Transaction(tranVM);
 
             return DeleteTransaction(transaction);
         }
-        public int DeleteTransaction(Transaction transaction)
+        public string DeleteTransaction(Transaction transaction)
         {
-            return db.Delete(transaction);
+            db.Delete(transaction);
+            return "OK";
         }
 
         public int UpdateAccount(AccountViewModel vm)
@@ -136,9 +137,15 @@ namespace PIMM.Persistance
 
         }
 
-        public int DeleteAccount(Account account)
+        public string DeleteAccount(Account account)
         {
-            return db.Delete(account);
+            var transactionsWithThatAccountInUse =
+                db.ExecuteScalar<int>(@"SELECT COUNT(*) FROM 'Transaction' WHERE AccountId = ? ", account.Id);
+            if (transactionsWithThatAccountInUse > 0)
+                return $"This account is used in {transactionsWithThatAccountInUse} transactions and it cannot be erased.";
+
+            db.Delete(account);
+            return "OK";
         }
 
     }

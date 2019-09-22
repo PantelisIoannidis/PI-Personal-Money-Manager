@@ -8,9 +8,9 @@ namespace PIMM.Persistance
 {
     public interface IRepository
     {
-        int DeleteAccount(Account account);
-        int DeleteTransaction(Transaction transaction);
-        int DeleteTransaction(UpdateTransactionViewModel tranVM);
+        string DeleteAccount(Account account);
+        string DeleteTransaction(Transaction transaction);
+        string DeleteTransaction(UpdateTransactionViewModel tranVM);
         List<AccountViewModel> GetAccountsAsViewModels();
         List<Account> GetAllAccounts();
         List<Category> GetAllCategories();
