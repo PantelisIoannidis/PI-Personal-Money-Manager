@@ -14,7 +14,7 @@ namespace PIMM
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountsPage : ContentPage
     {
-        List<AccountViewModel> accounts;
+        List<AccountDto> accounts;
         AccountsViewModel accountsViewModel;
         Repository repository;
 

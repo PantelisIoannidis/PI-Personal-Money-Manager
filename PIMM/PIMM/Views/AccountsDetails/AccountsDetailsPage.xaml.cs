@@ -15,14 +15,14 @@ namespace PIMM.Views.AccountsDetails
     {
         private IPageService pageService;
         private IRepository repository;
-        private AccountViewModel vm;
+        private AccountDto vm;
 
         public AccountsDetailsPage()
         {
             InitializeComponent();
         }
 
-        public AccountsDetailsPage(IPageService pageService, IRepository repository, AccountViewModel vm)
+        public AccountsDetailsPage(IPageService pageService, IRepository repository, AccountDto vm)
         {
             InitializeComponent();
 

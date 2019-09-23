@@ -17,7 +17,7 @@ namespace PIMM.Views.Converters
 
             Color color = new Color();
 
-            var type = (value as TransactionViewModel).Type;
+            var type = (value as TransactionDto).Type;
 
 
             switch (type)

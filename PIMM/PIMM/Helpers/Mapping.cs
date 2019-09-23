@@ -11,7 +11,7 @@ namespace PIMM.Helpers
     public class Mapping
     {
 
-        public Account AccountViewModel_2_Account(AccountViewModel vm)
+        public Account AccountDto_2_Account(AccountDto vm)
         {
             return new Account {
                  Id=vm.Id,
@@ -19,9 +19,9 @@ namespace PIMM.Helpers
                  Description=vm.Description
             };
         }
-        public UpdateTransactionViewModel TransactionViewModel_2_UpdateTransactionViewModel(TransactionViewModel vm)
+        public UpdateTransactionDto TransactionDto_2_UpdateTransactionDto(TransactionDto vm)
         {
-            var newVM = new UpdateTransactionViewModel()
+            var newVM = new UpdateTransactionDto()
             {
                 Id = vm.Id,
                 AccountId = vm.AccountId,
@@ -35,7 +35,7 @@ namespace PIMM.Helpers
             return newVM;
         }
 
-        public Transaction TransactionViewModel_2_Transaction(TransactionViewModel vm)
+        public Transaction TransactionDto_2_Transaction(TransactionDto vm)
         {
             var trans = new Transaction()
             {
@@ -52,10 +52,10 @@ namespace PIMM.Helpers
 
         }
 
-        public TransactionViewModel Transaction_2_TransactionViewModel(Transaction transaction, 
+        public TransactionDto Transaction_2_TransactionDto(Transaction transaction, 
             Category category, FontIcon fontIcon, Account account)
         {
-            var vm = new TransactionViewModel()
+            var vm = new TransactionDto()
             {
                 Id = transaction.Id,
                 AccountId = transaction.AccountId,
@@ -72,7 +72,7 @@ namespace PIMM.Helpers
             return vm;
         }
 
-        public Transaction UpdateTransactionViewModel_2_Transaction(UpdateTransactionViewModel tranVM)
+        public Transaction UpdateTransactionDto_2_Transaction(UpdateTransactionDto tranVM)
         {
             var transaction = new Transaction
             {
@@ -85,6 +85,20 @@ namespace PIMM.Helpers
                 Description = tranVM.Description
             };
             return transaction;
+        }
+
+        public Category CategoryDto_2_Category(CategoryDto vm)
+        {
+            var category = new Category
+            {
+                Id = vm.Id,
+                Color = vm.Color,
+                Description = vm.Description,
+                FontIconId = vm.FontIconId,
+                Type = vm.Type
+            };
+
+            return category;
         }
     }
 }

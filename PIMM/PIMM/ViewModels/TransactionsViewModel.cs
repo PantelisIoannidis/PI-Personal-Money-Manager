@@ -1,4 +1,6 @@
 ﻿using PIMM.Helpers;
+using PIMM.Models;
+using PIMM.Models.ViewModels;
 using PIMM.Persistance;
 using PIMM.ViewModels;
 using PIMM.Views;
@@ -12,13 +14,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace PIMM.Models.ViewModels
+namespace PIMM.ViewModels
 {
     public class TransactionsViewModel : INotifyPropertyChanged
     {
-        private Func<TransactionViewModel, bool> filter;
-        private List<TransactionViewModel> transactions;
-        private TransactionViewModel selectedTransaction;
+        private Func<TransactionDto, bool> filter;
+        private List<TransactionDto> transactions;
+        private TransactionDto selectedTransaction;
         private readonly IPageService _pageService;
         private readonly IRepository _repository;
         private bool isRefreshing;
@@ -71,7 +73,7 @@ namespace PIMM.Models.ViewModels
         }
 
 
-        public List<TransactionViewModel> Transactions
+        public List<TransactionDto> Transactions
         {
             get {
                 return transactions.Where(filter).ToList(); }
@@ -107,7 +109,7 @@ namespace PIMM.Models.ViewModels
             OnPropertyChanged(nameof(Balance));
         }
 
-        public TransactionViewModel SelectedTransaction
+        public TransactionDto SelectedTransaction
         {
             get {
                 return selectedTransaction; }
@@ -126,21 +128,21 @@ namespace PIMM.Models.ViewModels
 
         
 
-        public TransactionsViewModel(List<TransactionViewModel> transactions, IPageService pageService,IRepository repository,IPeriod period)
+        public TransactionsViewModel(List<TransactionDto> transactions, IPageService pageService,IRepository repository,IPeriod period)
         {
             this.Transactions = transactions;
             this.filter = (x) => { return true; };
             _pageService = pageService;
             this._repository = repository;
             RefreshCommand = new Command(CmdRefresh);
-            SelectTransactionCommand = new Command<TransactionViewModel>(async vm => await SelectTransaction(vm));
+            SelectTransactionCommand = new Command<TransactionDto>(async vm => await SelectTransaction(vm));
             NewTransactionCommand = new Command(async vm => await NewTransaction());
             ChoosePeriodCommand = new Command(async vm => await ChoosePeriod());
             NextTimePeriodCommand = new Command(NextTimePeriod);
             PreviousTimePeriodCommand = new Command(PreviousTimePeriod);
             ResetTimePeriodCommand = new Command(ResetTimePeriod);
-            DeleteActionCommand = new Command<TransactionViewModel>(async vm => await DeleteAction(vm));
-            EditActionCommand = new Command<TransactionViewModel>(async vm => await EditAction(vm));
+            DeleteActionCommand = new Command<TransactionDto>(async vm => await DeleteAction(vm));
+            EditActionCommand = new Command<TransactionDto>(async vm => await EditAction(vm));
             SearchCommand = new Command<string>(s => Search(s));
             ShowSearchFieldCommand = new Command(ShowSearchField);
             ShowSetDateCommand = new Command(ShowSetDate);
@@ -182,7 +184,7 @@ namespace PIMM.Models.ViewModels
 
         private async Task NewTransaction()
         {
-            var vm = new TransactionViewModel()
+            var vm = new TransactionDto()
             {
                 
                 Type = TransactionType.Expense,
@@ -191,15 +193,15 @@ namespace PIMM.Models.ViewModels
             await _pageService.PushAsync(new TransactionDetailsPage(_pageService, _repository, vm));
         }
 
-        private async Task EditAction(TransactionViewModel vm)
+        private async Task EditAction(TransactionDto vm)
         {
             await _pageService.PushAsync(new TransactionDetailsPage(_pageService, _repository, vm));
         }
 
-        private async Task DeleteAction(TransactionViewModel vm)
+        private async Task DeleteAction(TransactionDto vm)
         {
             var deleteConfirmation = await _pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
-            var transactions = new Mapping().TransactionViewModel_2_Transaction(vm);
+            var transactions = new Mapping().TransactionDto_2_Transaction(vm);
             if (deleteConfirmation)
             {
                 _repository.DeleteTransaction(transactions);
@@ -252,7 +254,7 @@ namespace PIMM.Models.ViewModels
             Transactions = _repository.GetTransactions(DisplayPeriod);
         }
 
-        private async Task SelectTransaction(TransactionViewModel transaction)
+        private async Task SelectTransaction(TransactionDto transaction)
         {
             SelectedTransaction = null;
         }

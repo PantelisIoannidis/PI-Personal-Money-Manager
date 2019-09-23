@@ -18,10 +18,10 @@ namespace PIMM.Views.TransactionDetails
     {
         private readonly IPageService pageService;
         private readonly IRepository repository;
-        private UpdateTransactionViewModel newTransVM;
+        private UpdateTransactionDto newTransVM;
         private readonly TransactionsDetailsViewModel transDetailVM;
 
-        public TransactionDetailsPage(IPageService pageService,IRepository repository, TransactionViewModel transaction)
+        public TransactionDetailsPage(IPageService pageService,IRepository repository, TransactionDto transaction)
         {
             InitializeComponent();
             
@@ -33,10 +33,10 @@ namespace PIMM.Views.TransactionDetails
             BindingContext = transDetailVM;
         }
 
-        private void prepareViewModel(TransactionViewModel vm)
+        private void prepareViewModel(TransactionDto vm)
         {
             var mapping = new Mapping();
-            this.newTransVM = mapping.TransactionViewModel_2_UpdateTransactionViewModel(vm);
+            this.newTransVM = mapping.TransactionDto_2_UpdateTransactionDto(vm);
             newTransVM = repository.PopulateTransactionWithConnectedLists(newTransVM);
             if (newTransVM.CategoryId == 0)
                 newTransVM.CategoryId = newTransVM.CurrentCategory.Id;

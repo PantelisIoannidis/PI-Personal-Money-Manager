@@ -13,8 +13,8 @@ namespace PIMM.Views.TransactionsDetails
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TransactionsDetailsAccounts : ContentPage
     {
-        private readonly UpdateTransactionViewModel transVM;
-        public TransactionsDetailsAccounts(UpdateTransactionViewModel transVM)
+        private readonly UpdateTransactionDto transVM;
+        public TransactionsDetailsAccounts(UpdateTransactionDto transVM)
         {
             InitializeComponent();
             this.transVM = transVM;

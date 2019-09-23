@@ -22,7 +22,7 @@ namespace PIMM
         private double width = 0;
         private double height = 0;
 
-        List<TransactionViewModel> transactions;
+        List<TransactionDto> transactions;
         TransactionsViewModel transactionsViewModel;
         Repository repository;
         Period period;

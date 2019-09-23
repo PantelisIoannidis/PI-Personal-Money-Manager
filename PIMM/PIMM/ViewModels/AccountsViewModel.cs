@@ -1,5 +1,6 @@
 ﻿using PIMM.Helpers;
 using PIMM.Persistance;
+using PIMM.ViewModels;
 using PIMM.Views.AccountsDetails;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,12 @@ namespace PIMM.ViewModels
 {
     public class AccountsViewModel : INotifyPropertyChanged
     {
-        private Func<AccountViewModel, bool> filter;
-        public List<AccountViewModel> accounts;
-        private AccountViewModel selectedAccount;
+        private Func<AccountDto, bool> filter;
+        public List<AccountDto> accounts;
+        private AccountDto selectedAccount;
         private readonly IPageService _pageService;
         private readonly IRepository _repository;
         private bool isRefreshing;
-        private bool isSearchVisible;
-        private bool isSetDateVisible;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,46 +31,46 @@ namespace PIMM.ViewModels
         public ICommand EditActionCommand { get; private set; }
         public ICommand NewTransactionCommand { get; private set; }
 
-        public AccountsViewModel(List<AccountViewModel> accounts, IPageService pageService, IRepository repository)
+        public AccountsViewModel(List<AccountDto> accounts, IPageService pageService, IRepository repository)
         {
             this.Accounts = accounts;
             this.filter = (x) => { return true; };
             _pageService = pageService;
             this._repository = repository;
             RefreshCommand = new Command(CmdRefresh);
-            SelectAccountCommand = new Command<AccountViewModel>(async vm => await SelectAccount(vm));
-            DeleteActionCommand = new Command<AccountViewModel>(async vm => await DeleteAction(vm));
-            EditActionCommand = new Command<AccountViewModel>(async vm => await EditAction(vm));
-            NewTransactionCommand = new Command<AccountViewModel>(async vm => await NewAction());
+            SelectAccountCommand = new Command<AccountDto>(async vm => await SelectAccount(vm));
+            DeleteActionCommand = new Command<AccountDto>(async vm => await DeleteAction(vm));
+            EditActionCommand = new Command<AccountDto>(async vm => await EditAction(vm));
+            NewTransactionCommand = new Command<AccountDto>(async vm => await NewAction());
             SearchCommand = new Command<string>(s => Search(s));
-            MessagingCenter.Subscribe<AccountsDetailsPage,AccountViewModel>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });
+            MessagingCenter.Subscribe<AccountsDetailsPage,AccountDto>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });
         }
 
         private async Task NewAction()
         {
-            var vm = new AccountViewModel() {
+            var vm = new AccountDto() {
                 Color = "#ffffff",
                 Description="Default Account"
             };
             await _pageService.PushAsync(new AccountsDetailsPage(_pageService, _repository, vm));
         }
 
-        private async Task UpdateAccount(AccountsDetailsPage page, AccountViewModel vm)
+        private async Task UpdateAccount(AccountsDetailsPage page, AccountDto vm)
         {
             await _pageService.PopAsync();
             _repository.UpdateAccount(vm);
             MessagingCenter.Send(this, "RefreshAccounts");
         }
 
-        private async Task EditAction(AccountViewModel vm)
+        private async Task EditAction(AccountDto vm)
         {
             await _pageService.PushAsync(new AccountsDetailsPage(_pageService, _repository, vm));
         }
 
-        private async Task DeleteAction(AccountViewModel vm)
+        private async Task DeleteAction(AccountDto vm)
         {
             var deleteConfirmation = await _pageService.DisplayAlert("Delete account", "Are you sure?", "Yes", "No");
-            var account = new Mapping().AccountViewModel_2_Account(vm);
+            var account = new Mapping().AccountDto_2_Account(vm);
             if (deleteConfirmation)
             {
                 var status =_repository.DeleteAccount(account);
@@ -90,7 +89,7 @@ namespace PIMM.ViewModels
             set { isRefreshing = value; OnPropertyChanged(nameof(IsRefreshing)); }
         }
 
-        public AccountViewModel SelectedAccount
+        public AccountDto SelectedAccount
         {
             get
             {
@@ -103,7 +102,7 @@ namespace PIMM.ViewModels
             }
         }
 
-        public List<AccountViewModel> Accounts
+        public List<AccountDto> Accounts
         {
             get
             {
@@ -131,7 +130,7 @@ namespace PIMM.ViewModels
             OnPropertyChanged(nameof(Accounts));
         }
 
-        private async Task SelectAccount(AccountViewModel account)
+        private async Task SelectAccount(AccountDto account)
         {
             SelectedAccount = null;
         }

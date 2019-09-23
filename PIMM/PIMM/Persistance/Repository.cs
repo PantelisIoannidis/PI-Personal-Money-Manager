@@ -20,9 +20,9 @@ namespace PIMM.Persistance
             db = DependencyService.Get<ISQLiteDb>().GetConnection();
         }
 
-        public List<TransactionViewModel> GetTransactions()
+        public List<TransactionDto> GetTransactions()
         {
-            var transactions = db.Query<TransactionViewModel>(
+            var transactions = db.Query<TransactionDto>(
                 @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily, AC.Color as AccountColor, CA.Description as CategoryDescription 
                 FROM 'Transaction' TR  
                 inner join Category CA on TR.CategoryId = CA.Id  
@@ -30,9 +30,19 @@ namespace PIMM.Persistance
                 inner join Account AC on AC.Id = TR.AccountId ");
             return transactions;
         }
-        public List<TransactionViewModel> GetTransactions(Period period)
+
+        internal List<CategoryDto> GetCategoriesAsViewModels()
         {
-            var transactions = db.Query<TransactionViewModel>(
+            var categories = db.Query<CategoryDto>(
+                @"SELECT CA.*, FO.Glyph as FontGlyph, FO.FontFamily, FO.Description as FontDescription   
+                FROM Category CA  
+                inner join FontIcon FO on FO.Id = CA.FontIconId ");
+            return categories;
+        }
+
+        public List<TransactionDto> GetTransactions(Period period)
+        {
+            var transactions = db.Query<TransactionDto>(
                 @"SELECT TR.*,CA.Color as GlyphColor,FO.Glyph,FO.FontFamily, AC.Color as AccountColor, CA.Description as CategoryDescription  
                 FROM 'Transaction' TR  
                 inner join Category CA on TR.CategoryId = CA.Id  
@@ -42,9 +52,9 @@ namespace PIMM.Persistance
             return transactions;
         }
 
-        public List<AccountViewModel> GetAccountsAsViewModels()
+        public List<AccountDto> GetAccountsAsViewModels()
         {
-            var accounts = db.Query<AccountViewModel>(
+            var accounts = db.Query<AccountDto>(
                 @"SELECT * FROM Account ");
             return accounts;
         }
@@ -64,7 +74,7 @@ namespace PIMM.Persistance
             return db.Table<Category>().ToList();
         }
 
-        public UpdateTransactionViewModel PopulateTransactionWithConnectedLists(UpdateTransactionViewModel tran)
+        public UpdateTransactionDto PopulateTransactionWithConnectedLists(UpdateTransactionDto tran)
         {
             var transactions = db.Query<TransactionDetailsCategoryViewModel>(
                 @"SELECT CA.*, FO.Glyph, FO.FontFamily    
@@ -78,10 +88,10 @@ namespace PIMM.Persistance
             return tran;
         }
 
-        public int UpdateTransaction(UpdateTransactionViewModel tranVM)
+        public int UpdateTransaction(UpdateTransactionDto tranVM)
         {
             var mapping = new Mapping();
-            var transaction = mapping.UpdateTransactionViewModel_2_Transaction(tranVM);
+            var transaction = mapping.UpdateTransactionDto_2_Transaction(tranVM);
 
             return UpdateTransaction(transaction);
         }
@@ -101,10 +111,10 @@ namespace PIMM.Persistance
 
         }
 
-        public string DeleteTransaction(UpdateTransactionViewModel tranVM)
+        public string DeleteTransaction(UpdateTransactionDto tranVM)
         {
             var mapping = new Mapping();
-            var transaction = mapping.UpdateTransactionViewModel_2_Transaction(tranVM);
+            var transaction = mapping.UpdateTransactionDto_2_Transaction(tranVM);
 
             return DeleteTransaction(transaction);
         }
@@ -114,10 +124,10 @@ namespace PIMM.Persistance
             return "OK";
         }
 
-        public int UpdateAccount(AccountViewModel vm)
+        public int UpdateAccount(AccountDto vm)
         {
             var mapping = new Mapping();
-            var account = mapping.AccountViewModel_2_Account(vm);
+            var account = mapping.AccountDto_2_Account(vm);
 
             return UpdateAccount(account);
         }
@@ -146,6 +156,40 @@ namespace PIMM.Persistance
 
             db.Delete(account);
             return "OK";
+        }
+
+        public string DeleteCategory(Category category)
+        {
+            var transactionsWithThatCategoryInUse =
+                db.ExecuteScalar<int>(@"SELECT COUNT(*) FROM 'Transaction' WHERE CategoryId = ? ", category.Id);
+            if (transactionsWithThatCategoryInUse > 0)
+                return $"This category is used in {transactionsWithThatCategoryInUse} transactions and it cannot be erased.";
+
+            db.Delete(category);
+            return "OK";
+        }
+
+        public int UpdateCategory(CategoryDto vm)
+        {
+            var mapping = new Mapping();
+            var category = mapping.CategoryDto_2_Category(vm);
+
+            return UpdateCategory(category);
+        }
+        public int UpdateCategory(Category category)
+        {
+            int rows = 0;
+            if (category.Id <= 0)
+            {
+                rows = db.Insert(category);
+                return rows;
+            }
+            else
+            {
+                rows = db.Update(category);
+                return rows;
+            }
+
         }
 
     }

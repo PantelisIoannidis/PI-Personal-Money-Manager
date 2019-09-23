@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace PIMM.Models.ViewModels
 {
-    public class TransactionViewModel
+    public class TransactionDto
     {
         public int Id { get; set; }
         public int AccountId { get; set; }

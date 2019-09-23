@@ -9,18 +9,21 @@ namespace PIMM.Persistance
     public interface IRepository
     {
         string DeleteAccount(Account account);
+        string DeleteCategory(Category category);
         string DeleteTransaction(Transaction transaction);
-        string DeleteTransaction(UpdateTransactionViewModel tranVM);
-        List<AccountViewModel> GetAccountsAsViewModels();
+        string DeleteTransaction(UpdateTransactionDto tranVM);
+        List<AccountDto> GetAccountsAsViewModels();
         List<Account> GetAllAccounts();
         List<Category> GetAllCategories();
         List<FontIcon> GetAllFontIcons();
-        List<TransactionViewModel> GetTransactions();
-        List<TransactionViewModel> GetTransactions(Period period);
-        UpdateTransactionViewModel PopulateTransactionWithConnectedLists(UpdateTransactionViewModel tran);
+        List<TransactionDto> GetTransactions();
+        List<TransactionDto> GetTransactions(Period period);
+        UpdateTransactionDto PopulateTransactionWithConnectedLists(UpdateTransactionDto tran);
         int UpdateAccount(Account account);
-        int UpdateAccount(AccountViewModel vm);
+        int UpdateAccount(AccountDto vm);
+        int UpdateCategory(Category category);
+        int UpdateCategory(CategoryDto vm);
         int UpdateTransaction(Transaction transaction);
-        int UpdateTransaction(UpdateTransactionViewModel tranVM);
+        int UpdateTransaction(UpdateTransactionDto tranVM);
     }
 }

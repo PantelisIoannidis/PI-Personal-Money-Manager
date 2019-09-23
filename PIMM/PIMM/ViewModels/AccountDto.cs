@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PIMM.ViewModels
 {
-    public class AccountViewModel
+    public class AccountDto
     {
         public int Id { get; set; }
         public string Description { get; set; }
