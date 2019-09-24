@@ -4,26 +4,35 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:fa="clr-namespace:PIMM.Helpers"
              mc:Ignorable="d"
              Title="Select an Icon"
              x:Class="PIMM.Views.CategoriesDetails.CategoryIconsPage">
     <ContentPage.Content>
-
-        <flv:FlowListView SeparatorVisibility="None" HasUnevenRows="true"
+        <StackLayout Orientation="Vertical">
+            <SearchBar Margin="10"
+                           x:Name="SearchBar" 
+                           SearchCommand="{Binding SearchCommand}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
+                <SearchBar.Behaviors>
+                    <fa:TextChangedBehavior />
+                </SearchBar.Behaviors>
+            </SearchBar>
+            <flv:FlowListView SeparatorVisibility="None" HasUnevenRows="true"
                           FlowItemTappedCommand="{Binding SelectedFontCommand}"
 			FlowColumnMinWidth="110" FlowItemsSource="{Binding FontIcons}">
 
-            <flv:FlowListView.FlowColumnTemplate>
-                <DataTemplate>
-                    <Grid Margin="8">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <Label Grid.Row="0" Grid.Column="0"
+                <flv:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Grid Margin="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0"
                                 BackgroundColor="{StaticResource controlBackgroundColor}"
                                 MinimumHeightRequest="140" MinimumWidthRequest="140"
                                 Text="{Binding Glyph}"  
@@ -31,9 +40,10 @@
                                 TextColor="{StaticResource controlTextColor}"
                                 FontFamily="{Binding FontFamily}"
                                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                    </Grid>
-                </DataTemplate>
-            </flv:FlowListView.FlowColumnTemplate>
-        </flv:FlowListView>
+                        </Grid>
+                    </DataTemplate>
+                </flv:FlowListView.FlowColumnTemplate>
+            </flv:FlowListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

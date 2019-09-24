@@ -3,6 +3,7 @@ using PIMM.Persistance;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,7 +13,7 @@ namespace PIMM.ViewModels
 {
     public class FontIconViewModel : INotifyPropertyChanged
     {
-        public List<FontIcon> FontIcons { get; set; }
+        private Func<FontIcon, bool> filter;
 
         public FontIcon SelectedIcon { get; set; }
 
@@ -22,13 +23,25 @@ namespace PIMM.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand SelectedFontCommand { get; set; }
+        public ICommand SearchCommand { get; private set; }
+
+        private List<FontIcon> fontIcons;
+
+        public List<FontIcon> FontIcons
+        {
+            get { return fontIcons.Where(filter).ToList(); }
+            set { fontIcons = value; OnPropertyChanged(nameof(FontIcons)); }
+        }
+
 
         public FontIconViewModel(IPageService pageService, IRepository repository, List<FontIcon> fonts)
         {
+            this.filter = (x) => { return true; };
             this.pageService = pageService;
             this.repository = repository;
             this.FontIcons = fonts;
 
+            SearchCommand = new Command<string>(s => Search(s));
             SelectedFontCommand = new Command(x => SelectedFont(x));
         }
 
@@ -38,6 +51,21 @@ namespace PIMM.ViewModels
              
             MessagingCenter.Send<FontIconViewModel,FontIcon>(this, "UpdateIcon", SelectedIcon);
 
+        }
+
+        private void Search(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                this.filter = (x) => { return true; };
+            }
+            else
+            {
+                this.filter = (x) => {
+                    return (x.Description.ToLower().Contains(s.ToLower()));
+                };
+            }
+            OnPropertyChanged(nameof(FontIcons));
         }
 
         private void OnPropertyChanged(string property)
