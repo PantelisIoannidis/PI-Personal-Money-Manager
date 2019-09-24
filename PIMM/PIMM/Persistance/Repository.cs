@@ -1,4 +1,5 @@
-﻿using PIMM.Helpers;
+﻿using AutoMapper;
+using PIMM.Helpers;
 using PIMM.Models;
 using PIMM.Models.ViewModels;
 using PIMM.ViewModels;
@@ -95,8 +96,7 @@ namespace PIMM.Persistance
 
         public int UpdateTransaction(UpdateTransactionDto tranVM)
         {
-            var mapping = new Mapping();
-            var transaction = mapping.UpdateTransactionDto_2_Transaction(tranVM);
+            var transaction = Mapper.Map<UpdateTransactionDto, Transaction>(tranVM);
 
             return UpdateTransaction(transaction);
         }
@@ -118,8 +118,7 @@ namespace PIMM.Persistance
 
         public string DeleteTransaction(UpdateTransactionDto tranVM)
         {
-            var mapping = new Mapping();
-            var transaction = mapping.UpdateTransactionDto_2_Transaction(tranVM);
+            var transaction = Mapper.Map<UpdateTransactionDto, Transaction>(tranVM);
 
             return DeleteTransaction(transaction);
         }
@@ -131,8 +130,7 @@ namespace PIMM.Persistance
 
         public int UpdateAccount(AccountDto vm)
         {
-            var mapping = new Mapping();
-            var account = mapping.AccountDto_2_Account(vm);
+            var account = Mapper.Map<AccountDto, Account>(vm);
 
             return UpdateAccount(account);
         }
@@ -176,9 +174,7 @@ namespace PIMM.Persistance
 
         public int UpdateCategory(CategoryDto vm)
         {
-            var mapping = new Mapping();
-            var category = mapping.CategoryDto_2_Category(vm);
-
+            var category = Mapper.Map<CategoryDto, Category>(vm);
             return UpdateCategory(category);
         }
         public int UpdateCategory(Category category)

@@ -1,4 +1,6 @@
-﻿using PIMM.Helpers;
+﻿using AutoMapper;
+using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.Persistance;
 using PIMM.ViewModels;
 using PIMM.Views.AccountsDetails;
@@ -71,7 +73,7 @@ namespace PIMM.ViewModels
         private async Task DeleteAction(AccountDto vm)
         {
             var deleteConfirmation = await _pageService.DisplayAlert("Delete account", "Are you sure?", "Yes", "No");
-            var account = new Mapping().AccountDto_2_Account(vm);
+            var account = Mapper.Map<AccountDto, Account>(vm);
             if (deleteConfirmation)
             {
                 var status =_repository.DeleteAccount(account);

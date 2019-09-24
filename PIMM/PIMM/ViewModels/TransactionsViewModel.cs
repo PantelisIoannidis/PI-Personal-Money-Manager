@@ -1,4 +1,5 @@
-﻿using PIMM.Helpers;
+﻿using AutoMapper;
+using PIMM.Helpers;
 using PIMM.Models;
 using PIMM.Models.ViewModels;
 using PIMM.Persistance;
@@ -201,7 +202,7 @@ namespace PIMM.ViewModels
         private async Task DeleteAction(TransactionDto vm)
         {
             var deleteConfirmation = await _pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
-            var transactions = new Mapping().TransactionDto_2_Transaction(vm);
+            var transactions = Mapper.Map<TransactionDto,Transaction>(vm);
             if (deleteConfirmation)
             {
                 _repository.DeleteTransaction(transactions);

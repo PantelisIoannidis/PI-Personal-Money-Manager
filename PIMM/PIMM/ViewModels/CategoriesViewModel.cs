@@ -1,4 +1,5 @@
-﻿using PIMM.Helpers;
+﻿using AutoMapper;
+using PIMM.Helpers;
 using PIMM.Models;
 using PIMM.Persistance;
 using PIMM.Views.CategoriesDetails;
@@ -116,7 +117,7 @@ namespace PIMM.ViewModels
         private async Task DeleteAction(CategoryDto vm)
         {
             var deleteConfirmation = await _pageService.DisplayAlert("Delete category", "Are you sure?", "Yes", "No");
-            var category = new Mapping().CategoryDto_2_Category(vm);
+            var category = Mapper.Map<CategoryDto, Category>(vm);
             if (deleteConfirmation)
             {
                 var status = _repository.DeleteCategory(category);

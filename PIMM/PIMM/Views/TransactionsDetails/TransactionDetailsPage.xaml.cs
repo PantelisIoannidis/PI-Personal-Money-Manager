@@ -1,4 +1,5 @@
-﻿using PIMM.Helpers;
+﻿using AutoMapper;
+using PIMM.Helpers;
 using PIMM.Models.ViewModels;
 using PIMM.Persistance;
 using PIMM.ViewModels;
@@ -35,8 +36,8 @@ namespace PIMM.Views.TransactionDetails
 
         private void prepareViewModel(TransactionDto vm)
         {
-            var mapping = new Mapping();
-            this.newTransVM = mapping.TransactionDto_2_UpdateTransactionDto(vm);
+
+            this.newTransVM = Mapper.Map<TransactionDto,UpdateTransactionDto>(vm);
             newTransVM = repository.PopulateTransactionWithConnectedLists(newTransVM);
             if (newTransVM.CategoryId == 0)
                 newTransVM.CategoryId = newTransVM.CurrentCategory.Id;

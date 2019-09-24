@@ -1,4 +1,5 @@
-﻿using DLToolkit.Forms.Controls;
+﻿using AutoMapper;
+using DLToolkit.Forms.Controls;
 using PIMM.Helpers;
 using PIMM.Persistance;
 using System;
@@ -16,6 +17,7 @@ namespace PIMM
         {
             InitializeComponent();
             FlowListView.Init();
+            Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             // Create and Seed Database
             var newDatabase = new InitializeDatabase();
 

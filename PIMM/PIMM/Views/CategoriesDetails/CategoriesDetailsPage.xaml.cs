@@ -17,12 +17,10 @@ namespace PIMM.Views.CategoriesDetails
     {
         private IPageService pageService;
         private IRepository repository;
-        private CategoryDetailsViewModel detailsVM=null;
+        private CategoryDetailsViewModel detailsVM;
         public CategoriesDetailsPage(IPageService pageService, IRepository repository, CategoryDto categories)
         {
             InitializeComponent();
-
-            var mapping = new Mapping();
 
             this.pageService = pageService;
             this.repository = repository;
