@@ -16,6 +16,7 @@ namespace PIMM.Persistance
         List<Account> GetAllAccounts();
         List<Category> GetAllCategories();
         List<FontIcon> GetAllFontIcons();
+        FontIcon GetFontIcon(int id);
         List<TransactionDto> GetTransactions();
         List<TransactionDto> GetTransactions(Period period);
         UpdateTransactionDto PopulateTransactionWithConnectedLists(UpdateTransactionDto tran);

@@ -3,13 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lc="clr-namespace:PIMM.Extensions;assembly=PIMM"
              mc:Ignorable="d"
+             Title="{Binding Category.FormPurposeNewOrEdit}"
              x:Class="PIMM.Views.CategoriesDetails.CategoriesDetailsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical" Padding="10,20">
+            <Grid ColumnSpacing="40" RowSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Icon" HorizontalOptions="End"/>
+                <Button Grid.Row="0" Grid.Column="1" 
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding Category.FontGlyph}" 
+                        FontSize="Medium"
+                        TextColor="{StaticResource controlTextColor}"
+                        FontFamily="{Binding Category.FontFamily}"
+                        Command="{Binding SelectIconCommand}"
+                        CommandParameter="{Binding Category.FontIconId}"/>
+
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Category" HorizontalOptions="End"/>
+                <lc:ColorPicker x:Name="myWebView" Grid.Row="1" Grid.Column="1"
+                                       Color="{Binding Category.Color}" 
+                                       Backcolor="{StaticResource backgroundColor}"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Description" HorizontalOptions="End"/>
+                <Entry x:Name="descriptionEntry" Grid.Row="2" Grid.Column="1" Text="{Binding Category.Description}">
+                    <Entry.Triggers>
+                        <MultiTrigger TargetType="Entry">
+                            <MultiTrigger.Conditions>
+                                <PropertyCondition  Property="Text" Value=""/>
+                                <PropertyCondition Property="IsFocused" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter  Property="BackgroundColor" Value="Red" />
+                        </MultiTrigger>
+                    </Entry.Triggers>
+                </Entry>
+
+            </Grid>
+            <Button x:Name="SaveButton"
+                    Text="Save" 
+                    Margin="20"
+                    HorizontalOptions="FillAndExpand" 
+                    Clicked="SaveButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

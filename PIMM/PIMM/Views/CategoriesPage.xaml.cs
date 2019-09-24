@@ -24,9 +24,10 @@ namespace PIMM
             repository = new Repository();
             categories = repository.GetCategoriesAsViewModels();
             categoriesViewModel = new CategoriesViewModel(categories, new PageService(), repository);
-
-            MessagingCenter.Subscribe<CategoriesViewModel>(this, "DeleteCategories", RefreshCategories);
-            MessagingCenter.Subscribe<CategoriesViewModel>(this, "RefreshCategories", RefreshCategories);
+            MessagingCenter.Unsubscribe<CategoriesViewModel>(this, "DeleteCategory");
+            MessagingCenter.Unsubscribe<CategoriesViewModel>(this, "RefreshCategory");
+            MessagingCenter.Subscribe<CategoriesViewModel>(this, "DeleteCategory", RefreshCategories);
+            MessagingCenter.Subscribe<CategoriesViewModel>(this, "RefreshCategory", RefreshCategories);
             BindingContext = categoriesViewModel;
         }
 

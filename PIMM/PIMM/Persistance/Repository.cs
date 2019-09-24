@@ -64,6 +64,11 @@ namespace PIMM.Persistance
             return db.Table<Account>().ToList();
         }
 
+        public FontIcon GetFontIcon(int id)
+        {
+            return db.Table<FontIcon>().FirstOrDefault(x => x.Id == id);
+        }
+
         public List<FontIcon> GetAllFontIcons()
         {
             return db.Table<FontIcon>().ToList();

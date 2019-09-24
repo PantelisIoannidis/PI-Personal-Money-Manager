@@ -43,6 +43,7 @@ namespace PIMM.ViewModels
             EditActionCommand = new Command<AccountDto>(async vm => await EditAction(vm));
             NewTransactionCommand = new Command<AccountDto>(async vm => await NewAction());
             SearchCommand = new Command<string>(s => Search(s));
+            MessagingCenter.Unsubscribe<AccountsDetailsPage, AccountDto>(this, "UpdateAccount");
             MessagingCenter.Subscribe<AccountsDetailsPage,AccountDto>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });
         }
 

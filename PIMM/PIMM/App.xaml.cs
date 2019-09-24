@@ -1,4 +1,5 @@
-﻿using PIMM.Helpers;
+﻿using DLToolkit.Forms.Controls;
+using PIMM.Helpers;
 using PIMM.Persistance;
 using System;
 using Xamarin.Forms;
@@ -14,7 +15,7 @@ namespace PIMM
         public App()
         {
             InitializeComponent();
-
+            FlowListView.Init();
             // Create and Seed Database
             var newDatabase = new InitializeDatabase();
 

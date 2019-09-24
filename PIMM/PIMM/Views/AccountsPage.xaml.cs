@@ -25,7 +25,8 @@ namespace PIMM
             repository = new Repository();
             accounts = repository.GetAccountsAsViewModels();
             accountsViewModel = new AccountsViewModel(accounts, new PageService(), repository);
-
+            MessagingCenter.Unsubscribe<AccountsViewModel>(this, "DeleteAccounts");
+            MessagingCenter.Unsubscribe<AccountsViewModel>(this, "RefreshAccounts");
             MessagingCenter.Subscribe<AccountsViewModel>(this, "DeleteAccounts", RefreshAccounts);
             MessagingCenter.Subscribe<AccountsViewModel>(this, "RefreshAccounts", RefreshAccounts);
             BindingContext = accountsViewModel;

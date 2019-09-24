@@ -16,5 +16,6 @@ namespace PIMM.ViewModels
         public string FontDescription { get; set; }
         public string FontGlyph { get; set; }
         public string FontFamily { get; set; }
+
     }
 }

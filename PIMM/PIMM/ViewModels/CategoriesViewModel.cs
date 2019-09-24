@@ -50,6 +50,7 @@ namespace PIMM.ViewModels
             SearchCommand = new Command<string>(s => Search(s));
             IncomeSelectedCommand = new Command(IncomeSelected);
             ExpenseSelectedCommand = new Command(ExpenseSelected);
+            MessagingCenter.Unsubscribe<CategoryDetailsViewModel, CategoryDto>(this, "UpdateCategory");
             MessagingCenter.Subscribe<CategoriesDetailsPage, CategoryDto>(this, "UpdateCategory", async (page, vm) => { await UpdateCategory(page, vm); });
         }
 

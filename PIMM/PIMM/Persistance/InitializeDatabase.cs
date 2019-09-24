@@ -30,6 +30,7 @@ namespace PIMM.Persistance
                 return;
             CreateCetegories();
             CreateAcounts();
+            PrepareIcons();
             InsertSampleData();
         }
 
@@ -153,7 +154,7 @@ namespace PIMM.Persistance
             AddTransaction("Cash", 1250m,now);
             AddTransaction("Utilities", 80m,now.AddDays(-10));
             AddTransaction("Eating Out", 120m,now.AddDays(-11));
-            AddTransaction("Entertaiment", 60m, now.AddDays(-12));
+            AddTransaction("Entertainment", 60m, now.AddDays(-12));
             AddTransaction("Fuel", 110m, now.AddYears(-2));
             AddTransaction("General", 100m, now.AddYears(-2));
             AddTransaction("Vacations", 50m);

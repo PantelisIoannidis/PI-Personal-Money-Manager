@@ -35,6 +35,9 @@ namespace PIMM
             period.Init(DateTime.Now, PeriodType.Month);
             transactions = repository.GetTransactions(period);
             transactionsViewModel = new TransactionsViewModel(transactions, new PageService(), repository, period);
+            MessagingCenter.Unsubscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions");
+            MessagingCenter.Unsubscribe<TransactionsViewModel>(this, "DeleteTransactions");
+            MessagingCenter.Unsubscribe<TransactionsViewModel>(this, "RefreshTransactions");
 
             MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", RefreshTransactions);
