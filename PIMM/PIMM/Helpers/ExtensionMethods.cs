@@ -26,5 +26,11 @@ namespace PIMM.Helpers
 
             return hex;
         }
+
+        public static string FormatAmount(this decimal amount)
+        {
+            return String.Format("{0:C}", (decimal)amount);
+        }
+
     }
 }
