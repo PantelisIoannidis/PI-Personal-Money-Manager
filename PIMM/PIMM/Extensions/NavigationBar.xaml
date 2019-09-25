@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:conv="clr-namespace:PIMM.Views.Converters;assembly=PIMM"
+             xmlns:fa="clr-namespace:PIMM.Helpers"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PIMM.Extensions.NavigationBar">
+
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <conv:AmountToColorConverter x:Key="AmountToColorConverter"/>
+                <conv:AmountFormatConverter x:Key="AmountFormatConverter"/>
+                <conv:DateFormatConverter x:Key="DateFormatConverter"/>
+            </ResourceDictionary>
+        </ContentView.Resources>
+        <StackLayout Orientation="Vertical" Padding="5">
+            <Grid ColumnSpacing="0" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Button Grid.Row="0" Grid.Column="0" 
+                                Command="{Binding NavigationBar.PreviousTimePeriodCommand}"
+                                BorderRadius="0"
+                                Text="&#xf060;"
+                                FontFamily="{x:Static fa:FontAwesome.FontName}"/>
+                <Button Grid.Row="0" Grid.Column="1" 
+                                    Command="{Binding NavigationBar.ResetTimePeriodCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf015;"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
+                <Button Grid.Row="0" Grid.Column="2" 
+                                    BorderRadius="0"
+                                    Text="{Binding NavigationBar.DisplayPeriod.Description, StringFormat='{0} ▼'}"
+                                    Command="{Binding NavigationBar.ChoosePeriodCommand}"/>
+                <Button Grid.Row="0" Grid.Column="3" 
+                                    Command="{Binding NavigationBar.NextTimePeriodCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf061;"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
+                <Button Grid.Row="0" Grid.Column="4" 
+                                    Command="{Binding NavigationBar.ShowSetDateCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf133;"
+                                    BorderColor="{StaticResource backgroundColor}"
+                                    BorderWidth="3"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding NavigationBar.IsSetDateVisible}"
+                                    Value="true">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlSelectedBackgroundColor}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding NavigationBar.IsSetDateVisible}"
+                                    Value="false">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlBackgroundColor}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Grid.Row="0" Grid.Column="5" 
+                                    Command="{Binding NavigationBar.ShowSearchFieldCommand}"
+                                    BorderRadius="0"
+                                    Text="&#xf002;"
+                                    BorderColor="{StaticResource backgroundColor}"
+                                    BorderWidth="3"
+                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding NavigationBar.IsSearchVisible}"
+                                    Value="true">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlSelectedBackgroundColor}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding NavigationBar.IsSearchVisible}"
+                                    Value="false">
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource controlBackgroundColor}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+            </Grid>
+
+
+
+            <StackLayout Orientation="Vertical">
+                <DatePicker DateSelected="ChooseDate_DateSelected"
+                                IsVisible="False"
+                                x:Name="chooseDate"
+                                Date="{Binding TransVM.TransactionDate}"
+                                Format="D">
+                    <DatePicker.Triggers>
+                        <DataTrigger TargetType="DatePicker"
+                                     Binding="{Binding NavigationBar.IsSetDateVisible}"
+                                        Value="true">
+                            <Setter Property="IsVisible"
+                                        Value="True" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="DatePicker"
+                                     Binding="{Binding NavigationBar.IsSetDateVisible}"
+                                        Value="false">
+                            <Setter Property="IsVisible"
+                                        Value="False" />
+                        </DataTrigger>
+                    </DatePicker.Triggers>
+                </DatePicker>
+                <SearchBar x:Name="SearchBar" 
+                           IsVisible="False"
+                           SearchCommand="{Binding NavigationBar.SearchCommand}" 
+                           SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
+                    <SearchBar.Triggers>
+                        <DataTrigger TargetType="SearchBar"
+                                 Binding="{Binding NavigationBar.IsSearchVisible}"
+                                    Value="true">
+                            <Setter Property="IsVisible"
+                                    Value="True" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="SearchBar"
+                                 Binding="{Binding NavigationBar.IsSearchVisible}"
+                                    Value="false">
+                            <Setter Property="IsVisible"
+                                    Value="False" />
+                        </DataTrigger>
+                    </SearchBar.Triggers>
+                    <SearchBar.Behaviors>
+                        <fa:TextChangedBehavior />
+                    </SearchBar.Behaviors>
+                </SearchBar>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" 
+                       TextColor="{StaticResource IncomeColor}"
+                       Text="{Binding NavigationBar.IncomeSum, 
+                            Converter={StaticResource AmountFormatConverter},
+                            StringFormat='Income {0}'}"/>
+                    <Label Grid.Row="0" Grid.Column="1" 
+                       TextColor="{StaticResource amountZeroColor}"
+                       Text="{Binding NavigationBar.Balance, 
+                                Converter={StaticResource AmountFormatConverter},
+                                StringFormat='Balance {0}'}"/>
+                    <Label Grid.Row="0" Grid.Column="2" 
+                       TextColor="{StaticResource ExpenseColor}"
+                       Text="{Binding NavigationBar.ExpenseSum, 
+                                Converter={StaticResource AmountFormatConverter},
+                                StringFormat='Expense {0}'}"/>
+                </Grid>
+                <ProgressBar x:Name="incomeBalanceBar" 
+                         Progress="{Binding NavigationBar.IncomeSumPercentage}"
+                         ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
+                
+            </StackLayout>
+        </StackLayout>
+</ContentView>

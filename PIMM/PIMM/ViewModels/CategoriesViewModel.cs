@@ -94,10 +94,8 @@ namespace PIMM.ViewModels
 
         private async Task NewAction()
         {
-            var vm = new CategoryDto()
-            {
-                Color = "#ffffff",
-                Description = "Generic Category"
+            var vm = new CategoryDto() {
+                Type= SelectedType
             };
             await _pageService.PushAsync(new CategoriesDetailsPage(_pageService, _repository, vm));
         }

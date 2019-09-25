@@ -80,6 +80,18 @@ namespace PIMM.Persistance
             return db.Table<Category>().ToList();
         }
 
+        public CategoryDto GetFirstCategory(TransactionType type = TransactionType.Expense)
+        {
+            var category = db.Query<CategoryDto>(
+                @"SELECT CA.*, FO.Glyph as FontGlyph, FO.FontFamily, FO.Description as FontDescription   
+                FROM Category CA  
+                inner join FontIcon FO on FO.Id = CA.FontIconId 
+                Where CA.Type = ? 
+                Order By CA.Id Limit 1
+                ", type).FirstOrDefault();
+            return category;
+        }
+
         public UpdateTransactionDto PopulateTransactionWithConnectedLists(UpdateTransactionDto tran)
         {
             var transactions = db.Query<TransactionDetailsCategoryViewModel>(

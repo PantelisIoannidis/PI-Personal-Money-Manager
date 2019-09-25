@@ -18,13 +18,20 @@ namespace PIMM.Views.CategoriesDetails
         private IPageService pageService;
         private IRepository repository;
         private CategoryDetailsViewModel detailsVM;
-        public CategoriesDetailsPage(IPageService pageService, IRepository repository, CategoryDto categories)
+        public CategoriesDetailsPage(IPageService pageService, IRepository repository, CategoryDto category)
         {
             InitializeComponent();
 
             this.pageService = pageService;
             this.repository = repository;
-            detailsVM = new CategoryDetailsViewModel(pageService, repository, categories);
+            if (category.Id <= 0)
+            {
+                var temp_category = repository.GetFirstCategory(category.Type);
+                category.Color = temp_category.Color;
+                category.FontGlyph = temp_category.FontGlyph;
+                category.FontFamily = temp_category.FontFamily;
+            }
+            detailsVM = new CategoryDetailsViewModel(pageService, repository, category);
 
 
             BindingContext = detailsVM;
@@ -36,7 +43,7 @@ namespace PIMM.Views.CategoriesDetails
             myWebView.GetValueFromPickerAsync().ContinueWith(r => {
                 color = r.Result;
                 detailsVM.Category.Color = color;
-                detailsVM.Unsubscribe();
+                //detailsVM.Unsubscribe();
                 MessagingCenter.Send(this, "UpdateCategory", detailsVM.Category);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }

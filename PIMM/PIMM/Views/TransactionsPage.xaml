@@ -5,9 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:PIMM.Views.Converters;assembly=PIMM"
              xmlns:fa="clr-namespace:PIMM.Helpers"
+             xmlns:lc="clr-namespace:PIMM.Extensions;assembly=PIMM"
              Title="Transactions Page"
              mc:Ignorable="d"
              x:Class="PIMM.TransactionsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="plus.png" 
+                     Text="New Transaction"
+                     Command="{Binding NewTransactionCommand}"
+                     Order="Primary"/>
+    </ContentPage.ToolbarItems>
     <ContentView x:Name="PortraitView" Padding="10">
         <ContentView.Resources>
             <ResourceDictionary>
@@ -17,174 +24,17 @@
             </ResourceDictionary>            
         </ContentView.Resources>
         <StackLayout Orientation="Vertical">
-            <Grid ColumnSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                               
-                
-                <Button Grid.Row="0" Grid.Column="0" 
-                                Command="{Binding PreviousTimePeriodCommand}"
-                                BorderRadius="0"
-                                Text="&#xf060;"
-                                FontFamily="{x:Static fa:FontAwesome.FontName}"/>
-                <Button Grid.Row="0" Grid.Column="1" 
-                                    Command="{Binding ResetTimePeriodCommand}"
-                                    BorderRadius="0"
-                                    Text="&#xf015;"
-                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
-                <Button Grid.Row="0" Grid.Column="2" 
-                                    BorderRadius="0"
-                                    Text="{Binding DisplayPeriod.Description, StringFormat='{0} ▼'}"
-                                    Command="{Binding ChoosePeriodCommand}"/>
-                <Button Grid.Row="0" Grid.Column="3" 
-                                    Command="{Binding NextTimePeriodCommand}"
-                                    BorderRadius="0"
-                                    Text="&#xf061;"
-                                    FontFamily="{x:Static fa:FontAwesome.FontName}"/>
-                <Button Grid.Row="0" Grid.Column="4" 
-                                    Command="{Binding ShowSetDateCommand}"
-                                    BorderRadius="0"
-                                    Text="&#xf133;"
-                                    BorderColor="{StaticResource backgroundColor}"
-                                    BorderWidth="3"
-                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button"
-                                 Binding="{Binding IsSetDateVisible}"
-                                    Value="true">
-                            <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlSelectedBackgroundColor}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button"
-                                 Binding="{Binding IsSetDateVisible}"
-                                    Value="false">
-                            <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlBackgroundColor}" />
-                        </DataTrigger>
-                    </Button.Triggers>
-                </Button>
-                <Button Grid.Row="0" Grid.Column="5" 
-                                    Command="{Binding ShowSearchFieldCommand}"
-                                    BorderRadius="0"
-                                    Text="&#xf002;"
-                                    BorderColor="{StaticResource backgroundColor}"
-                                    BorderWidth="3"
-                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button"
-                                 Binding="{Binding IsSearchVisible}"
-                                    Value="true">
-                            <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlSelectedBackgroundColor}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button"
-                                 Binding="{Binding IsSearchVisible}"
-                                    Value="false">
-                            <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlBackgroundColor}" />
-                        </DataTrigger>
-                    </Button.Triggers>
-                </Button>
-                <Button  Grid.Row="0" Grid.Column="6" 
+
+            
+            <lc:NavigationBar />
+            <!--<Button  Grid.Row="0" Grid.Column="6" 
                          Text="&#xf067;" 
                          FontFamily="{x:Static fa:FontAwesome.FontName}" 
-                         Command="{Binding NewTransactionCommand}"/>
-            </Grid>
-            
-            
-            
-            <StackLayout Orientation="Vertical">
-                <DatePicker DateSelected="ChooseDate_DateSelected"
-                                IsVisible="False"
-                                x:Name="chooseDate"
-                                Date="{Binding TransVM.TransactionDate}"
-                                Format="D">
-                    <DatePicker.Triggers>
-                        <DataTrigger TargetType="DatePicker"
-                                     Binding="{Binding IsSetDateVisible}"
-                                        Value="true">
-                            <Setter Property="IsVisible"
-                                        Value="True" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="DatePicker"
-                                     Binding="{Binding IsSetDateVisible}"
-                                        Value="false">
-                            <Setter Property="IsVisible"
-                                        Value="False" />
-                        </DataTrigger>
-                    </DatePicker.Triggers>
-                </DatePicker>
-                <SearchBar x:Name="SearchBar" 
-                           IsVisible="False"
-                           SearchCommand="{Binding SearchCommand}" 
-                           SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
-                    <SearchBar.Triggers>
-                        <DataTrigger TargetType="SearchBar"
-                                 Binding="{Binding IsSearchVisible}"
-                                    Value="true">
-                            <Setter Property="IsVisible"
-                                    Value="True" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="SearchBar"
-                                 Binding="{Binding IsSearchVisible}"
-                                    Value="false">
-                            <Setter Property="IsVisible"
-                                    Value="False" />
-                        </DataTrigger>
-                    </SearchBar.Triggers>
-                    <SearchBar.Behaviors>
-                        <fa:TextChangedBehavior />
-                    </SearchBar.Behaviors>
-                </SearchBar>
-            </StackLayout>
-            
-            
-            
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" 
-                       TextColor="{StaticResource IncomeColor}"
-                       Text="{Binding IncomeSum, 
-                            Converter={StaticResource AmountFormatConverter},
-                            StringFormat='Income {0}'}"/>
-                <Label Grid.Row="0" Grid.Column="1" 
-                       TextColor="{StaticResource amountZeroColor}"
-                       Text="{Binding Balance, 
-                                Converter={StaticResource AmountFormatConverter},
-                                StringFormat='Balance {0}'}"/>
-                <Label Grid.Row="0" Grid.Column="2" 
-                       TextColor="{StaticResource ExpenseColor}"
-                       Text="{Binding ExpenseSum, 
-                                Converter={StaticResource AmountFormatConverter},
-                                StringFormat='Expense {0}'}"/>
-            </Grid>
-            <ProgressBar x:Name="incomeBalanceBar" 
-                         Progress="{Binding IncomeSumPercentage}"
-                         ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
-            
-            
-            
+                         Command="{Binding NewTransactionCommand}"/>-->
             <ListView
                     x:Name="transListView"
                     CachingStrategy="RecycleElementAndDataTemplate"
-                    ItemsSource="{Binding Transactions}" 
+                    ItemsSource="{Binding NavigationBar.Transactions}" 
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"

@@ -26,7 +26,7 @@
                         CommandParameter="{Binding Category.FontIconId}"/>
 
 
-                <Label Grid.Row="1" Grid.Column="0" Text="Category" HorizontalOptions="End"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Color" HorizontalOptions="End"/>
                 <lc:ColorPicker x:Name="myWebView" Grid.Row="1" Grid.Column="1"
                                        Color="{Binding Category.Color}" 
                                        Backcolor="{StaticResource backgroundColor}"/>

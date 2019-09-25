@@ -4,29 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:fontAwesome="clr-namespace:PIMM"
+             xmlns:lc="clr-namespace:PIMM.Extensions;assembly=PIMM"
              mc:Ignorable="d"
              x:Class="PIMM.HomePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <!--<Label Text="&#xf249;" 
-               FontSize="100"
-               TextColor="Tan"
-               VerticalOptions="Center" 
-               HorizontalOptions="Center" >
-                    <Label.FontFamily>
-                        <OnPlatform 
-                            x:TypeArguments="x:String"
-                            Android="Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free Regular" 
-                            iOS="Font Awesome 5 Free" 
-                            WinPhone="Assets/Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free" />
-                    </Label.FontFamily>
-            </Label>
-            <Label x:Name="label1"
-               FontSize="100"
-               TextColor="Blue"
-               VerticalOptions="Center" 
-               HorizontalOptions="Center" >
-            </Label>-->
+        <StackLayout Orientation="Vertical">
+            <lc:NavigationBar />
         </StackLayout>
-    </ContentPage.Content>
 </ContentPage>

@@ -17,7 +17,7 @@
                      Text="About"
                      Order="Secondary"/>
     </TabbedPage.ToolbarItems>
-    
+
     <local:HomePage Title="Overview" IconImageSource="chartpie.png" x:Name="overview"/>
 
     <local:TransactionsPage Title="Transactions" IconImageSource="dollarsign.png" x:Name="transactions"/>

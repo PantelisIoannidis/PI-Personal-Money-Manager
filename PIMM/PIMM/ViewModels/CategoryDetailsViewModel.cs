@@ -38,10 +38,6 @@ namespace PIMM.ViewModels
             SelectIconCommand = new Command(async x => await SelectIcon());
         }
 
-        public void Unsubscribe()
-        {
-            MessagingCenter.Unsubscribe<FontIconViewModel, FontIcon>(this, "UpdateIcon");
-        }
 
         private async Task UpdateIcon(object obj)
         {

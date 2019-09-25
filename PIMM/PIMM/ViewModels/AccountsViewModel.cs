@@ -31,7 +31,7 @@ namespace PIMM.ViewModels
         public ICommand SearchCommand { get; private set; }
         public ICommand DeleteActionCommand { get; private set; }
         public ICommand EditActionCommand { get; private set; }
-        public ICommand NewTransactionCommand { get; private set; }
+        public ICommand NewAccountCommand { get; private set; }
 
         public AccountsViewModel(List<AccountDto> accounts, IPageService pageService, IRepository repository)
         {
@@ -43,7 +43,7 @@ namespace PIMM.ViewModels
             SelectAccountCommand = new Command<AccountDto>(async vm => await SelectAccount(vm));
             DeleteActionCommand = new Command<AccountDto>(async vm => await DeleteAction(vm));
             EditActionCommand = new Command<AccountDto>(async vm => await EditAction(vm));
-            NewTransactionCommand = new Command<AccountDto>(async vm => await NewAction());
+            NewAccountCommand = new Command<AccountDto>(async vm => await NewAction());
             SearchCommand = new Command<string>(s => Search(s));
             MessagingCenter.Unsubscribe<AccountsDetailsPage, AccountDto>(this, "UpdateAccount");
             MessagingCenter.Subscribe<AccountsDetailsPage,AccountDto>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });

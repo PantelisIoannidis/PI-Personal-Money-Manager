@@ -22,42 +22,10 @@ namespace PIMM
         private double width = 0;
         private double height = 0;
 
-        List<TransactionDto> transactions;
-        TransactionsViewModel transactionsViewModel;
-        Repository repository;
-        Period period;
         public TransactionsPage()
         {
             InitializeComponent();
 
-            repository = new Repository();
-            period = new Period();
-            period.Init(DateTime.Now, PeriodType.Month);
-            transactions = repository.GetTransactions(period);
-            transactionsViewModel = new TransactionsViewModel(transactions, new PageService(), repository, period);
-            MessagingCenter.Unsubscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions");
-            MessagingCenter.Unsubscribe<TransactionsViewModel>(this, "DeleteTransactions");
-            MessagingCenter.Unsubscribe<TransactionsViewModel>(this, "RefreshTransactions");
-
-            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", RefreshTransactions);
-            MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", RefreshTransactions);
-            MessagingCenter.Subscribe<TransactionsViewModel>(this, "RefreshTransactions", RefreshTransactions);
-            BindingContext = transactionsViewModel;
-
-        }
-
-
-
-        private void RefreshTransactions(TransactionsViewModel obj)
-        {
-            transactions = repository.GetTransactions(period);
-            transactionsViewModel.Transactions = transactions;
-        }
-
-        private void RefreshTransactions(TransactionsDetailsViewModel obj)
-        {
-            transactions = repository.GetTransactions(period);
-            transactionsViewModel.Transactions = transactions;
         }
 
 
@@ -97,10 +65,5 @@ namespace PIMM
             set { BindingContext = value; }
         }
 
-        private void ChooseDate_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            if(e.NewDate!=e.OldDate)
-                ViewModel.SetDateCommand.Execute(e.NewDate);
-        }
     }
 }

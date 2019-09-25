@@ -16,6 +16,7 @@ namespace PIMM.Persistance
         List<Account> GetAllAccounts();
         List<Category> GetAllCategories();
         List<FontIcon> GetAllFontIcons();
+        CategoryDto GetFirstCategory(TransactionType type = TransactionType.Expense);
         FontIcon GetFontIcon(int id);
         List<TransactionDto> GetTransactions();
         List<TransactionDto> GetTransactions(Period period);

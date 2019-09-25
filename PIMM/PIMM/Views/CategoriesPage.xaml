@@ -6,6 +6,12 @@
              xmlns:fa="clr-namespace:PIMM.Helpers"
              mc:Ignorable="d"
              x:Class="PIMM.CategoriesPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="plus.png" 
+                     Text="New Transaction"
+                     Command="{Binding NewCategoryCommand}"
+                     Order="Primary"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
 
@@ -16,8 +22,8 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="1"
@@ -71,10 +77,10 @@
                         <fa:TextChangedBehavior />
                     </SearchBar.Behaviors>
                 </SearchBar>
-                <Button  Grid.Row="0" Grid.Column="1" 
+                <!--<Button  Grid.Row="0" Grid.Column="1" 
                          Text="&#xf067;" 
                          FontFamily="{x:Static fa:FontAwesome.FontName}" 
-                         Command="{Binding NewCategoryCommand}"/>
+                         Command="{Binding NewCategoryCommand}"/>-->
             </Grid>
 
 

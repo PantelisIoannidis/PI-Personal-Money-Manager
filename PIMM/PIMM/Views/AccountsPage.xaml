@@ -6,31 +6,24 @@
              xmlns:fa="clr-namespace:PIMM.Helpers"
              mc:Ignorable="d"
              x:Class="PIMM.AccountsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="plus.png" 
+                     Text="New Transaction"
+                     Command="{Binding NewAccountCommand}"
+                     Order="Primary"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            <Grid RowSpacing="4" Padding="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <SearchBar Grid.Row="0" Grid.Column="0"
-                           x:Name="SearchBar" 
-                           SearchCommand="{Binding SearchCommand}" 
-                           SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
-                    <SearchBar.Behaviors>
-                        <fa:TextChangedBehavior />
-                    </SearchBar.Behaviors>
-                </SearchBar>
-                <Button  Grid.Row="0" Grid.Column="1" 
-                         Text="&#xf067;" 
-                         FontFamily="{x:Static fa:FontAwesome.FontName}" 
-                         Command="{Binding NewTransactionCommand}"/>
-            </Grid>
+            <SearchBar Margin="10"
+                        x:Name="SearchBar" 
+                        SearchCommand="{Binding SearchCommand}" 
+                        SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
+                <SearchBar.Behaviors>
+                    <fa:TextChangedBehavior />
+                </SearchBar.Behaviors>
+            </SearchBar>
+
             <ListView
                     x:Name="accountsListView"
                     CachingStrategy="RecycleElementAndDataTemplate"
