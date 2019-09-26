@@ -130,7 +130,7 @@ namespace PIMM.ViewModels
         private async Task SetDate(object newDate)
         {
             DisplayPeriod.ResetSelectedDate((DateTime)newDate);
-            Transactions = _repository.GetTransactions(DisplayPeriod);
+            MessagingCenter.Send(this, "UpdatePeriod");
         }
 
         private void ShowSetDate()
@@ -163,19 +163,19 @@ namespace PIMM.ViewModels
         private void ResetTimePeriod(object obj)
         {
             DisplayPeriod.ResetSelectedDate(DateTime.Now);
-            Transactions = _repository.GetTransactions(DisplayPeriod);
+            MessagingCenter.Send(this, "UpdatePeriod");
         }
 
         private void PreviousTimePeriod()
         {
             DisplayPeriod.MoveToPrevious();
-            Transactions = _repository.GetTransactions(DisplayPeriod);
+            MessagingCenter.Send(this, "UpdatePeriod");
         }
 
         private void NextTimePeriod()
         {
             DisplayPeriod.MoveToNext();
-            Transactions = _repository.GetTransactions(DisplayPeriod);
+            MessagingCenter.Send(this, "UpdatePeriod");
         }
 
         private async Task ChoosePeriod()
@@ -201,7 +201,7 @@ namespace PIMM.ViewModels
                     DisplayPeriod.ChooseNewPeriod(PeriodType.All);
                     break;
             }
-            Transactions = _repository.GetTransactions(DisplayPeriod);
+            MessagingCenter.Send(this, "UpdatePeriod");
         }
 
         private void OnPropertyChanged(string property)

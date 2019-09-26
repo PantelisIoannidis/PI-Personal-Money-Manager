@@ -69,7 +69,7 @@ namespace PIMM.ViewModels
         {
             get
             {
-                var data = repository.GetAmountByCategory()
+                var data = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
                     .Where(x=>x.Type==Models.TransactionType.Expense)
                     .Take(8);
 
@@ -90,7 +90,7 @@ namespace PIMM.ViewModels
         {
             get
             {
-                var data = repository.GetAmountByAccount();
+                var data = repository.GetAmountByAccount(NavigationBar.DisplayPeriod);
 
                 var entries = new List<Microcharts.Entry>();
                 foreach (var entry in data)

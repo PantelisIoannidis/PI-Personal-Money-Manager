@@ -21,7 +21,13 @@ namespace PIMM.Extensions
         private void ChooseDate_DateSelected(object sender, DateChangedEventArgs e)
         {
             if (e.NewDate != e.OldDate)
-                (BindingContext as NavigationBarViewModel).SetDateCommand.Execute(e.NewDate);
+            {
+                if (BindingContext is ChartsViewModel)
+                    (BindingContext as ChartsViewModel).NavigationBar.SetDateCommand.Execute(e.NewDate);
+                if (BindingContext is TransactionsViewModel)
+                    (BindingContext as TransactionsViewModel).NavigationBar.SetDateCommand.Execute(e.NewDate);
+            }
+                
         }
     }
 }

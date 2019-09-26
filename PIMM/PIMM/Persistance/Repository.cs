@@ -21,25 +21,27 @@ namespace PIMM.Persistance
             db = DependencyService.Get<ISQLiteDb>().GetConnection();
         }
 
-        public List<AmountPerCategoryViewModel> GetAmountByCategory()
+        public List<AmountPerCategoryViewModel> GetAmountByCategory(Period period)
         {
             var result = db.Query<AmountPerCategoryViewModel>(
                 @"select CategoryId,CA.Description,CA.Color,CA.Type, sum(Amount) as Amount from 'Transaction' TR 
                     inner join Category CA on CA.Id = TR.CategoryId 
+                    where TR.TransactionDate between ? and ? 
                     group by CategoryId 
                     order by Amount DESC "
-                );
+                , period.FromDate, period.ToDate);
             return result;
         }
 
-        public List<AmountPerAccountViewModel> GetAmountByAccount()
+        public List<AmountPerAccountViewModel> GetAmountByAccount(Period period)
         {
             var result = db.Query<AmountPerAccountViewModel>(
                 @"select AccountId,AC.Description,AC.Color, sum(Amount) as Amount from 'Transaction' TR
                     inner join Account AC on AC.Id = TR.AccountId
+                    where TR.TransactionDate between ? and ? 
                     group by AccountId
                     order by Amount DESC"
-                );
+                , period.FromDate, period.ToDate);
             return result;
         }
 

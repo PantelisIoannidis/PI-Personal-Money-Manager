@@ -18,22 +18,16 @@ namespace PIMM.Persistance
         public InitializeDatabase()
         {
             db = DependencyService.Get<ISQLiteDb>().GetConnection();
-
-            CreateDatabaseIfItIsNotExists();
-
+            CreateTables();
         }
 
-        private void CreateDatabaseIfItIsNotExists()
+        public void CreateCategoriesAndAccounts()
         {
-            CreateTables();
-            if ((IsAnewDatabase()==false))
-                return;
+           
             CreateCetegories();
             CreateAcounts();
             PrepareIcons();
-            InsertSampleData();
         }
-
 
         private void CreateTables()
         {
@@ -43,11 +37,22 @@ namespace PIMM.Persistance
             db.CreateTable<Transaction>();
         }
 
-        private bool IsAnewDatabase()
+        public bool IsAnewDatabase()
         {
             if ((db.Table<Account>().Count()<=0) 
                 && (db.Table<Category>().Count()<= 0)
                 && (db.Table<FontIcon>().Count()<= 0))
+                return true;
+            else
+                return false;
+        }
+
+        public bool IsAnEmptyDatabase()
+        {
+            if ((db.Table<Account>().Count() >= 0)
+                && (db.Table<Category>().Count() >= 0)
+                && (db.Table<FontIcon>().Count() >= 0)
+                && (db.Table<Transaction>().Count() == 0))
                 return true;
             else
                 return false;
@@ -139,40 +144,40 @@ namespace PIMM.Persistance
             return fontAwesomeSolidIcons;
         }
 
-        private void InsertSampleData()
+        public void InsertSampleData()
         {
             if (db.Table<Transaction>().Count() > 0)
                 return;
 
             var now = DateTime.Now;
 
-            AddTransaction("Salary", 2500m,now);
-            AddTransaction("Home", 1200m,now);
-            AddTransaction("Shopping", 400m,now.AddDays(-1));
-            AddTransaction("Groceries", 350m,now.AddDays(-2));
-            AddTransaction("Loan", 100m,now.AddDays(-1));
-            AddTransaction("Cash", 1250m,now);
-            AddTransaction("Utilities", 80m,now.AddDays(-10));
-            AddTransaction("Eating Out", 120m,now.AddDays(-11));
-            AddTransaction("Entertainment", 60m, now.AddDays(-12));
-            AddTransaction("Fuel", 110m, now.AddYears(-2));
-            AddTransaction("General", 100m, now.AddYears(-2));
-            AddTransaction("Vacations", 50m);
-            AddTransaction("Kids", 400m);
-            AddTransaction("Pets", 120m);
-            AddTransaction("Sports", 40m);
-            AddTransaction("Travel", 30m);
+            AddTransaction("Salary", 2500m,0,now);
+            AddTransaction("Home", 1200m,0,now);
+            AddTransaction("Shopping", 400m,0,now.AddDays(-1));
+            AddTransaction("Groceries", 350m,0,now.AddDays(-2));
+            AddTransaction("Loan", 100m,1,now.AddDays(-1));
+            AddTransaction("Cash", 1250m,1,now);
+            AddTransaction("Utilities", 80m,0,now.AddDays(-10));
+            AddTransaction("Eating Out", 120m,0,now.AddDays(-11));
+            AddTransaction("Entertainment", 60m,0, now.AddDays(-12));
+            AddTransaction("Fuel", 110m,0, now.AddYears(-2));
+            AddTransaction("General", 100m,0, now.AddYears(-2));
+            AddTransaction("Vacations", 50m, 1);
+            AddTransaction("Kids", 400m,0);
+            AddTransaction("Pets", 120m,0);
+            AddTransaction("Sports", 40m,0);
+            AddTransaction("Travel", 30m,0);
             
 
         }
 
-        private void AddTransaction(string categoryName,decimal amount,DateTime? dt=null)
+        private void AddTransaction(string categoryName,decimal amount,int accountNo,DateTime? dt=null)
         {
             if (dt == null)
                 dt = DateTime.Now;
             var category = db.Table<Category>().FirstOrDefault(c => c.Description == categoryName);
             var icon = db.Table<FontIcon>().FirstOrDefault(c => c.Id == category.FontIconId);
-            var account = db.Table<Account>().First();
+            var account = db.Table<Account>().Skip(accountNo).FirstOrDefault();
             var transaction = new Transaction
             {
                 AccountId = account.Id,

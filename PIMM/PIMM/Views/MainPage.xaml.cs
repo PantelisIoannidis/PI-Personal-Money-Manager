@@ -28,6 +28,10 @@ namespace PIMM
         public MainPage()
         {
             InitializeComponent();
+
+            // Create and Seed Database if there is none.
+            InitializeDatabase();
+
             repository = new Repository();
             period = new Period();
             pageService = new PageService();
@@ -35,26 +39,52 @@ namespace PIMM
             trans = repository.GetTransactions(period);
             navigationBarViewModel = new NavigationBarViewModel(trans, pageService, repository, period);
             charts = new ChartsViewModel(navigationBarViewModel, pageService, repository);
-            transactionsViewModel = new TransactionsViewModel(navigationBarViewModel, pageService, repository,period);
+            transactionsViewModel = new TransactionsViewModel(navigationBarViewModel, pageService, repository, period);
 
             overview.BindingContext = charts;
             transactions.BindingContext = transactionsViewModel;
 
+            MessagingCenter.Subscribe<NavigationBarViewModel>(this, "UpdatePeriod", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "RefreshTransactions", RefreshTransactions);
         }
 
+
+
+        private async Task InitializeDatabase()
+        {
+            var createDatabase = new InitializeDatabase();
+            if (createDatabase.IsAnEmptyDatabase())
+            {
+                var response = await DisplayAlert("New Database", "The database is empty. Do you want some sample data?", "Yes", "No");
+                if (response) { 
+                    createDatabase.InsertSampleData();
+                    RefreshTransactions();        
+                }
+            }
+        }
+
+        private void RefreshTransactions(NavigationBarViewModel obj)
+        {
+            RefreshTransactions();
+        }
+
         private void RefreshTransactions(TransactionsViewModel obj)
         {
-            var transactions = repository.GetTransactions(period);
-            navigationBarViewModel.Transactions = transactions;
+            RefreshTransactions();
         }
 
         private void RefreshTransactions(TransactionsDetailsViewModel obj)
         {
+            RefreshTransactions();
+        }
+
+        private void RefreshTransactions()
+        {
             var transactions = repository.GetTransactions(period);
             navigationBarViewModel.Transactions = transactions;
+            MessagingCenter.Send(this, "UpdateCharts");
         }
     }
 }

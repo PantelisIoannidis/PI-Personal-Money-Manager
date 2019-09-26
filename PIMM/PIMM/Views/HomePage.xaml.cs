@@ -24,15 +24,15 @@ namespace PIMM
         public HomePage()
         {
             InitializeComponent();
+            MessagingCenter.Subscribe<MainPage>(this, "UpdateCharts", UpdateCharts);
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            UpdateLayout();
 
-            ChartPierIncomeExpense.WidthRequest = ChartWidth*0.5;
+        private void UpdateCharts(MainPage obj)
+        {
+            ChartPierIncomeExpense.WidthRequest = ChartWidth * 0.5;
             ChartPierIncomeExpense.HeightRequest = ChartWidth * 0.5;
-            ChartPierIncomeExpense.Chart = new BarChart {
+            ChartPierIncomeExpense.Chart = new BarChart
+            {
                 Entries = ViewModel.PrepareIncomeExpense,
                 BackgroundColor = "backgroundColor".SKFromResources(),
             };
@@ -52,10 +52,16 @@ namespace PIMM
                 Entries = ViewModel.PrepareAccounts,
                 BackgroundColor = "backgroundColor".SKFromResources(),
             };
-
-
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateLayout();
+            UpdateCharts(null);
+        }
+
+  
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);

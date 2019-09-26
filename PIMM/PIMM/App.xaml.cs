@@ -18,10 +18,12 @@ namespace PIMM
             InitializeComponent();
             FlowListView.Init();
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
-            // Create and Seed Database
-            var newDatabase = new InitializeDatabase();
 
-            
+            var createDatabase = new InitializeDatabase();
+            if (createDatabase.IsAnewDatabase())
+            {
+                createDatabase.CreateCategoriesAndAccounts();
+            }
 
             MainPage = new NavigationPage(new MainPage()
             {
