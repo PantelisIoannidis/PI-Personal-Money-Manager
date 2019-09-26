@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PIMM
+namespace PIMM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
+    public partial class AboutPage : ContentPage
     {
         private readonly PageService pageService;
         private readonly Repository repository;
 
-        public SettingsPage(PageService pageService, Repository repository)
+        public AboutPage(PageService pageService, Repository repository)
         {
             InitializeComponent();
-
             this.pageService = pageService;
             this.repository = repository;
         }

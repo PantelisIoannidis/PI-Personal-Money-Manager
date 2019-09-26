@@ -18,6 +18,8 @@ namespace PIMM
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+        public MainPageViewModel MainVM { set; get; }
+
         List<TransactionDto> trans;
         NavigationBarViewModel navigationBarViewModel;
         TransactionsViewModel transactionsViewModel;
@@ -28,6 +30,8 @@ namespace PIMM
         public MainPage()
         {
             InitializeComponent();
+
+
 
             // Create and Seed Database if there is none.
             InitializeDatabase();
@@ -41,6 +45,9 @@ namespace PIMM
             charts = new ChartsViewModel(navigationBarViewModel, pageService, repository);
             transactionsViewModel = new TransactionsViewModel(navigationBarViewModel, pageService, repository, period);
 
+            MainVM = new MainPageViewModel(pageService, repository);
+
+            this.BindingContext = MainVM;
             overview.BindingContext = charts;
             transactions.BindingContext = transactionsViewModel;
 
@@ -86,5 +93,12 @@ namespace PIMM
             navigationBarViewModel.Transactions = transactions;
             MessagingCenter.Send(this, "UpdateCharts");
         }
+
+        public MainPageViewModel ViewModel
+        {
+            get { return BindingContext as MainPageViewModel; }
+            set { BindingContext = value; }
+        }
+
     }
 }

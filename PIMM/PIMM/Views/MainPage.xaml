@@ -10,11 +10,15 @@
              x:Class="PIMM.MainPage">
     
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Icon="tools.png" 
+        <ToolbarItem x:Name="settingsMenu"
+                     Icon="tools.png" 
                      Text="Settings"
+                     Command="{Binding GoToSettingsPageCommand}"
                      Order="Secondary"/>
-        <ToolbarItem Icon="eye.png" 
+        <ToolbarItem x:Name="aboutMenu"
+                     Icon="eye.png" 
                      Text="About"
+                     Command="{Binding GoToAboutPageCommand}"
                      Order="Secondary"/>
     </TabbedPage.ToolbarItems>
 
