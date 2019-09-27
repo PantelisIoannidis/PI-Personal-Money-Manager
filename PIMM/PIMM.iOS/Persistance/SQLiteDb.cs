@@ -7,6 +7,7 @@ using Foundation;
 using UIKit;
 using PIMM.iOS.Persistance;
 using PIMM.Persistance;
+using PIMM.Helpers;
 
 [assembly: Dependency(typeof(SQLiteDb))]
 

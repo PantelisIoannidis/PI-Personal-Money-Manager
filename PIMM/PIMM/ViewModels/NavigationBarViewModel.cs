@@ -49,11 +49,33 @@ namespace PIMM.ViewModels
             set { period = value; OnPropertyChanged(nameof(DisplayPeriod)); }
         }
 
+        public string SetDateVisibleBackgroundColor
+        {
+            get
+            {
+                return IsSetDateVisible
+                    ? ((Color)App.Current.Resources["controlSelectedBackgroundColor"]).GetHexString()
+                    : ((Color)App.Current.Resources["controlBackgroundColor"]).GetHexString();
+            }
+        }
 
+        public string SearchVisibleBackgroundColor
+        {
+            get
+            {
+                return IsSearchVisible
+                    ? ((Color)App.Current.Resources["controlSelectedBackgroundColor"]).GetHexString()
+                    : ((Color)App.Current.Resources["controlBackgroundColor"]).GetHexString();
+            }
+        }
         public bool IsSetDateVisible
         {
             get { return isSetDateVisible; }
-            set { isSetDateVisible = value; OnPropertyChanged(nameof(IsSetDateVisible)); }
+            set {
+                isSetDateVisible = value;
+                OnPropertyChanged(nameof(IsSetDateVisible));
+                OnPropertyChanged(nameof(SetDateVisibleBackgroundColor));
+            }
         }
 
         public bool IsSearchVisible
@@ -63,6 +85,7 @@ namespace PIMM.ViewModels
             {
                 isSearchVisible = value;
                 OnPropertyChanged(nameof(IsSearchVisible));
+                OnPropertyChanged(nameof(SearchVisibleBackgroundColor));
             }
         }
 

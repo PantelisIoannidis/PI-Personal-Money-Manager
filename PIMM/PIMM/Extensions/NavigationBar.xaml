@@ -53,7 +53,7 @@
                                     Command="{Binding NavigationBar.ShowSetDateCommand}"
                                     BorderRadius="0"
                                     Text="&#xf133;"
-                                    BorderColor="{StaticResource backgroundColor}"
+                                    BorderColor="{DynamicResource backgroundColor}"
                                     BorderWidth="3"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}">
                     <Button.Triggers>
@@ -61,21 +61,21 @@
                                  Binding="{Binding NavigationBar.IsSetDateVisible}"
                                     Value="true">
                             <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlSelectedBackgroundColor}" />
-                        </DataTrigger>
+                                    Value="{DynamicResource controlSelectedBackgroundColor}" />
+                    </DataTrigger>
                         <DataTrigger TargetType="Button"
                                  Binding="{Binding NavigationBar.IsSetDateVisible}"
                                     Value="false">
                             <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlBackgroundColor}" />
-                        </DataTrigger>
+                                    Value="{DynamicResource controlBackgroundColor}" />
+                    </DataTrigger>
                     </Button.Triggers>
                 </Button>
                 <Button Grid.Row="0" Grid.Column="5" 
                                     Command="{Binding NavigationBar.ShowSearchFieldCommand}"
                                     BorderRadius="0"
                                     Text="&#xf002;"
-                                    BorderColor="{StaticResource backgroundColor}"
+                                    BorderColor="{DynamicResource backgroundColor}"
                                     BorderWidth="3"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}">
                     <Button.Triggers>
@@ -83,14 +83,14 @@
                                  Binding="{Binding NavigationBar.IsSearchVisible}"
                                     Value="true">
                             <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlSelectedBackgroundColor}" />
-                        </DataTrigger>
+                                    Value="{DynamicResource controlSelectedBackgroundColor}" />
+                    </DataTrigger>
                         <DataTrigger TargetType="Button"
                                  Binding="{Binding NavigationBar.IsSearchVisible}"
                                     Value="false">
                             <Setter Property="BackgroundColor"
-                                    Value="{StaticResource controlBackgroundColor}" />
-                        </DataTrigger>
+                                    Value="{DynamicResource controlBackgroundColor}" />
+                    </DataTrigger>
                     </Button.Triggers>
                 </Button>
 
@@ -102,6 +102,8 @@
                 <DatePicker DateSelected="ChooseDate_DateSelected"
                                 IsVisible="False"
                                 x:Name="chooseDate"
+                                TextColor="{DynamicResource textColor}"
+                                BackgroundColor="{DynamicResource backgroundColor}"
                                 Date="{Binding TransVM.TransactionDate}"
                                 Format="D">
                     <DatePicker.Triggers>
@@ -121,6 +123,10 @@
                 </DatePicker>
                 <SearchBar x:Name="SearchBar" 
                            IsVisible="False"
+                           PlaceholderColor="{DynamicResource controlTextColor}"
+                           BackgroundColor="{DynamicResource backgroundColor}"
+                           TextColor="{DynamicResource textColor}"
+                           CancelButtonColor="{DynamicResource controlTextColor}"
                            SearchCommand="{Binding NavigationBar.SearchCommand}" 
                            SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
                     <SearchBar.Triggers>
@@ -152,24 +158,24 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" 
-                       TextColor="{StaticResource IncomeColor}"
+                       TextColor="{DynamicResource IncomeColor}"
                        Text="{Binding NavigationBar.IncomeSum, 
                             Converter={StaticResource AmountFormatConverter},
                             StringFormat='Income {0}'}"/>
                     <Label Grid.Row="0" Grid.Column="1" 
-                       TextColor="{StaticResource amountZeroColor}"
+                       TextColor="{DynamicResource amountZeroColor}"
                        Text="{Binding NavigationBar.Balance, 
                                 Converter={StaticResource AmountFormatConverter},
                                 StringFormat='Balance {0}'}"/>
                     <Label Grid.Row="0" Grid.Column="2" 
-                       TextColor="{StaticResource ExpenseColor}"
+                       TextColor="{DynamicResource ExpenseColor}"
                        Text="{Binding NavigationBar.ExpenseSum, 
                                 Converter={StaticResource AmountFormatConverter},
                                 StringFormat='Expense {0}'}"/>
                 </Grid>
                 <ProgressBar x:Name="incomeBalanceBar" 
                          Progress="{Binding NavigationBar.IncomeSumPercentage}"
-                         ProgressColor="{StaticResource IncomeColor}"></ProgressBar>
+                         ProgressColor="{DynamicResource IncomeColor}"></ProgressBar>
                 
             </StackLayout>
         </StackLayout>

@@ -26,7 +26,7 @@
                 <Label Grid.Row="1" Grid.Column="0" Text="Color" HorizontalOptions="End"/>
                 <lc:ColorPicker x:Name="myWebView" Grid.Row="1" Grid.Column="1"
                                        Color="{Binding Color}" 
-                                       Backcolor="{StaticResource backgroundColor}"/>
+                                       Backcolor="{DynamicResource backgroundColor}"/>
 
             </Grid>
 

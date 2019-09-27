@@ -3,6 +3,7 @@ using System.IO;
 using SQLite;
 using Xamarin.Forms;
 using PIMM.Droid.Persistance;
+using PIMM.Helpers;
 using PIMM.Persistance;
 
 [assembly: Dependency(typeof(SQLiteDb))]

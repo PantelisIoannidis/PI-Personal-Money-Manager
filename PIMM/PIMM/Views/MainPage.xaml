@@ -6,6 +6,9 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:PIMM"
              NavigationPage.HasNavigationBar="True"
+             BackgroundColor="{DynamicResource backgroundColor}"
+             BarBackgroundColor="{DynamicResource barBackgroundColor}"
+             BarTextColor="{DynamicResource textColor}"
              Title="Personal Money Tracker"
              x:Class="PIMM.MainPage">
     
@@ -22,12 +25,12 @@
                      Order="Secondary"/>
     </TabbedPage.ToolbarItems>
 
-    <local:HomePage Title="Overview" IconImageSource="chartpie.png" x:Name="overview"/>
+    <local:HomePage Title="Overview" IconImageSource="chartpie.png" x:Name="overview" BackgroundColor="{DynamicResource backgroundColor}"/>
 
-    <local:TransactionsPage Title="Transactions" IconImageSource="dollarsign.png" x:Name="transactions"/>
+    <local:TransactionsPage Title="Transactions" IconImageSource="dollarsign.png" x:Name="transactions" BackgroundColor="{DynamicResource backgroundColor}"/>
 
-    <local:CategoriesPage Title="Categories" IconImageSource="tag.png" x:Name="categories"/>
+    <local:CategoriesPage Title="Categories" IconImageSource="tag.png" x:Name="categories" BackgroundColor="{DynamicResource backgroundColor}"/>
 
-    <local:AccountsPage Title="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts"/>
+    <local:AccountsPage Title="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts" BackgroundColor="{DynamicResource backgroundColor}"/>
 
 </TabbedPage>

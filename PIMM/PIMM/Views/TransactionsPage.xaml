@@ -38,9 +38,9 @@
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
-                    BackgroundColor="{StaticResource backgroundColor}"
+                    BackgroundColor="{DynamicResource backgroundColor}"
                     SeparatorVisibility="Default"
-                    SeparatorColor="{StaticResource seperatorColor}"
+                    SeparatorColor="{DynamicResource seperatorColor}"
                     ItemSelected="Listview_ItemSelected">
                 
                 <ListView.ItemTemplate>
@@ -70,7 +70,7 @@
                                    TextColor="{Binding AccountColor}"/>
                                 <Label Grid.Column="2" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
-                                   TextColor="{StaticResource textColor}"
+                                   TextColor="{DynamicResource textColor}"
                                    Text="{Binding Description}"/>
                                 <Label Grid.Column="3" Grid.Row="0"
                                    HorizontalTextAlignment="End"

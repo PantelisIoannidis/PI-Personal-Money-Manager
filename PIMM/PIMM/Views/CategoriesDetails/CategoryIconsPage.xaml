@@ -33,11 +33,11 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Row="0" Grid.Column="0"
-                                BackgroundColor="{StaticResource controlBackgroundColor}"
+                                BackgroundColor="{DynamicResource controlBackgroundColor}"
                                 MinimumHeightRequest="140" MinimumWidthRequest="140"
                                 Text="{Binding Glyph}"  
                                 FontSize="Large"
-                                TextColor="{StaticResource controlTextColor}"
+                                TextColor="{DynamicResource controlTextColor}"
                                 FontFamily="{Binding FontFamily}"
                                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                         </Grid>

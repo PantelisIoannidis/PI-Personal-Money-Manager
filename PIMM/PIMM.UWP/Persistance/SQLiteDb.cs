@@ -6,6 +6,7 @@ using Windows.Storage;
 using PIMM.UWP;
 using PIMM.UWP.Persistance;
 using PIMM.Persistance;
+using PIMM.Helpers;
 
 [assembly: Dependency(typeof(SQLiteDb))]
 

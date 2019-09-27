@@ -31,9 +31,9 @@
                     SelectedItem="{Binding SelectedAccount,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
-                    BackgroundColor="{StaticResource backgroundColor}"
+                    BackgroundColor="{DynamicResource backgroundColor}"
                     SeparatorVisibility="Default"
-                    SeparatorColor="{StaticResource seperatorColor}"
+                    SeparatorColor="{DynamicResource seperatorColor}"
                     ItemSelected="AccountsListView_ItemSelected">
 
                 <ListView.ItemTemplate>
@@ -56,7 +56,7 @@
                                    TextColor="{Binding Color}"/>
                                 <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
-                                   TextColor="{StaticResource textColor}"
+                                   TextColor="{DynamicResource textColor}"
                                    Text="{Binding Description}"/>
                             </Grid>
                             <ViewCell.ContextActions>

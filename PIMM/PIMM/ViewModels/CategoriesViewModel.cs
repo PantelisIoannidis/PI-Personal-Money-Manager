@@ -64,6 +64,8 @@ namespace PIMM.ViewModels
                 OnPropertyChanged(nameof(SelectedType));
                 OnPropertyChanged(nameof(IsIncome));
                 OnPropertyChanged(nameof(IsExpense));
+                OnPropertyChanged(nameof(IncomeBackgroundColor));
+                OnPropertyChanged(nameof(ExpenseBackgroundColor));
                 OnPropertyChanged(nameof(Categories));
             }
         }
@@ -78,6 +80,26 @@ namespace PIMM.ViewModels
         {
             get { return SelectedType == TransactionType.Expense; }
 
+        }
+
+        public string IncomeBackgroundColor
+        {
+            get
+            {
+                return IsIncome
+                    ? ((Color)App.Current.Resources["IncomeColor"]).GetHexString()
+                    : ((Color)App.Current.Resources["backgroundColor"]).GetHexString();
+            }
+        }
+
+        public string ExpenseBackgroundColor
+        {
+            get
+            {
+                return IsExpense
+                    ? ((Color)App.Current.Resources["ExpenseColor"]).GetHexString()
+                    : ((Color)App.Current.Resources["backgroundColor"]).GetHexString();
+            }
         }
 
 

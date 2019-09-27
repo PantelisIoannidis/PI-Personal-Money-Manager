@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
+using PIMM.Helpers;
 
 namespace PIMM.ViewModels
 {
@@ -41,6 +43,27 @@ namespace PIMM.ViewModels
                 var result = Type == TransactionType.Expense;
                 return result;
             } }
+
+        public string IncomeBackgroundColor
+        {
+            get
+            {
+                return IsIncome
+                    ? ((Color)App.Current.Resources["IncomeColor"]).GetHexString()
+                    : ((Color)App.Current.Resources["backgroundColor"]).GetHexString();
+            }
+        }
+
+        public string ExpenseBackgroundColor
+        {
+            get
+            {
+                return IsExpense
+                    ? ((Color)App.Current.Resources["ExpenseColor"]).GetHexString()
+                    : ((Color)App.Current.Resources["backgroundColor"]).GetHexString();
+            }
+        }
+
         public bool IsAdjustment { get {
                 return Type == TransactionType.Adjustment; } }
         public bool IsTransfer { get {

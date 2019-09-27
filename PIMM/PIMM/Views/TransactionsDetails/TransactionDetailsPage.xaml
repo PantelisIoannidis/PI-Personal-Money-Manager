@@ -31,30 +31,16 @@
                                 Text="Income" 
                                 BorderWidth="1"
                                 CornerRadius="0"
-                                BorderColor="{StaticResource IncomeColor}">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding TransVM.IsIncome}" Value="True">
-                            <Setter Property="BackgroundColor" Value="{StaticResource IncomeColor}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button" Binding="{Binding TransVM.IsIncome}" Value="False">
-                            <Setter Property="BackgroundColor" Value="{StaticResource backgroundColor}" />
-                        </DataTrigger>
-                    </Button.Triggers>
+                                BackgroundColor="{Binding TransVM.IncomeBackgroundColor}"
+                                BorderColor="{DynamicResource IncomeColor}">
                 </Button>
                 <Button Grid.Row="0" Grid.Column="2"
                                 Command="{Binding ExpenseSelectedCommand}"
                                 Text="Expense" 
                                 BorderWidth="1"
                                 CornerRadius="0"
-                                BorderColor="{StaticResource ExpenseColor}">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding TransVM.IsExpense}" Value="True">
-                            <Setter Property="BackgroundColor" Value="{StaticResource ExpenseColor}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button" Binding="{Binding TransVM.IsExpense}" Value="False">
-                            <Setter Property="BackgroundColor" Value="{StaticResource backgroundColor}" />
-                        </DataTrigger>
-                    </Button.Triggers>
+                                BackgroundColor="{Binding TransVM.ExpenseBackgroundColor}"
+                                BorderColor="{DynamicResource ExpenseColor}">
                 </Button>
 
             </Grid>

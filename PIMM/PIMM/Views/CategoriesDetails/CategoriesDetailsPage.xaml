@@ -20,7 +20,7 @@
                         HorizontalOptions="StartAndExpand"
                         Text="{Binding Category.FontGlyph}" 
                         FontSize="Medium"
-                        TextColor="{StaticResource controlTextColor}"
+                        TextColor="{DynamicResource controlTextColor}"
                         FontFamily="{Binding Category.FontFamily}"
                         Command="{Binding SelectIconCommand}"
                         CommandParameter="{Binding Category.FontIconId}"/>
@@ -29,7 +29,7 @@
                 <Label Grid.Row="1" Grid.Column="0" Text="Color" HorizontalOptions="End"/>
                 <lc:ColorPicker x:Name="myWebView" Grid.Row="1" Grid.Column="1"
                                        Color="{Binding Category.Color}" 
-                                       Backcolor="{StaticResource backgroundColor}"/>
+                                       Backcolor="{DynamicResource backgroundColor}"/>
 
                 <Label Grid.Row="2" Grid.Column="0" Text="Description" HorizontalOptions="End"/>
                 <Entry x:Name="descriptionEntry" Grid.Row="2" Grid.Column="1" Text="{Binding Category.Description}">

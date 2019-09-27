@@ -6,10 +6,6 @@
              mc:Ignorable="d"
              x:Class="PIMM.App">
 
-    <!--<Color x:Key="barBackgroundColor">#7190bf</Color>
-    <Color x:Key="controlBackgroundColor">#bd44c2</Color>
-    <Color x:Key="backgroundColor">#abbdd9</Color>-->
-
     <Application.Resources>
         <ResourceDictionary>
 
@@ -37,23 +33,27 @@
             
             
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource controlBackgroundColor}"/>
-                <Setter Property="TextColor" Value="{StaticResource controlTextColor}"/>
-                <Setter Property="BorderRadius" Value="{StaticResource controlBorderRadius}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource controlBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource controlTextColor}"/>
+                <Setter Property="BorderRadius" Value="{DynamicResource controlBorderRadius}"/>
                 <!--<Setter Property="FontAttributes" Value="None"/>-->
             </Style>
 
             <Style TargetType="Label">
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
-                <Setter Property="FontSize" Value="Small"/>
-                <Setter Property="TextColor" Value="{StaticResource textColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource textColor}"/>
             </Style>
-            
-            
+
+            <Style TargetType="SearchBar">
+                <Setter Property="TextColor" Value="{DynamicResource textColor}"/>
+            </Style>
+
+
             <!--<Style x:Key="button" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource buttonBackgroundColor}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource buttonBackgroundColor}"/>
                 <Setter Property="TextColor" Value="White"/>
+                            <Setter Property="FontSize" Value="Small"/>
                 <Setter Property="BackgroundColor" Value="Gray"/>
                 <Setter Property="BorderRadius" Value="20"/>
                 <Setter Property="FontAttributes" Value="Bold"/>

@@ -31,30 +31,17 @@
                                 Text="Income" 
                                 BorderWidth="1"
                                 CornerRadius="0"
-                                BorderColor="{StaticResource IncomeColor}">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsIncome}" Value="True">
-                            <Setter Property="BackgroundColor" Value="{StaticResource IncomeColor}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsIncome}" Value="False">
-                            <Setter Property="BackgroundColor" Value="{StaticResource backgroundColor}" />
-                        </DataTrigger>
-                    </Button.Triggers>
+                                BackgroundColor="{Binding IncomeBackgroundColor}"
+                                BorderColor="{DynamicResource IncomeColor}">
+                                
                 </Button>
                 <Button Grid.Row="0" Grid.Column="2"
                                 Command="{Binding ExpenseSelectedCommand}"
                                 Text="Expense" 
                                 BorderWidth="1"
                                 CornerRadius="0"
-                                BorderColor="{StaticResource ExpenseColor}">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsExpense}" Value="True">
-                            <Setter Property="BackgroundColor" Value="{StaticResource ExpenseColor}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsExpense}" Value="False">
-                            <Setter Property="BackgroundColor" Value="{StaticResource backgroundColor}" />
-                        </DataTrigger>
-                    </Button.Triggers>
+                                BackgroundColor="{Binding ExpenseBackgroundColor}"
+                                BorderColor="{DynamicResource ExpenseColor}">
                 </Button>
             </Grid>
 
@@ -86,9 +73,9 @@
                     SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
-                    BackgroundColor="{StaticResource backgroundColor}"
+                    BackgroundColor="{DynamicResource backgroundColor}"
                     SeparatorVisibility="Default"
-                    SeparatorColor="{StaticResource seperatorColor}"
+                    SeparatorColor="{DynamicResource seperatorColor}"
                     ItemSelected="CategoriesListView_ItemSelected">
 
                 <ListView.ItemTemplate>
@@ -111,7 +98,7 @@
                                    TextColor="{Binding Color}"/>
                                 <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
-                                   TextColor="{StaticResource textColor}"
+                                   TextColor="{DynamicResource textColor}"
                                    Text="{Binding Description}"/>
                             </Grid>
                             <ViewCell.ContextActions>

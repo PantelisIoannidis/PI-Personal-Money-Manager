@@ -32,10 +32,6 @@ namespace PIMM
             InitializeComponent();
 
 
-
-            // Create and Seed Database if there is none.
-            InitializeDatabase();
-
             repository = new Repository();
             period = new Period();
             pageService = new PageService();
@@ -51,41 +47,76 @@ namespace PIMM
             overview.BindingContext = charts;
             transactions.BindingContext = transactionsViewModel;
 
+            LoadTheme();
+
             MessagingCenter.Subscribe<NavigationBarViewModel>(this, "UpdatePeriod", RefreshTransactions);
+            MessagingCenter.Subscribe<SettingsPage>(this, "UpdateTransactionsAfterSettingsChange", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "RefreshTransactions", RefreshTransactions);
         }
 
 
+        private void LoadTheme()
+        {
+            var app = (Application.Current as App);
+
+            if (!app.Properties.ContainsKey(Themes.Theme))
+            {
+                app.Properties[Themes.Theme] = Themes.Light;
+            }
+
+            var theme = app.Properties[Themes.Theme].ToString();
+
+            if (theme == Themes.Dark)
+                app.SetDarkTheme();
+            else if(theme == Themes.Light)
+                app.SetLightTheme();
+            else if(theme == Themes.Blue)
+                app.SetBlueTheme();
+            else
+
+            app.SetNavigationBarColor();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Create and Seed Database if there is none.
+            InitializeDatabase();
+        }
+
 
         private async Task InitializeDatabase()
         {
-            var createDatabase = new InitializeDatabase();
-            if (createDatabase.IsAnEmptyDatabase())
+            try
             {
-                var response = await DisplayAlert("New Database", "The database is empty. Do you want some sample data?", "Yes", "No");
-                if (response) { 
-                    createDatabase.InsertSampleData();
-                    RefreshTransactions();        
+                var createDatabase = new InitializeDatabase();
+                if (createDatabase.IsAnEmptyDatabase())
+                {
+                    var response = await pageService.DisplayAlert("New Database", "The database is empty. Do you want some sample data?", "Yes", "No");
+                    if (response)
+                    {
+                        createDatabase.InsertSampleData();
+                        RefreshTransactions();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 
-        private void RefreshTransactions(NavigationBarViewModel obj)
-        {
-            RefreshTransactions();
-        }
+        private void RefreshTransactions(SettingsPage obj) => RefreshTransactions();
 
-        private void RefreshTransactions(TransactionsViewModel obj)
-        {
-            RefreshTransactions();
-        }
+        private void RefreshTransactions(NavigationBarViewModel obj) => RefreshTransactions();
 
-        private void RefreshTransactions(TransactionsDetailsViewModel obj)
-        {
-            RefreshTransactions();
-        }
+        private void RefreshTransactions(TransactionsViewModel obj) => RefreshTransactions();
+
+        private void RefreshTransactions(TransactionsDetailsViewModel obj) => RefreshTransactions();
 
         private void RefreshTransactions()
         {

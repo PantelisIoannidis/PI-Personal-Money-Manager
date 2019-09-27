@@ -12,7 +12,7 @@
                     x:Name="categoriesListView"
                     ItemsSource="{Binding CategoryListByType}" 
                    
-                    BackgroundColor="{StaticResource backgroundColor}">
+                    BackgroundColor="{DynamicResource backgroundColor}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -32,7 +32,7 @@
                                    TextColor="{Binding Color}"/>
                                 <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
-                                   TextColor="{StaticResource textColor}"
+                                   TextColor="{DynamicResource textColor}"
                                    Text="{Binding Description}"/>
                             </Grid>
                         </ViewCell>

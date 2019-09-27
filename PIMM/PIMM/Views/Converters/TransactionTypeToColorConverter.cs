@@ -35,7 +35,7 @@ namespace PIMM.Views.Converters
                     color = (Color)Application.Current.Resources["AdjustmentColor"];
                     break;
                 default:
-                    color = Color.Black;
+                    color = (Color)Application.Current.Resources["textColor"]; 
                     break;
             }
 

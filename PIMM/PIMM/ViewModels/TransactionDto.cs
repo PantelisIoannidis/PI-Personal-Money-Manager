@@ -34,20 +34,18 @@ namespace PIMM.Models.ViewModels
         {
             get
             {
-                switch (Type)
-                {
-                    case TransactionType.Income:
-                        return (Color)Application.Current.Resources["IncomeColor"];
-                    case TransactionType.Expense:
-                        return (Color)Application.Current.Resources["ExpenseColor"];
-                    case TransactionType.Transfer:
-                        return (Color)Application.Current.Resources["TransferColor"];
-                    case TransactionType.Adjustment:
-                        return (Color)Application.Current.Resources["AdjustmentColor"];
-                    default:
-                        return Color.Black;
 
-                }
+                    if(Type== TransactionType.Income)
+                        return (Color)Application.Current.Resources["IncomeColor"];
+                    if (Type == TransactionType.Expense)
+                        return (Color)Application.Current.Resources["ExpenseColor"];
+                    if (Type == TransactionType.Transfer)
+                        return (Color)Application.Current.Resources["TransferColor"];
+                    if (Type == TransactionType.Adjustment)
+                        return (Color)Application.Current.Resources["AdjustmentColor"];
+
+                    return (Color)Application.Current.Resources["textColor"];
+
             }
         }
 
