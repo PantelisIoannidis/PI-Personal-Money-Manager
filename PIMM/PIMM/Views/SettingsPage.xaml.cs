@@ -19,15 +19,16 @@ namespace PIMM
 
         private readonly PageService pageService;
         private readonly Repository repository;
+        private readonly InitializeDatabase initializeDatabase;
 
-        public SettingsPage(PageService pageService, Repository repository)
+        public SettingsPage(PageService pageService, Repository repository, InitializeDatabase initializeDatabase)
         {
             InitializeComponent();
 
             this.pageService = pageService;
             this.repository = repository;
-
-            settingsVM = new SettingsViewModel(pageService, repository);
+            this.initializeDatabase = initializeDatabase;
+            settingsVM = new SettingsViewModel(pageService, repository, initializeDatabase);
 
             BindingContext = settingsVM;
         }
@@ -48,7 +49,7 @@ namespace PIMM
 
             app.SetNavigationBarColor();
 
-            app.Properties[Themes.Theme] = theme;
+            app.Properties[Themes.ThemeKey] = theme;
             app.SavePropertiesAsync();
 
             ExitPage();
@@ -56,7 +57,7 @@ namespace PIMM
 
         private async Task ExitPage()
         {
-            MessagingCenter.Send(this, "UpdateTransactions");
+            MessagingCenter.Send(this, "UpdateTransactionsAfterSettingsChange");
             await pageService.PopAsync();
         }
 

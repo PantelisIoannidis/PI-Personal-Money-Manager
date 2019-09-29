@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lc="clr-namespace:PIMM.Extensions;assembly=PIMM"
              mc:Ignorable="d"
-             Title="{Binding Category.FormPurposeNewOrEdit}"
+             Title="{Binding FormPurposeNewOrEdit}"
              x:Class="PIMM.Views.CategoriesDetails.CategoriesDetailsPage">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="10,20">

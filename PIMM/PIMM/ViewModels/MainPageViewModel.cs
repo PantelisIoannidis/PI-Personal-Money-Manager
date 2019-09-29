@@ -15,15 +15,16 @@ namespace PIMM.ViewModels
     {
         private readonly PageService pageService;
         private readonly Repository repository;
+        private readonly InitializeDatabase initializeDatabase;
 
         public ICommand GoToSettingsPageCommand { get; set; }
         public ICommand GoToAboutPageCommand { get; set; }
 
-        public MainPageViewModel(PageService pageService, Repository repository)
+        public MainPageViewModel(PageService pageService, Repository repository, InitializeDatabase initializeDatabase)
         {
             this.pageService = pageService;
             this.repository = repository;
-
+            this.initializeDatabase = initializeDatabase;
             GoToSettingsPageCommand = new Command(async vm => await GoToSettingsPage());
             GoToAboutPageCommand = new Command(async vm => await GoToAboutPage());
         }
@@ -35,7 +36,7 @@ namespace PIMM.ViewModels
 
         private async Task GoToSettingsPage()
         {
-            await pageService.PushAsync(new SettingsPage(pageService, repository));
+            await pageService.PushAsync(new SettingsPage(pageService, repository, initializeDatabase));
         }
     }
 }

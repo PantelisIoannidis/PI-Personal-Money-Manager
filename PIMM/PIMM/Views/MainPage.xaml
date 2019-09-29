@@ -25,12 +25,12 @@
                      Order="Secondary"/>
     </TabbedPage.ToolbarItems>
 
-    <local:HomePage Title="Overview" IconImageSource="chartpie.png" x:Name="overview" BackgroundColor="{DynamicResource backgroundColor}"/>
+    <local:HomePage Title="" ClassId="Overview - Charts"  IconImageSource="chartpie.png" x:Name="overview" BackgroundColor="{DynamicResource backgroundColor}" />
 
-    <local:TransactionsPage Title="Transactions" IconImageSource="dollarsign.png" x:Name="transactions" BackgroundColor="{DynamicResource backgroundColor}"/>
+    <local:TransactionsPage Title="" ClassId="Transactions" IconImageSource="dollarsign.png" x:Name="transactions" BackgroundColor="{DynamicResource backgroundColor}"/>
 
-    <local:CategoriesPage Title="Categories" IconImageSource="tag.png" x:Name="categories" BackgroundColor="{DynamicResource backgroundColor}"/>
+    <local:CategoriesPage Title="" ClassId="Categories" IconImageSource="tag.png" x:Name="categories" BackgroundColor="{DynamicResource backgroundColor}"/>
 
-    <local:AccountsPage Title="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts" BackgroundColor="{DynamicResource backgroundColor}"/>
+    <local:AccountsPage Title="" ClassId="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts" BackgroundColor="{DynamicResource backgroundColor}"/>
 
 </TabbedPage>

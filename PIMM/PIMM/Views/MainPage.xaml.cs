@@ -26,6 +26,7 @@ namespace PIMM
         ChartsViewModel charts;
         Repository repository;
         PageService pageService;
+        InitializeDatabase initializeDatabase;
         Period period;
         public MainPage()
         {
@@ -35,13 +36,14 @@ namespace PIMM
             repository = new Repository();
             period = new Period();
             pageService = new PageService();
+            initializeDatabase = new InitializeDatabase(pageService);
             period.Init(DateTime.Now, PeriodType.Month);
             trans = repository.GetTransactions(period);
             navigationBarViewModel = new NavigationBarViewModel(trans, pageService, repository, period);
             charts = new ChartsViewModel(navigationBarViewModel, pageService, repository);
             transactionsViewModel = new TransactionsViewModel(navigationBarViewModel, pageService, repository, period);
 
-            MainVM = new MainPageViewModel(pageService, repository);
+            MainVM = new MainPageViewModel(pageService, repository, initializeDatabase);
 
             this.BindingContext = MainVM;
             overview.BindingContext = charts;
@@ -51,22 +53,29 @@ namespace PIMM
 
             MessagingCenter.Subscribe<NavigationBarViewModel>(this, "UpdatePeriod", RefreshTransactions);
             MessagingCenter.Subscribe<SettingsPage>(this, "UpdateTransactionsAfterSettingsChange", RefreshTransactions);
+            MessagingCenter.Subscribe<SettingsViewModel>(this, "UpdateTransactionsAfterReset", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", RefreshTransactions);
             MessagingCenter.Subscribe<TransactionsViewModel>(this, "RefreshTransactions", RefreshTransactions);
         }
 
-
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+            string currentPageName = CurrentPage.ClassId;
+            CurrentPage.Title = ClassId;
+            this.Title = currentPageName;
+        }
         private void LoadTheme()
         {
             var app = (Application.Current as App);
 
-            if (!app.Properties.ContainsKey(Themes.Theme))
+            if (!app.Properties.ContainsKey(Themes.ThemeKey))
             {
-                app.Properties[Themes.Theme] = Themes.Light;
+                app.Properties[Themes.ThemeKey] = Themes.Blue;
             }
 
-            var theme = app.Properties[Themes.Theme].ToString();
+            var theme = app.Properties[Themes.ThemeKey].ToString();
 
             if (theme == Themes.Dark)
                 app.SetDarkTheme();
@@ -90,25 +99,12 @@ namespace PIMM
 
         private async Task InitializeDatabase()
         {
-            try
-            {
-                var createDatabase = new InitializeDatabase();
-                if (createDatabase.IsAnEmptyDatabase())
-                {
-                    var response = await pageService.DisplayAlert("New Database", "The database is empty. Do you want some sample data?", "Yes", "No");
-                    if (response)
-                    {
-                        createDatabase.InsertSampleData();
-                        RefreshTransactions();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            var createDatabase = new InitializeDatabase(pageService);
+            await createDatabase.PopulateDatabase();
+            RefreshTransactions();
         }
+
+        private void RefreshTransactions(SettingsViewModel obj) => RefreshTransactions();
 
         private void RefreshTransactions(SettingsPage obj) => RefreshTransactions();
 

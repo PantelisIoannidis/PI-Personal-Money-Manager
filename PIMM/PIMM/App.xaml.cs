@@ -20,11 +20,9 @@ namespace PIMM
             FlowListView.Init();
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
 
-            var createDatabase = new InitializeDatabase();
-            if (createDatabase.IsAnewDatabase())
-            {
-                createDatabase.CreateCategoriesAndAccounts();
-            }
+            var createDatabase = new InitializeDatabase(null);
+            createDatabase.CreateCategoriesAndAccounts();
+
             mainPage = new MainPage();
             navigationPage = new NavigationPage(mainPage);
             SetNavigationBarColor();
@@ -119,7 +117,7 @@ namespace PIMM
             Resources["backgroundColor"] = Color.FromHex("#ffffff");
             Resources["textColor"] = Color.FromHex("#000000");
 
-            Resources["barBackgroundColor"] = Color.FromHex("#146b0e");
+            Resources["barBackgroundColor"] = Color.FromHex("#0e520a");
             Resources["barTextColor"] = Color.FromHex("#ffffff");
 
             Resources["controlSelectedBackgroundColor"] = Color.FromHex("#146b0e");
