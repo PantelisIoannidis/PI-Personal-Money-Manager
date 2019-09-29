@@ -30,8 +30,10 @@ namespace PIMM
         Period period;
         public MainPage()
         {
-            InitializeComponent();
 
+            LoadTheme();
+
+            InitializeComponent();          
 
             repository = new Repository();
             period = new Period();
@@ -49,7 +51,7 @@ namespace PIMM
             overview.BindingContext = charts;
             transactions.BindingContext = transactionsViewModel;
 
-            LoadTheme();
+            
 
             MessagingCenter.Subscribe<NavigationBarViewModel>(this, "UpdatePeriod", RefreshTransactions);
             MessagingCenter.Subscribe<SettingsPage>(this, "UpdateTransactionsAfterSettingsChange", RefreshTransactions);
@@ -63,7 +65,7 @@ namespace PIMM
         {
             base.OnCurrentPageChanged();
             string currentPageName = CurrentPage.ClassId;
-            CurrentPage.Title = ClassId;
+            //CurrentPage.Title = ClassId;
             this.Title = currentPageName;
         }
         private void LoadTheme()
