@@ -1,10 +1,6 @@
 ﻿using PIMM.Persistance;
 using PIMM.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,9 +10,9 @@ namespace PIMM
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountsPage : ContentPage
     {
-        List<AccountDto> accounts;
-        AccountsViewModel accountsViewModel;
-        Repository repository;
+        private List<AccountDto> accounts;
+        private AccountsViewModel accountsViewModel;
+        private Repository repository;
 
         public AccountsPage()
         {
@@ -37,7 +33,6 @@ namespace PIMM
             accounts = repository.GetAccountsAsViewModels();
             accountsViewModel.Accounts = accounts;
         }
-
 
         private void AccountsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

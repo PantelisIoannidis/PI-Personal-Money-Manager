@@ -1,13 +1,9 @@
-﻿using Microcharts;
-using PIMM.Helpers;
+﻿using PIMM.Helpers;
 using PIMM.Persistance;
 using SkiaSharp;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using Xamarin.Forms;
 
 namespace PIMM.ViewModels
 {
@@ -31,7 +27,6 @@ namespace PIMM.ViewModels
             set { navigationBar = value; OnPropertyChanged(nameof(NavigationBar)); }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string property)
@@ -41,7 +36,7 @@ namespace PIMM.ViewModels
         }
 
         ///  Charts
-        ///  
+        ///
         public Microcharts.Entry[] PrepareIncomeExpense
         {
             get
@@ -69,19 +64,33 @@ namespace PIMM.ViewModels
         {
             get
             {
-                var data = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
-                    .Where(x=>x.Type==Models.TransactionType.Expense)
+                var first8 = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
+                    .Where(x => x.Type == Models.TransactionType.Expense)
                     .Take(8);
+                var all = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
+                    .Where(x => x.Type == Models.TransactionType.Expense);
 
                 var entries = new List<Microcharts.Entry>();
-                foreach(var entry in data)
+                foreach (var entry in first8)
                 {
-                    entries.Add(new Microcharts.Entry((float)entry.Amount) {
-                        Label=entry.Description,
-                        ValueLabel= entry.Amount.FormatAmount(),
-                        Color= SKColor.Parse(entry.Color)
+                    entries.Add(new Microcharts.Entry((float)entry.Amount)
+                    {
+                        Label = entry.Description,
+                        ValueLabel = entry.Amount.FormatAmount(),
+                        Color = SKColor.Parse(entry.Color)
                     });
                 }
+                if (all.ToList().Count > 8)
+                {
+                    var otherAmount = all.Sum(x => x.Amount) - first8.Sum(x => x.Amount);
+                    entries.Add(new Microcharts.Entry((float)otherAmount)
+                    {
+                        Label = "Other",
+                        ValueLabel = otherAmount.FormatAmount(),
+                        Color = SKColor.Parse("#888888")
+                    });
+                }
+
                 return entries;
             }
         }
@@ -106,5 +115,4 @@ namespace PIMM.ViewModels
             }
         }
     }
-
 }

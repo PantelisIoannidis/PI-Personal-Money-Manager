@@ -10,13 +10,13 @@
         <StackLayout Padding="10">
             <Grid Padding="8">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Text="Theme"/>
-                <Picker Grid.Row="0" Grid.Column="1" 
-                        x:Name="themePicker" Title="Select a Theme" 
+                <Label Grid.Row="0" Grid.Column="0" Text="Theme" />
+                <Picker Grid.Row="0" Grid.Column="1"
+                        x:Name="themePicker" Title="Select a Theme"
                         SelectedIndexChanged="ThemePicker_SelectedIndexChanged">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
@@ -27,7 +27,7 @@
                     </Picker.ItemsSource>
                 </Picker>
 
-                <Label Grid.Row="1" Grid.Column="0" Text="Reset Database"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Reset Database" />
                 <Button Grid.Row="1" Grid.Column="1" Text="Reset" Command="{Binding ResetDatabaseCommand}" />
             </Grid>
         </StackLayout>

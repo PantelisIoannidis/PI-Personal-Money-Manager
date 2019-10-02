@@ -10,31 +10,30 @@
              mc:Ignorable="d"
              x:Class="PIMM.TransactionsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="plus.png" 
+        <ToolbarItem Icon="plus.png"
                      Text="New Transaction"
                      Command="{Binding NewTransactionCommand}"
-                     Order="Primary"/>
+                     Order="Primary" />
     </ContentPage.ToolbarItems>
     <ContentView x:Name="PortraitView" Padding="10">
         <ContentView.Resources>
             <ResourceDictionary>
-                <conv:AmountToColorConverter x:Key="AmountToColorConverter"/>
-                <conv:AmountFormatConverter x:Key="AmountFormatConverter"/>
-                <conv:DateFormatConverter x:Key="DateFormatConverter"/>
-            </ResourceDictionary>            
+                <conv:AmountToColorConverter x:Key="AmountToColorConverter" />
+                <conv:AmountFormatConverter x:Key="AmountFormatConverter" />
+                <conv:DateFormatConverter x:Key="DateFormatConverter" />
+            </ResourceDictionary>
         </ContentView.Resources>
         <StackLayout Orientation="Vertical">
 
-            
             <lc:NavigationBar />
-            <!--<Button  Grid.Row="0" Grid.Column="6" 
-                         Text="&#xf067;" 
-                         FontFamily="{x:Static fa:FontAwesome.FontName}" 
-                         Command="{Binding NewTransactionCommand}"/>-->
+            <!--<Button  Grid.Row="0" Grid.Column="6"
+                         Text="&#xf067;"
+                         FontFamily="{x:Static fa:FontAwesome.FontName}"
+                         Command="{Binding NewTransactionCommand}" />-->
             <ListView
                     x:Name="transListView"
                     CachingStrategy="RecycleElementAndDataTemplate"
-                    ItemsSource="{Binding NavigationBar.Transactions}" 
+                    ItemsSource="{Binding NavigationBar.Transactions}"
                     SelectedItem="{Binding SelectedTransaction,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
@@ -42,7 +41,7 @@
                     SeparatorVisibility="Default"
                     SeparatorColor="{DynamicResource seperatorColor}"
                     ItemSelected="Listview_ItemSelected">
-                
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -50,47 +49,47 @@
                             RowSpacing="2"
                             ColumnSpacing="2">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="4*"/>
-                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0"
                                    FontSize="Large"
                                    Text="{Binding Glyph}"
                                    FontFamily="{Binding FontFamily}"
-                                   TextColor="{Binding GlyphColor}"/>
+                                   TextColor="{Binding GlyphColor}" />
                                 <Label Grid.Column="1" Grid.Row="0"
                                    Text="&#xf111;"
                                    FontFamily="{x:Static fa:FontAwesome.FontName}"
-                                   TextColor="{Binding AccountColor}"/>
+                                   TextColor="{Binding AccountColor}" />
                                 <Label Grid.Column="2" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
                                    TextColor="{DynamicResource textColor}"
-                                   Text="{Binding Description}"/>
+                                   Text="{Binding Description}" />
                                 <Label Grid.Column="3" Grid.Row="0"
                                    HorizontalTextAlignment="End"
                                    Text="{Binding FormattedDate}" />
                                 <Label Grid.Column="4" Grid.Row="0"
                                    HorizontalTextAlignment="End"
                                    Text="{Binding FormattedAmount}"
-                                   TextColor="{Binding FormattedColorAmount}"/>
+                                   TextColor="{Binding FormattedColorAmount}" />
                             </Grid>
                             <ViewCell.ContextActions>
-                                <MenuItem x:Name="DeleteCom" 
-                                          Text="Delete" 
-                                          IsDestructive="True" 
-                                          Command="{Binding Path=BindingContext.DeleteActionCommand, Source={x:Reference Name=transListView}}" 
-                                          CommandParameter="{Binding .}"  />
-                                <MenuItem x:Name="EditCom" 
-                                          Text="Edit" 
-                                          IsDestructive="False" 
-                                          Command="{Binding Path=BindingContext.EditActionCommand, Source={x:Reference Name=transListView}}" 
-                                          CommandParameter="{Binding .}"  />
+                                <MenuItem x:Name="DeleteCom"
+                                          Text="Delete"
+                                          IsDestructive="True"
+                                          Command="{Binding Path=BindingContext.DeleteActionCommand, Source={x:Reference Name=transListView}}"
+                                          CommandParameter="{Binding .}" />
+                                <MenuItem x:Name="EditCom"
+                                          Text="Edit"
+                                          IsDestructive="False"
+                                          Command="{Binding Path=BindingContext.EditActionCommand, Source={x:Reference Name=transListView}}"
+                                          CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
                         </ViewCell>
                     </DataTemplate>

@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -22,7 +21,7 @@ namespace PIMM.ViewModels
         private readonly IPageService _pageService;
         private readonly IRepository _repository;
         private bool isRefreshing;
-        
+        private CategoriesDetailsPage categoriesDetailsPage;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,6 +42,7 @@ namespace PIMM.ViewModels
             this.filter = (x) => { return x.Type == selectedType; };
             _pageService = pageService;
             this._repository = repository;
+            categoriesDetailsPage = new CategoriesDetailsPage(_pageService, _repository, new CategoryDto());
             RefreshCommand = new Command(CmdRefresh);
             SelectCategoryCommand = new Command<CategoryDto>(async vm => await SelectCategory(vm));
             DeleteActionCommand = new Command<CategoryDto>(async vm => await DeleteAction(vm));
@@ -60,7 +60,9 @@ namespace PIMM.ViewModels
         public TransactionType SelectedType
         {
             get { return selectedType; }
-            set { selectedType = value;
+            set
+            {
+                selectedType = value;
                 OnPropertyChanged(nameof(SelectedType));
                 OnPropertyChanged(nameof(IsIncome));
                 OnPropertyChanged(nameof(IsExpense));
@@ -72,14 +74,12 @@ namespace PIMM.ViewModels
 
         public bool IsIncome
         {
-            get { return SelectedType==TransactionType.Income; }
-            
+            get { return SelectedType == TransactionType.Income; }
         }
 
         public bool IsExpense
         {
             get { return SelectedType == TransactionType.Expense; }
-
         }
 
         public string IncomeBackgroundColor
@@ -102,7 +102,6 @@ namespace PIMM.ViewModels
             }
         }
 
-
         private void ExpenseSelected()
         {
             SelectedType = TransactionType.Expense;
@@ -113,13 +112,14 @@ namespace PIMM.ViewModels
             SelectedType = TransactionType.Income;
         }
 
-
         private async Task NewAction()
         {
-            var vm = new CategoryDto() {
-                Type= SelectedType
+            var vm = new CategoryDto()
+            {
+                Type = SelectedType
             };
-            await _pageService.PushAsync(new CategoriesDetailsPage(_pageService, _repository, vm));
+            categoriesDetailsPage.SetCategoryDetailsViewModel(vm);
+            await _pageService.PushAsync(categoriesDetailsPage);
         }
 
         private async Task UpdateCategory(CategoriesDetailsPage page, CategoryDto vm)
@@ -131,7 +131,8 @@ namespace PIMM.ViewModels
 
         private async Task EditAction(CategoryDto vm)
         {
-            await _pageService.PushAsync(new CategoriesDetailsPage(_pageService, _repository, vm));
+            categoriesDetailsPage.SetCategoryDetailsViewModel(vm);
+            await _pageService.PushAsync(categoriesDetailsPage);
         }
 
         private async Task DeleteAction(CategoryDto vm)
@@ -156,12 +157,13 @@ namespace PIMM.ViewModels
         {
             if (string.IsNullOrWhiteSpace(s))
             {
-                this.filter = (x) => { return  x.Type == selectedType; };
+                this.filter = (x) => { return x.Type == selectedType; };
             }
             else
             {
-                this.filter = (x) => {
-                    return ((x.Description.ToLower().Contains(s.ToLower())) && x.Type ==selectedType);
+                this.filter = (x) =>
+                {
+                    return ((x.Description.ToLower().Contains(s.ToLower())) && x.Type == selectedType);
                 };
             }
             OnPropertyChanged(nameof(Categories));

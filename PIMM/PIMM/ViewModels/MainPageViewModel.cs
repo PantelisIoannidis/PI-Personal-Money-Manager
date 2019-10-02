@@ -1,10 +1,5 @@
-﻿using PIMM.Helpers;
-using PIMM.Models.ViewModels;
-using PIMM.Persistance;
+﻿using PIMM.Persistance;
 using PIMM.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;

@@ -1,9 +1,4 @@
 ﻿using PIMM.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -15,19 +10,21 @@ namespace PIMM.Extensions
     public partial class ColorPicker : ContentView
     {
         public static readonly BindableProperty ColorProperty =
-            BindableProperty.Create("Color", typeof(string), typeof(ColorPicker),null, 
-                defaultBindingMode:BindingMode.TwoWay, propertyChanged: OnColorChanged);
+            BindableProperty.Create("Color", typeof(string), typeof(ColorPicker), null,
+                defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnColorChanged);
 
         private static void OnColorChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            
         }
 
         public string Color
         {
-            get {
-                return (string)GetValue(ColorProperty); }
-            set {
+            get
+            {
+                return (string)GetValue(ColorProperty);
+            }
+            set
+            {
                 SetValue(ColorProperty, value);
             }
         }
@@ -38,19 +35,19 @@ namespace PIMM.Extensions
 
         private static void OnBackcolorChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            
         }
 
         public string Backcolor
         {
-            get {
-                return (string)GetValue(BackcolorProperty); }
-            set {
+            get
+            {
+                return (string)GetValue(BackcolorProperty);
+            }
+            set
+            {
                 SetValue(BackcolorProperty, value);
             }
         }
-
-
 
         public ColorPicker()
         {
@@ -62,7 +59,7 @@ namespace PIMM.Extensions
             base.OnBindingContextChanged();
             PrepareWebViewColorPicker();
         }
-   
+
         private void PrepareWebViewColorPicker()
         {
             var bgcolor = (Color)Application.Current.Resources["backgroundColor"];
@@ -81,7 +78,7 @@ namespace PIMM.Extensions
             webView.Source = htmlSource;
         }
 
-        public async Task<string> GetValueFromPickerAsync(string controlId= "colorPicker")
+        public async Task<string> GetValueFromPickerAsync(string controlId = "colorPicker")
         {
             return await webView.EvaluateJavaScriptAsync($"document.getElementById('{controlId}').value;");
         }

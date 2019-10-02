@@ -7,17 +7,17 @@
              mc:Ignorable="d"
              x:Class="PIMM.AccountsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="plus.png" 
+        <ToolbarItem Icon="plus.png"
                      Text="New Transaction"
                      Command="{Binding NewAccountCommand}"
-                     Order="Primary"/>
+                     Order="Primary" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
 
             <SearchBar Margin="10"
-                        x:Name="SearchBar" 
-                        SearchCommand="{Binding SearchCommand}" 
+                        x:Name="SearchBar"
+                        SearchCommand="{Binding SearchCommand}"
                         SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
                 <SearchBar.Behaviors>
                     <fa:TextChangedBehavior />
@@ -27,7 +27,7 @@
             <ListView
                     x:Name="accountsListView"
                     CachingStrategy="RecycleElementAndDataTemplate"
-                    ItemsSource="{Binding Accounts}" 
+                    ItemsSource="{Binding Accounts}"
                     SelectedItem="{Binding SelectedAccount,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
@@ -44,32 +44,32 @@
                                 RowSpacing="2"
                                 ColumnSpacing="2">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="6*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="6*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0"
                                    Text="&#xf111;"
                                    FontFamily="{x:Static fa:FontAwesome.FontName}"
-                                   TextColor="{Binding Color}"/>
+                                   TextColor="{Binding Color}" />
                                 <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
                                    TextColor="{DynamicResource textColor}"
-                                   Text="{Binding Description}"/>
+                                   Text="{Binding Description}" />
                             </Grid>
                             <ViewCell.ContextActions>
-                                <MenuItem x:Name="DeleteCom" 
-                                          Text="Delete" 
-                                          IsDestructive="True" 
-                                          Command="{Binding Path=BindingContext.DeleteActionCommand, Source={x:Reference Name=accountsListView}}" 
-                                          CommandParameter="{Binding .}"  />
-                                <MenuItem x:Name="EditCom" 
-                                          Text="Edit" 
-                                          IsDestructive="False" 
-                                          Command="{Binding Path=BindingContext.EditActionCommand, Source={x:Reference Name=accountsListView}}" 
-                                          CommandParameter="{Binding .}"  />
+                                <MenuItem x:Name="DeleteCom"
+                                          Text="Delete"
+                                          IsDestructive="True"
+                                          Command="{Binding Path=BindingContext.DeleteActionCommand, Source={x:Reference Name=accountsListView}}"
+                                          CommandParameter="{Binding .}" />
+                                <MenuItem x:Name="EditCom"
+                                          Text="Edit"
+                                          IsDestructive="False"
+                                          Command="{Binding Path=BindingContext.EditActionCommand, Source={x:Reference Name=accountsListView}}"
+                                          CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
                         </ViewCell>
                     </DataTemplate>

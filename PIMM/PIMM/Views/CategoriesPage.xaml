@@ -7,37 +7,35 @@
              mc:Ignorable="d"
              x:Class="PIMM.CategoriesPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="plus.png" 
+        <ToolbarItem Icon="plus.png"
                      Text="New Transaction"
                      Command="{Binding NewCategoryCommand}"
-                     Order="Primary"/>
+                     Order="Primary" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
 
-            
             <Grid ColumnSpacing="0" Padding="10,10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="1"
                                 Command="{Binding IncomeSelectedCommand}"
-                                Text="Income" 
+                                Text="Income"
                                 BorderWidth="1"
                                 CornerRadius="0"
                                 BackgroundColor="{Binding IncomeBackgroundColor}"
                                 BorderColor="{DynamicResource IncomeColor}">
-                                
                 </Button>
                 <Button Grid.Row="0" Grid.Column="2"
                                 Command="{Binding ExpenseSelectedCommand}"
-                                Text="Expense" 
+                                Text="Expense"
                                 BorderWidth="1"
                                 CornerRadius="0"
                                 BackgroundColor="{Binding ExpenseBackgroundColor}"
@@ -45,19 +43,17 @@
                 </Button>
             </Grid>
 
-
-
             <Grid RowSpacing="4" Padding="10,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <SearchBar Grid.Row="0" Grid.Column="0"
-                           x:Name="SearchBar" 
-                           SearchCommand="{Binding SearchCommand}" 
+                           x:Name="SearchBar"
+                           SearchCommand="{Binding SearchCommand}"
                            SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
                     <SearchBar.Behaviors>
                         <fa:TextChangedBehavior />
@@ -65,11 +61,10 @@
                 </SearchBar>
             </Grid>
 
-
             <ListView
                     x:Name="categoriesListView"
                     CachingStrategy="RecycleElementAndDataTemplate"
-                    ItemsSource="{Binding Categories}" 
+                    ItemsSource="{Binding Categories}"
                     SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}"
@@ -85,39 +80,38 @@
                             RowSpacing="2"
                             ColumnSpacing="2">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="5*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0"
                                    FontSize="Large"
                                    Text="{Binding FontGlyph}"
                                    FontFamily="{Binding FontFamily}"
-                                   TextColor="{Binding Color}"/>
+                                   TextColor="{Binding Color}" />
                                 <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
                                    TextColor="{DynamicResource textColor}"
-                                   Text="{Binding Description}"/>
+                                   Text="{Binding Description}" />
                             </Grid>
                             <ViewCell.ContextActions>
-                                <MenuItem x:Name="DeleteCom" 
-                                          Text="Delete" 
-                                          IsDestructive="True" 
-                                          Command="{Binding Path=BindingContext.DeleteActionCommand, Source={x:Reference Name=categoriesListView}}" 
-                                          CommandParameter="{Binding .}"  />
-                                <MenuItem x:Name="EditCom" 
-                                          Text="Edit" 
-                                          IsDestructive="False" 
-                                          Command="{Binding Path=BindingContext.EditActionCommand, Source={x:Reference Name=categoriesListView}}" 
-                                          CommandParameter="{Binding .}"  />
+                                <MenuItem x:Name="DeleteCom"
+                                          Text="Delete"
+                                          IsDestructive="True"
+                                          Command="{Binding Path=BindingContext.DeleteActionCommand, Source={x:Reference Name=categoriesListView}}"
+                                          CommandParameter="{Binding .}" />
+                                <MenuItem x:Name="EditCom"
+                                          Text="Edit"
+                                          IsDestructive="False"
+                                          Command="{Binding Path=BindingContext.EditActionCommand, Source={x:Reference Name=categoriesListView}}"
+                                          CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

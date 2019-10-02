@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PIMM.ViewModels
+﻿namespace PIMM.ViewModels
 {
     public class AccountDto
     {

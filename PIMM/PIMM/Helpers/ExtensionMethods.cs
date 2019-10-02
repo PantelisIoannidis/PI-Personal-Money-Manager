@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PIMM.Helpers
 {
@@ -31,6 +29,5 @@ namespace PIMM.Helpers
         {
             return String.Format("{0:C}", (decimal)amount);
         }
-
     }
 }

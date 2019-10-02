@@ -9,38 +9,37 @@
              x:Class="PIMM.Views.TransactionsDetails.TransactionsDetailsAccounts">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Spacing="20">
-            <Label Text="Choose an account"/>
+            <Label Text="Choose an account" />
             <ListView
                     x:Name="accountsListView"
-                    ItemsSource="{Binding AccountsList}" 
+                    ItemsSource="{Binding AccountsList}"
                     BackgroundColor="{DynamicResource backgroundColor}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0"
                                    HorizontalTextAlignment="End"
                                    FontSize="Large"
                                    Text="&#xf111;"
                                    FontFamily="{x:Static fa:FontAwesome.FontName}}"
-                                   TextColor="{Binding Color}"/>
+                                   TextColor="{Binding Color}" />
                                 <Label Grid.Column="1" Grid.Row="0"
                                    HorizontalTextAlignment="Start"
                                    TextColor="{DynamicResource textColor}"
-                                   Text="{Binding Description}"/>
+                                   Text="{Binding Description}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>

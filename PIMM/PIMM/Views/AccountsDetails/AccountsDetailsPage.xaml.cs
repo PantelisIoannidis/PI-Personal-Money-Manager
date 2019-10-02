@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PIMM.Persistance;
+﻿using PIMM.Persistance;
 using PIMM.ViewModels;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,13 +33,12 @@ namespace PIMM.Views.AccountsDetails
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
             string color;
-            myWebView.GetValueFromPickerAsync().ContinueWith( r=> {
+            myWebView.GetValueFromPickerAsync().ContinueWith(r =>
+            {
                 color = r.Result;
                 vm.Color = color;
-                MessagingCenter.Send(this, "UpdateAccount",vm);
-            },TaskScheduler.FromCurrentSynchronizationContext());
-
+                MessagingCenter.Send(this, "UpdateAccount", vm);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
-
     }
 }

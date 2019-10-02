@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -33,7 +31,6 @@ namespace PIMM.ViewModels
             set { fontIcons = value; OnPropertyChanged(nameof(FontIcons)); }
         }
 
-
         public FontIconViewModel(IPageService pageService, IRepository repository, List<FontIcon> fonts)
         {
             this.filter = (x) => { return true; };
@@ -48,9 +45,8 @@ namespace PIMM.ViewModels
         private void SelectedFont(object fonticon)
         {
             SelectedIcon = (fonticon as FontIcon);
-             
-            MessagingCenter.Send<FontIconViewModel,FontIcon>(this, "UpdateIcon", SelectedIcon);
 
+            MessagingCenter.Send<FontIconViewModel, FontIcon>(this, "UpdateIcon", SelectedIcon);
         }
 
         private void Search(string s)
@@ -61,7 +57,8 @@ namespace PIMM.ViewModels
             }
             else
             {
-                this.filter = (x) => {
+                this.filter = (x) =>
+                {
                     return (x.Description.ToLower().Contains(s.ToLower()));
                 };
             }

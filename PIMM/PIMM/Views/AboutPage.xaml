@@ -8,8 +8,11 @@
              x:Class="PIMM.Views.AboutPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text=" About "
-                VerticalOptions="CenterAndExpand" 
+            <Label Text=" PI Personal Money Tracker " FontSize="Large"
+                VerticalOptions="Center"
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text=" Copyright 2019 Pantelis Ioannidis " FontSize="Large"
+                VerticalOptions="Center"
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>

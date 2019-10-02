@@ -11,8 +11,8 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <SearchBar Margin="10"
-                           x:Name="SearchBar" 
-                           SearchCommand="{Binding SearchCommand}" 
+                           x:Name="SearchBar"
+                           SearchCommand="{Binding SearchCommand}"
                            SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
                 <SearchBar.Behaviors>
                     <fa:TextChangedBehavior />
@@ -35,11 +35,11 @@
                             <Label Grid.Row="0" Grid.Column="0"
                                 BackgroundColor="{DynamicResource controlBackgroundColor}"
                                 MinimumHeightRequest="140" MinimumWidthRequest="140"
-                                Text="{Binding Glyph}"  
+                                Text="{Binding Glyph}"
                                 FontSize="Large"
                                 TextColor="{DynamicResource controlTextColor}"
                                 FontFamily="{Binding FontFamily}"
-                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                         </Grid>
                     </DataTemplate>
                 </flv:FlowListView.FlowColumnTemplate>

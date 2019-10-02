@@ -11,26 +11,25 @@
              BarTextColor="{DynamicResource textColor}"
              Title="Personal Money Tracker"
              x:Class="PIMM.MainPage">
-    
+
     <TabbedPage.ToolbarItems>
         <ToolbarItem x:Name="settingsMenu"
-                     Icon="tools.png" 
+                     Icon="tools.png"
                      Text="Settings"
                      Command="{Binding GoToSettingsPageCommand}"
-                     Order="Secondary"/>
+                     Order="Secondary" />
         <ToolbarItem x:Name="aboutMenu"
-                     Icon="eye.png" 
+                     Icon="eye.png"
                      Text="About"
                      Command="{Binding GoToAboutPageCommand}"
-                     Order="Secondary"/>
+                     Order="Secondary" />
     </TabbedPage.ToolbarItems>
 
     <local:HomePage Title="Overview" ClassId="Overview - Charts"  IconImageSource="chartpie.png" x:Name="overview" BackgroundColor="{DynamicResource backgroundColor}" />
 
-    <local:TransactionsPage Title="Transactions" ClassId="Transactions" IconImageSource="dollarsign.png" x:Name="transactions" BackgroundColor="{DynamicResource backgroundColor}"/>
+    <local:TransactionsPage Title="Transactions" ClassId="Transactions" IconImageSource="dollarsign.png" x:Name="transactions" BackgroundColor="{DynamicResource backgroundColor}" />
 
-    <local:CategoriesPage Title="Categories" ClassId="Categories" IconImageSource="tag.png" x:Name="categories" BackgroundColor="{DynamicResource backgroundColor}"/>
+    <local:CategoriesPage Title="Categories" ClassId="Categories" IconImageSource="tag.png" x:Name="categories" BackgroundColor="{DynamicResource backgroundColor}" />
 
-    <local:AccountsPage Title="Accounts" ClassId="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts" BackgroundColor="{DynamicResource backgroundColor}"/>
-
+    <local:AccountsPage Title="Accounts" ClassId="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts" BackgroundColor="{DynamicResource backgroundColor}" />
 </TabbedPage>

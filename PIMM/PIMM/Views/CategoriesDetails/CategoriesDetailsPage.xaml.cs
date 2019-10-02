@@ -1,10 +1,6 @@
-﻿using PIMM.Helpers;
-using PIMM.Persistance;
+﻿using PIMM.Persistance;
 using PIMM.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -18,12 +14,18 @@ namespace PIMM.Views.CategoriesDetails
         private IPageService pageService;
         private IRepository repository;
         private CategoryDetailsViewModel detailsVM;
+
         public CategoriesDetailsPage(IPageService pageService, IRepository repository, CategoryDto category)
         {
             InitializeComponent();
 
             this.pageService = pageService;
             this.repository = repository;
+            detailsVM = new CategoryDetailsViewModel(pageService, repository, category);
+        }
+
+        public void SetCategoryDetailsViewModel(CategoryDto category)
+        {
             if (category.Id <= 0)
             {
                 var temp_category = repository.GetFirstCategory(category.Type);
@@ -31,8 +33,7 @@ namespace PIMM.Views.CategoriesDetails
                 category.FontGlyph = temp_category.FontGlyph;
                 category.FontFamily = temp_category.FontFamily;
             }
-            detailsVM = new CategoryDetailsViewModel(pageService, repository, category);
-
+            detailsVM.Category = category;
 
             BindingContext = detailsVM;
         }
@@ -40,7 +41,8 @@ namespace PIMM.Views.CategoriesDetails
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
             string color;
-            myWebView.GetValueFromPickerAsync().ContinueWith(r => {
+            myWebView.GetValueFromPickerAsync().ContinueWith(r =>
+            {
                 color = r.Result;
                 detailsVM.Category.Color = color;
                 //detailsVM.Unsubscribe();

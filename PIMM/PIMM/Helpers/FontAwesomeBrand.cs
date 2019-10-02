@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PIMM.Helpers
+﻿namespace PIMM.Helpers
 {
     public static class FontAwesomeBrand
     {
@@ -340,7 +336,5 @@ namespace PIMM.Helpers
         //public static string Yoast = $"\uf2b1";
         //public static string Youtube = $"\uf167";
         //public static string Youtubesquare = $"\uf431";
-
-
     }
 }

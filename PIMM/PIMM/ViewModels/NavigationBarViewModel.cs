@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -17,9 +16,9 @@ namespace PIMM.ViewModels
     {
         private Func<TransactionDto, bool> filter;
         private List<TransactionDto> transactions;
-         private readonly IPageService _pageService;
+        private readonly IPageService _pageService;
         private readonly IRepository _repository;
-        Period period = (Application.Current as App).CurrentPeriod;
+        private Period period = (Application.Current as App).CurrentPeriod;
         private bool isSearchVisible;
         private bool isSetDateVisible;
 
@@ -68,10 +67,12 @@ namespace PIMM.ViewModels
                     : ((Color)App.Current.Resources["controlBackgroundColor"]).GetHexString();
             }
         }
+
         public bool IsSetDateVisible
         {
             get { return isSetDateVisible; }
-            set {
+            set
+            {
                 isSetDateVisible = value;
                 OnPropertyChanged(nameof(IsSetDateVisible));
                 OnPropertyChanged(nameof(SetDateVisibleBackgroundColor));
@@ -88,7 +89,6 @@ namespace PIMM.ViewModels
                 OnPropertyChanged(nameof(SearchVisibleBackgroundColor));
             }
         }
-
 
         public List<TransactionDto> Transactions
         {
@@ -174,14 +174,14 @@ namespace PIMM.ViewModels
             }
             else
             {
-                this.filter = (x) => {
+                this.filter = (x) =>
+                {
                     return ((x.Description.ToLower().Contains(s.ToLower()))
                     || (x.CategoryDescription.ToLower().Contains(s.ToLower())));
                 };
             }
             OnPropertyChanged(nameof(Transactions));
         }
-
 
         private void ResetTimePeriod(object obj)
         {
@@ -211,15 +211,19 @@ namespace PIMM.ViewModels
                 case "Day":
                     DisplayPeriod.ChooseNewPeriod(PeriodType.Day);
                     break;
+
                 case "Week":
                     DisplayPeriod.ChooseNewPeriod(PeriodType.Week);
                     break;
+
                 case "Month":
                     DisplayPeriod.ChooseNewPeriod(PeriodType.Month);
                     break;
+
                 case "Year":
                     DisplayPeriod.ChooseNewPeriod(PeriodType.Year);
                     break;
+
                 case "All":
                     DisplayPeriod.ChooseNewPeriod(PeriodType.All);
                     break;

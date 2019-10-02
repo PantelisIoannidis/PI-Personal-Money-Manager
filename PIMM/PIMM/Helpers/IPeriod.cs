@@ -15,9 +15,13 @@ namespace PIMM.Helpers
         event PropertyChangedEventHandler PropertyChanged;
 
         void ChooseNewPeriod(PeriodType type = PeriodType.Month);
+
         void Init(DateTime current, PeriodType type = PeriodType.Month, CultureInfo currentCulture = null);
+
         void MoveToNext();
+
         void MoveToPrevious();
+
         void ResetSelectedDate(DateTime date);
     }
 }

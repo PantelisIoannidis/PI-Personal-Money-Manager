@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using PIMM.Helpers;
 using PIMM.Models.ViewModels;
 using PIMM.Persistance;
 using PIMM.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,10 +16,10 @@ namespace PIMM.Views.TransactionDetails
         private UpdateTransactionDto newTransVM;
         private readonly TransactionsDetailsViewModel transDetailVM;
 
-        public TransactionDetailsPage(IPageService pageService,IRepository repository, TransactionDto transaction)
+        public TransactionDetailsPage(IPageService pageService, IRepository repository, TransactionDto transaction)
         {
             InitializeComponent();
-            
+
             this.pageService = pageService;
             this.repository = repository;
 
@@ -36,8 +30,7 @@ namespace PIMM.Views.TransactionDetails
 
         private void prepareViewModel(TransactionDto vm)
         {
-
-            this.newTransVM = Mapper.Map<TransactionDto,UpdateTransactionDto>(vm);
+            this.newTransVM = Mapper.Map<TransactionDto, UpdateTransactionDto>(vm);
             newTransVM = repository.PopulateTransactionWithConnectedLists(newTransVM);
             if (newTransVM.CategoryId == 0)
                 newTransVM.CategoryId = newTransVM.CurrentCategory.Id;

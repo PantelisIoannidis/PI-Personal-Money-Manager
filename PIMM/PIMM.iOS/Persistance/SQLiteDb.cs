@@ -1,13 +1,10 @@
-﻿using System;
-using System.IO;
-using SQLite;
-using Xamarin.Forms;
-
-using Foundation;
-using UIKit;
+﻿using PIMM.Helpers;
 using PIMM.iOS.Persistance;
 using PIMM.Persistance;
-using PIMM.Helpers;
+using SQLite;
+using System;
+using System.IO;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SQLiteDb))]
 
@@ -32,6 +29,5 @@ namespace PIMM.iOS.Persistance
 
             return path;
         }
-
     }
 }

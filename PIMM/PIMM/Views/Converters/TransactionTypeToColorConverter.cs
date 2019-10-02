@@ -1,9 +1,7 @@
 ﻿using PIMM.Models;
 using PIMM.Models.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace PIMM.Views.Converters
@@ -19,23 +17,26 @@ namespace PIMM.Views.Converters
 
             var type = (value as TransactionDto).Type;
 
-
             switch (type)
             {
                 case TransactionType.Income:
                     color = (Color)Application.Current.Resources["IncomeColor"];
                     break;
+
                 case TransactionType.Expense:
                     color = (Color)Application.Current.Resources["ExpenseColor"];
                     break;
+
                 case TransactionType.Transfer:
                     color = (Color)Application.Current.Resources["TransferColor"];
                     break;
+
                 case TransactionType.Adjustment:
                     color = (Color)Application.Current.Resources["AdjustmentColor"];
                     break;
+
                 default:
-                    color = (Color)Application.Current.Resources["textColor"]; 
+                    color = (Color)Application.Current.Resources["textColor"];
                     break;
             }
 

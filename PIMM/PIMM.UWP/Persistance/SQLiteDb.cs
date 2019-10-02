@@ -1,12 +1,10 @@
-﻿using System;
-using System.IO;
-using SQLite;
-using Xamarin.Forms;
-using Windows.Storage;
-using PIMM.UWP;
-using PIMM.UWP.Persistance;
+﻿using PIMM.Helpers;
 using PIMM.Persistance;
-using PIMM.Helpers;
+using PIMM.UWP.Persistance;
+using SQLite;
+using System.IO;
+using Windows.Storage;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SQLiteDb))]
 
@@ -30,6 +28,5 @@ namespace PIMM.UWP.Persistance
             var path = Path.Combine(documentsPath, DatabaseConsts.DatabaseName);
             return path;
         }
-
     }
 }

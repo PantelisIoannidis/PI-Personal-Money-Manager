@@ -3,14 +3,9 @@ using PIMM.Helpers;
 using PIMM.Models;
 using PIMM.Models.ViewModels;
 using PIMM.Persistance;
-using PIMM.ViewModels;
-using PIMM.Views;
 using PIMM.Views.TransactionDetails;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -24,7 +19,7 @@ namespace PIMM.ViewModels
         private bool isRefreshing;
         private readonly IPageService pageService;
         private readonly IRepository repository;
-        Period period = (Application.Current as App).CurrentPeriod;
+        private Period period = (Application.Current as App).CurrentPeriod;
 
         public ICommand RefreshCommand { get; set; }
         public ICommand SelectTransactionCommand { get; set; }
@@ -33,16 +28,12 @@ namespace PIMM.ViewModels
         public ICommand EditActionCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
-
-
-
-
-
-  
         public TransactionDto SelectedTransaction
         {
-            get {
-                return selectedTransaction; }
+            get
+            {
+                return selectedTransaction;
+            }
             set
             {
                 selectedTransaction = value;
@@ -64,7 +55,7 @@ namespace PIMM.ViewModels
             set { navigationBar = value; OnPropertyChanged(nameof(NavigationBar)); }
         }
 
-        public TransactionsViewModel(NavigationBarViewModel navigationBarViewModel, IPageService pageService,IRepository repository,IPeriod period)
+        public TransactionsViewModel(NavigationBarViewModel navigationBarViewModel, IPageService pageService, IRepository repository, IPeriod period)
         {
             NavigationBar = navigationBarViewModel;
             this.filter = (x) => { return true; };
@@ -73,21 +64,15 @@ namespace PIMM.ViewModels
             RefreshCommand = new Command(CmdRefresh);
             SelectTransactionCommand = new Command<TransactionDto>(async vm => await SelectTransaction(vm));
             NewTransactionCommand = new Command(async vm => await NewTransaction());
-            
+
             DeleteActionCommand = new Command<TransactionDto>(async vm => await DeleteAction(vm));
             EditActionCommand = new Command<TransactionDto>(async vm => await EditAction(vm));
-
         }
-
-
-
-
 
         private async Task NewTransaction()
         {
             var vm = new TransactionDto()
             {
-                
                 Type = TransactionType.Expense,
                 TransactionDate = DateTime.Now,
             };
@@ -102,16 +87,13 @@ namespace PIMM.ViewModels
         private async Task DeleteAction(TransactionDto vm)
         {
             var deleteConfirmation = await pageService.DisplayAlert("Delete transaction", "Are you sure?", "Yes", "No");
-            var transactions = Mapper.Map<TransactionDto,Transaction>(vm);
+            var transactions = Mapper.Map<TransactionDto, Transaction>(vm);
             if (deleteConfirmation)
             {
                 repository.DeleteTransaction(transactions);
                 MessagingCenter.Send(this, "DeleteTransactions");
             }
-                
         }
-
-       
 
         private async Task SelectTransaction(TransactionDto transaction)
         {
@@ -125,7 +107,6 @@ namespace PIMM.ViewModels
             IsRefreshing = false;
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string property)
@@ -133,6 +114,5 @@ namespace PIMM.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-
     }
 }

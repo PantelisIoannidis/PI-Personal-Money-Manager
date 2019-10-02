@@ -1,12 +1,7 @@
 ﻿using PIMM.Models;
-using PIMM.Models.ViewModels;
 using PIMM.Persistance;
 using PIMM.Views.TransactionsDetails;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -26,15 +21,19 @@ namespace PIMM.ViewModels
         public ICommand ExpenseSelectedCommand { get; set; }
         public ICommand SelectedAccountCommand { get; set; }
         public ICommand SelectedCategoryCommand { get; set; }
-        
 
-        public UpdateTransactionDto TransVM { get {
+        public UpdateTransactionDto TransVM
+        {
+            get
+            {
                 return transVM;
-                }
-            set {
+            }
+            set
+            {
                 transVM = value;
                 OnPropertyChanged(nameof(TransVM));
-            } }
+            }
+        }
 
         public TransactionsDetailsViewModel(IPageService pageService, IRepository repository, UpdateTransactionDto transactionDto)
         {
@@ -48,9 +47,6 @@ namespace PIMM.ViewModels
             SelectedAccountCommand = new Command(async x => await SelectedAccount());
             SelectedCategoryCommand = new Command(async x => await SelectedCategory());
         }
-
-
-
 
         private async Task SelectedCategory()
         {
@@ -103,6 +99,5 @@ namespace PIMM.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-
     }
 }

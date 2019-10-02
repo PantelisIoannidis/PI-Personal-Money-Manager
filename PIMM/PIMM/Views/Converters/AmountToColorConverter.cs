@@ -1,8 +1,5 @@
-﻿using PIMM.Models.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace PIMM.Views.Converters
@@ -26,7 +23,6 @@ namespace PIMM.Views.Converters
                 return (Color)Application.Current.Resources["amountPositiveColor"];
 
             return (Color)Application.Current.Resources["amountZeroColor"];
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

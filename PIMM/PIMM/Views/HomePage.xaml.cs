@@ -1,11 +1,6 @@
 ﻿using Microcharts;
 using PIMM.Helpers;
 using PIMM.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -61,12 +56,10 @@ namespace PIMM
             UpdateCharts(null);
         }
 
-  
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
             UpdateLayout();
-
         }
 
         private void UpdateLayout()
@@ -88,7 +81,6 @@ namespace PIMM
             }
             ChartWidth = (int)((width / density) / ChartsPerRow);
         }
-
 
         public ChartsViewModel ViewModel
         {

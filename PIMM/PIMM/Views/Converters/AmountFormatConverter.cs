@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace PIMM.Views.Converters
@@ -23,7 +21,7 @@ namespace PIMM.Views.Converters
             decimal amount = 0m;
             NumberStyles style = NumberStyles.AllowCurrencySymbol | NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint;
             CultureInfo culrure = CultureInfo.CurrentCulture;
-            decimal.TryParse((string)value, style,culrure, out amount);
+            decimal.TryParse((string)value, style, culrure, out amount);
 
             return amount;
         }

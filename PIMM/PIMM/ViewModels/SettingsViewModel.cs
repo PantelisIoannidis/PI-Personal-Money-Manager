@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PIMM.Persistance;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using PIMM.Persistance;
 using Xamarin.Forms;
 
 namespace PIMM.ViewModels
@@ -33,7 +30,6 @@ namespace PIMM.ViewModels
                 MessagingCenter.Send(this, "UpdateTransactionsAfterReset");
                 await pageService.PopAsync();
             }
-
         }
     }
 }

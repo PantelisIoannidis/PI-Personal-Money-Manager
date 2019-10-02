@@ -1,8 +1,4 @@
-﻿using PIMM.Models.ViewModels;
-using PIMM.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using Xamarin.Forms;
 
 namespace PIMM.Models.ViewModels
@@ -25,36 +21,36 @@ namespace PIMM.Models.ViewModels
         public string AccountColor { get; set; }
 
         public string FormattedAmount
-        { get
+        {
+            get
             {
                 return String.Format("{0:C}", (decimal)Amount);
-            } }
+            }
+        }
 
         public Color FormattedColorAmount
         {
             get
             {
+                if (Type == TransactionType.Income)
+                    return (Color)Application.Current.Resources["IncomeColor"];
+                if (Type == TransactionType.Expense)
+                    return (Color)Application.Current.Resources["ExpenseColor"];
+                if (Type == TransactionType.Transfer)
+                    return (Color)Application.Current.Resources["TransferColor"];
+                if (Type == TransactionType.Adjustment)
+                    return (Color)Application.Current.Resources["AdjustmentColor"];
 
-                    if(Type== TransactionType.Income)
-                        return (Color)Application.Current.Resources["IncomeColor"];
-                    if (Type == TransactionType.Expense)
-                        return (Color)Application.Current.Resources["ExpenseColor"];
-                    if (Type == TransactionType.Transfer)
-                        return (Color)Application.Current.Resources["TransferColor"];
-                    if (Type == TransactionType.Adjustment)
-                        return (Color)Application.Current.Resources["AdjustmentColor"];
-
-                    return (Color)Application.Current.Resources["textColor"];
-
+                return (Color)Application.Current.Resources["textColor"];
             }
         }
 
-        public string FormattedDate { get
+        public string FormattedDate
+        {
+            get
             {
                 return String.Format("{0:d}", TransactionDate);
-            } }
-
-       
-
+            }
+        }
     }
 }

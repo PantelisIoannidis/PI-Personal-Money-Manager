@@ -1,7 +1,4 @@
 ﻿using PIMM.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PIMM.ViewModels
 {
@@ -16,6 +13,5 @@ namespace PIMM.ViewModels
         public string FontDescription { get; set; }
         public string FontGlyph { get; set; }
         public string FontFamily { get; set; }
-
     }
 }

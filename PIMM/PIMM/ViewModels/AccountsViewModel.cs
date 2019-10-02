@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
-using PIMM.Helpers;
 using PIMM.Models;
 using PIMM.Persistance;
-using PIMM.ViewModels;
 using PIMM.Views.AccountsDetails;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -46,14 +43,15 @@ namespace PIMM.ViewModels
             NewAccountCommand = new Command<AccountDto>(async vm => await NewAction());
             SearchCommand = new Command<string>(s => Search(s));
             MessagingCenter.Unsubscribe<AccountsDetailsPage, AccountDto>(this, "UpdateAccount");
-            MessagingCenter.Subscribe<AccountsDetailsPage,AccountDto>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });
+            MessagingCenter.Subscribe<AccountsDetailsPage, AccountDto>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });
         }
 
         private async Task NewAction()
         {
-            var vm = new AccountDto() {
+            var vm = new AccountDto()
+            {
                 Color = "#ffffff",
-                Description="Default Account"
+                Description = "Default Account"
             };
             await _pageService.PushAsync(new AccountsDetailsPage(_pageService, _repository, vm));
         }
@@ -76,16 +74,18 @@ namespace PIMM.ViewModels
             var account = Mapper.Map<AccountDto, Account>(vm);
             if (deleteConfirmation)
             {
-                var status =_repository.DeleteAccount(account);
+                var status = _repository.DeleteAccount(account);
                 if (status != "OK")
                 {
                     await _pageService.DisplayAlert("Erase canceled", status, "OK");
                 }
-                else { 
+                else
+                {
                     MessagingCenter.Send(this, "DeleteAccounts");
                 }
             }
         }
+
         public bool IsRefreshing
         {
             get { return isRefreshing; }
@@ -126,7 +126,8 @@ namespace PIMM.ViewModels
             }
             else
             {
-                this.filter = (x) => {
+                this.filter = (x) =>
+                {
                     return (x.Description.ToLower().Contains(s.ToLower()));
                 };
             }

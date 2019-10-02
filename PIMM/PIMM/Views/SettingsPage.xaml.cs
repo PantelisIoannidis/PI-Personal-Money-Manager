@@ -2,9 +2,6 @@
 using PIMM.Persistance;
 using PIMM.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -40,7 +37,7 @@ namespace PIMM
 
             if (theme == Themes.Blue)
                 app.SetBlueTheme();
-               
+
             if (theme == Themes.Dark)
                 app.SetDarkTheme();
 
@@ -60,6 +57,5 @@ namespace PIMM
             MessagingCenter.Send(this, "UpdateTransactionsAfterSettingsChange");
             await pageService.PopAsync();
         }
-
     }
 }

@@ -5,11 +5,8 @@ using PIMM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PIMM
 {
@@ -20,20 +17,20 @@ namespace PIMM
     {
         public MainPageViewModel MainVM { set; get; }
 
-        List<TransactionDto> trans;
-        NavigationBarViewModel navigationBarViewModel;
-        TransactionsViewModel transactionsViewModel;
-        ChartsViewModel charts;
-        Repository repository;
-        PageService pageService;
-        InitializeDatabase initializeDatabase;
-        Period period;
+        private readonly List<TransactionDto> trans;
+        private NavigationBarViewModel navigationBarViewModel;
+        private TransactionsViewModel transactionsViewModel;
+        private ChartsViewModel charts;
+        private Repository repository;
+        private PageService pageService;
+        private InitializeDatabase initializeDatabase;
+        private Period period;
+
         public MainPage()
         {
-
             LoadTheme();
 
-            InitializeComponent();          
+            InitializeComponent();
 
             repository = new Repository();
             period = new Period();
@@ -51,8 +48,6 @@ namespace PIMM
             overview.BindingContext = charts;
             transactions.BindingContext = transactionsViewModel;
 
-            
-
             MessagingCenter.Subscribe<NavigationBarViewModel>(this, "UpdatePeriod", RefreshTransactions);
             MessagingCenter.Subscribe<SettingsPage>(this, "UpdateTransactionsAfterSettingsChange", RefreshTransactions);
             MessagingCenter.Subscribe<SettingsViewModel>(this, "UpdateTransactionsAfterReset", RefreshTransactions);
@@ -65,9 +60,13 @@ namespace PIMM
         {
             base.OnCurrentPageChanged();
             string currentPageName = CurrentPage.ClassId;
-            //CurrentPage.Title = ClassId;
+            //if (Device.RuntimePlatform == Device.Android)
+            //    CurrentPage.Title = "";
+            //else
+            //    CurrentPage.Title = currentPageName;
             this.Title = currentPageName;
         }
+
         private void LoadTheme()
         {
             var app = (Application.Current as App);
@@ -81,13 +80,13 @@ namespace PIMM
 
             if (theme == Themes.Dark)
                 app.SetDarkTheme();
-            else if(theme == Themes.Light)
+            else if (theme == Themes.Light)
                 app.SetLightTheme();
-            else if(theme == Themes.Blue)
+            else if (theme == Themes.Blue)
                 app.SetBlueTheme();
             else
 
-            app.SetNavigationBarColor();
+                app.SetNavigationBarColor();
         }
 
         protected override void OnAppearing()
@@ -97,7 +96,6 @@ namespace PIMM
             // Create and Seed Database if there is none.
             InitializeDatabase();
         }
-
 
         private async Task InitializeDatabase()
         {
@@ -128,6 +126,5 @@ namespace PIMM
             get { return BindingContext as MainPageViewModel; }
             set { BindingContext = value; }
         }
-
     }
 }

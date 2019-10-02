@@ -1,14 +1,12 @@
 ﻿using PIMM.Helpers;
+using PIMM.Models;
+using PIMM.ViewModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System.Linq;
-using PIMM.Models;
-using PIMM.ViewModels;
 
 namespace PIMM.Persistance
 {
@@ -17,6 +15,7 @@ namespace PIMM.Persistance
         private SQLiteConnection db;
         private List<FontIcon> fontList = new List<FontIcon>();
         private IPageService pageService;
+
         public InitializeDatabase(IPageService pageService)
         {
             this.pageService = pageService;
@@ -45,7 +44,6 @@ namespace PIMM.Persistance
                 PrepareIcons();
             }
         }
-
 
         private void CreateTables()
         {
@@ -93,9 +91,9 @@ namespace PIMM.Persistance
                     "#540000","#541600","#543900","#4a5400","#235400","#085400","#00540f","#00542b",
                     "#005054","#003254","#260054","#320054","#4d0054","#8a8411","#54003c","#540016" };
             var app = (Application.Current as App);
-            if(app.Properties.ContainsKey(Themes.ThemeKey))
-                if(app.Properties[Themes.ThemeKey].ToString()!= Themes.Light)
-                 randomColors = new string[] {
+            if (app.Properties.ContainsKey(Themes.ThemeKey))
+                if (app.Properties[Themes.ThemeKey].ToString() != Themes.Light)
+                    randomColors = new string[] {
                     "#22db0d","#dbc70d",
                     "#db100d","#db630d","#dbab0d","#bcdb0d","#6ddb0d","#0ddb8f","#0dd1db","#0d85db",
                     "#0d36db","#5c0ddb","#ab0ddb","#db0db2","#db0d7b","#db0d47","#db0d0d","#db3a0d"
@@ -210,8 +208,6 @@ namespace PIMM.Persistance
             AddTransaction("Pets", 120m, 0);
             AddTransaction("Sports", 40m, 0);
             AddTransaction("Travel", 30m, 0);
-
-
         }
 
         private void AddTransaction(string categoryName, decimal amount, int accountNo, DateTime? dt = null)
@@ -232,7 +228,5 @@ namespace PIMM.Persistance
             };
             db.Insert(transaction);
         }
-
-
     }
 }

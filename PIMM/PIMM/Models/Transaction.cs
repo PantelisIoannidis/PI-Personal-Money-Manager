@@ -1,7 +1,5 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PIMM.Models
 {
@@ -9,6 +7,7 @@ namespace PIMM.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
         public int AccountId { get; set; }
         public int CategoryId { get; set; }
         public TransactionType Type { get; set; }

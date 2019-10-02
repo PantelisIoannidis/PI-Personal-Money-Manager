@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using SQLite;
-using Xamarin.Forms;
-using PIMM.Droid.Persistance;
+﻿using PIMM.Droid.Persistance;
 using PIMM.Helpers;
 using PIMM.Persistance;
+using SQLite;
+using System;
+using System.IO;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SQLiteDb))]
 
@@ -29,6 +29,5 @@ namespace PIMM.Droid.Persistance
 
             return path;
         }
-
     }
 }

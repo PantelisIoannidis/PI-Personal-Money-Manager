@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PIMM.Helpers
+﻿namespace PIMM.Helpers
 {
     public static class FontAwesomeSolid
     {
-
         //public static string Inline(this string str)
         //{
         //    return str.Replace(@"\u", @"&#x") + ";";
@@ -41,13 +36,12 @@ namespace PIMM.Helpers
         public static string HandHoldingUsd = $"\uf4c0";
         public static string Tint = $"\uf043";
 
-
         //public static string Swimmer = $"\uf5c4";
 
         //public static string Addressbook = $"\uf2b9";
         //public static string Car = $"\uf1b9";
         //public static string Addresscard = $"\uf2bb";
-        
+
         //public static string Aligncenter = $"\uf037";
         //public static string Alignjustify = $"\uf039";
         //public static string Alignleft = $"\uf036";
@@ -275,7 +269,7 @@ namespace PIMM.Helpers
         //public static string Heartbeat = $"\uf21e";
         //public static string History = $"\uf1da";
         //public static string Hockeypuck = $"\uf453";
-        
+
         //public static string Hospital = $"\uf0f8";
         //public static string Hospitalsymbol = $"\uf47e";
         //public static string Hourglass = $"\uf254";
@@ -413,8 +407,7 @@ namespace PIMM.Helpers
         //public static string Ship = $"\uf21a";
         //public static string Shippingfast = $"\uf48b";
         //public static string Shoppingbag = $"\uf290";
-        
-        
+
         //public static string Shower = $"\uf2cc";
         //public static string Signinalt = $"\uf2f6";
         //public static string Signlanguage = $"\uf2a7";
@@ -532,6 +525,5 @@ namespace PIMM.Helpers
         //public static string Wonsign = $"\uf159";
         //public static string Wrench = $"\uf0ad";
         //public static string Yensign = $"\uf157";
-
     }
 }

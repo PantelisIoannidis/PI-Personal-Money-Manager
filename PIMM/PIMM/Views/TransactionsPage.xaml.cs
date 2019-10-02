@@ -1,15 +1,4 @@
-﻿using PIMM.Helpers;
-using PIMM.Models;
-using PIMM.Models.ViewModels;
-using PIMM.Persistance;
-using PIMM.ViewModels;
-using PIMM.Views.TransactionDetails;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PIMM.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,9 +14,7 @@ namespace PIMM
         public TransactionsPage()
         {
             InitializeComponent();
-
         }
-
 
         //protected override void OnSizeAllocated(double width, double height)
         //{
@@ -59,11 +46,11 @@ namespace PIMM
         {
             ViewModel.SelectTransactionCommand.Execute(e.SelectedItem);
         }
+
         public TransactionsViewModel ViewModel
         {
             get { return BindingContext as TransactionsViewModel; }
             set { BindingContext = value; }
         }
-
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Text;
 
 namespace PIMM.Helpers
 {
     public enum PeriodType
     {
-        Day =0,
+        Day = 0,
         Week = 1,
         Month = 2,
         Year = 3,
@@ -19,6 +17,7 @@ namespace PIMM.Helpers
     {
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
+
         /// <summary>
         /// SelectedDate is the first day of the week of the selected period(year,month,week)
         /// </summary>
@@ -69,46 +68,53 @@ namespace PIMM.Helpers
                     case PeriodType.Day:
                         description = $"{SelectedDate.ToString("d")}";
                         break;
+
                     case PeriodType.Week:
                         description = $"{FromDate.ToString("dd")} - {ToDate.ToString("dd")}  {SelectedDate.ToString("MMM")}";
                         break;
+
                     case PeriodType.Month:
                         description = $"{SelectedDate.ToString("MMMM")} {SelectedDate.Year}";
                         break;
+
                     case PeriodType.Year:
                         description = $"{SelectedDate.Year}";
                         break;
+
                     case PeriodType.All:
-                        description = $"Until Now";
+                        description = $"All";
                         break;
                 }
                 return description; //▼
             }
         }
 
-
         private void CalculateDates()
         {
             //if(Type!=PeriodType.Day)
-             //   SelectedDate = FirstDayOfTheWeek(SelectedDate);
+            //   SelectedDate = FirstDayOfTheWeek(SelectedDate);
             switch (Type)
             {
                 case PeriodType.Day:
                     FromDate = SelectedDate;
                     ToDate = SelectedDate;
                     break;
+
                 case PeriodType.Week:
                     FromDate = FirstDayOfTheWeek(SelectedDate);
                     ToDate = LastDayOfTheWeek(SelectedDate);
                     break;
+
                 case PeriodType.Month:
                     FromDate = FirstDayOfTheMonth(SelectedDate);
                     ToDate = LastDayOfTheMonth(SelectedDate);
                     break;
+
                 case PeriodType.Year:
                     FromDate = FirstDayOfTheYear(SelectedDate);
                     ToDate = LastDayOfTheYear(SelectedDate);
                     break;
+
                 case PeriodType.All:
                     FromDate = DateTime.MinValue;
                     ToDate = DateTime.MaxValue;
@@ -125,15 +131,19 @@ namespace PIMM.Helpers
                 case PeriodType.Day:
                     SelectedDate = SelectedDate.AddDays(1);
                     break;
+
                 case PeriodType.Week:
                     SelectedDate = SelectedDate.AddDays(7);
                     break;
+
                 case PeriodType.Month:
                     SelectedDate = SelectedDate.AddMonths(1);
                     break;
+
                 case PeriodType.Year:
                     SelectedDate = SelectedDate.AddYears(1);
                     break;
+
                 case PeriodType.All:
                     /// intentionally blank space
                     break;
@@ -149,15 +159,19 @@ namespace PIMM.Helpers
                 case PeriodType.Day:
                     SelectedDate = SelectedDate.AddDays(-1);
                     break;
+
                 case PeriodType.Week:
                     SelectedDate = SelectedDate.AddDays(-7);
                     break;
+
                 case PeriodType.Month:
                     SelectedDate = SelectedDate.AddMonths(-1);
                     break;
+
                 case PeriodType.Year:
                     SelectedDate = SelectedDate.AddYears(-1);
                     break;
+
                 case PeriodType.All:
                     /// intentionally blank space
                     break;
@@ -222,8 +236,5 @@ namespace PIMM.Helpers
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
-
-
-
     }
 }

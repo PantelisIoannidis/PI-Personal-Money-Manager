@@ -2,9 +2,7 @@
 using DLToolkit.Forms.Controls;
 using PIMM.Helpers;
 using PIMM.Persistance;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PIMM
 {
@@ -12,8 +10,10 @@ namespace PIMM
     {
         //Properties consts
         private const string PeriodKey = "periodKey";
+
         private NavigationPage navigationPage;
         private MainPage mainPage;
+
         public App()
         {
             InitializeComponent();
@@ -83,7 +83,6 @@ namespace PIMM
             Resources["amountZeroColor"] = Color.FromHex("#000000");
             Resources["TransferColor"] = Color.FromHex("#000000");
             Resources["AdjustmentColor"] = Color.FromHex("#000000");
-
         }
 
         public void SetDarkTheme()
@@ -108,8 +107,6 @@ namespace PIMM
             Resources["amountZeroColor"] = Color.FromHex("#ffffff");
             Resources["TransferColor"] = Color.FromHex("#ffffff");
             Resources["AdjustmentColor"] = Color.FromHex("#ffffff");
-
-
         }
 
         public void SetLightTheme()
@@ -134,8 +131,6 @@ namespace PIMM
             Resources["amountZeroColor"] = Color.FromHex("#000000");
             Resources["TransferColor"] = Color.FromHex("#ffffff");
             Resources["AdjustmentColor"] = Color.FromHex("#ffffff");
-
-
         }
 
         public void SetNavigationBarColor()

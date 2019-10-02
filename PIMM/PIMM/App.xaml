@@ -9,7 +9,6 @@
     <Application.Resources>
         <ResourceDictionary>
 
-            
             <Color x:Key="barBackgroundColor">#192a56</Color>
             <Color x:Key="barTextColor">White</Color>
 
@@ -30,33 +29,31 @@
             <Color x:Key="ExpenseColor">#570303</Color>
             <Color x:Key="TransferColor">Black</Color>
             <Color x:Key="AdjustmentColor">Black</Color>
-            
-            
+
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{DynamicResource controlBackgroundColor}"/>
-                <Setter Property="TextColor" Value="{DynamicResource controlTextColor}"/>
-                <Setter Property="BorderRadius" Value="{DynamicResource controlBorderRadius}"/>
-                <!--<Setter Property="FontAttributes" Value="None"/>-->
+                <Setter Property="BackgroundColor" Value="{DynamicResource controlBackgroundColor}" />
+                <Setter Property="TextColor" Value="{DynamicResource controlTextColor}" />
+                <Setter Property="BorderRadius" Value="{DynamicResource controlBorderRadius}" />
+                <!--<Setter Property="FontAttributes" Value="None" />-->
             </Style>
 
             <Style TargetType="Label">
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-                <Setter Property="TextColor" Value="{DynamicResource textColor}"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{DynamicResource textColor}" />
             </Style>
 
             <Style TargetType="SearchBar">
-                <Setter Property="TextColor" Value="{DynamicResource textColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource textColor}" />
             </Style>
 
-
             <!--<Style x:Key="button" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{DynamicResource buttonBackgroundColor}"/>
-                <Setter Property="TextColor" Value="White"/>
-                            <Setter Property="FontSize" Value="Small"/>
-                <Setter Property="BackgroundColor" Value="Gray"/>
-                <Setter Property="BorderRadius" Value="20"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource buttonBackgroundColor}" />
+                <Setter Property="TextColor" Value="White" />
+                            <Setter Property="FontSize" Value="Small" />
+                <Setter Property="BackgroundColor" Value="Gray" />
+                <Setter Property="BorderRadius" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
             </Style>-->
         </ResourceDictionary>
     </Application.Resources>

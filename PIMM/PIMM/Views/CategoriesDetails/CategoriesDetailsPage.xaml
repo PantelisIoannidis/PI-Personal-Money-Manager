@@ -11,45 +11,43 @@
         <StackLayout Orientation="Vertical" Padding="10,20">
             <Grid ColumnSpacing="40" RowSpacing="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Text="Icon" HorizontalOptions="End"/>
-                <Button Grid.Row="0" Grid.Column="1" 
+                <Label Grid.Row="0" Grid.Column="0" Text="Icon" HorizontalOptions="End" />
+                <Button Grid.Row="0" Grid.Column="1"
                         HorizontalOptions="StartAndExpand"
-                        Text="{Binding Category.FontGlyph}" 
+                        Text="{Binding Category.FontGlyph}"
                         FontSize="Medium"
                         TextColor="{DynamicResource controlTextColor}"
                         FontFamily="{Binding Category.FontFamily}"
                         Command="{Binding SelectIconCommand}"
-                        CommandParameter="{Binding Category.FontIconId}"/>
+                        CommandParameter="{Binding Category.FontIconId}" />
 
-
-                <Label Grid.Row="1" Grid.Column="0" Text="Color" HorizontalOptions="End"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Color" HorizontalOptions="End" />
                 <lc:ColorPicker x:Name="myWebView" Grid.Row="1" Grid.Column="1"
-                                       Color="{Binding Category.Color}" 
-                                       Backcolor="{DynamicResource backgroundColor}"/>
+                                       Color="{Binding Category.Color}"
+                                       Backcolor="{DynamicResource backgroundColor}" />
 
-                <Label Grid.Row="2" Grid.Column="0" Text="Description" HorizontalOptions="End"/>
+                <Label Grid.Row="2" Grid.Column="0" Text="Description" HorizontalOptions="End" />
                 <Entry x:Name="descriptionEntry" Grid.Row="2" Grid.Column="1" Text="{Binding Category.Description}">
                     <Entry.Triggers>
                         <MultiTrigger TargetType="Entry">
                             <MultiTrigger.Conditions>
-                                <PropertyCondition  Property="Text" Value=""/>
+                                <PropertyCondition  Property="Text" Value="" />
                                 <PropertyCondition Property="IsFocused" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter  Property="BackgroundColor" Value="Red" />
                         </MultiTrigger>
                     </Entry.Triggers>
                 </Entry>
-
             </Grid>
             <Button x:Name="SaveButton"
-                    Text="Save" 
+                    Text="Save"
                     Margin="20"
-                    HorizontalOptions="FillAndExpand" 
-                    Clicked="SaveButton_Clicked"/>
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="SaveButton_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,11 +1,7 @@
-﻿using PIMM.Helpers;
-using PIMM.Models;
+﻿using PIMM.Models;
 using PIMM.Persistance;
 using PIMM.Views.CategoriesDetails;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -26,7 +22,6 @@ namespace PIMM.ViewModels
             set { _category = value; OnPropertyChanged(nameof(Category)); }
         }
 
-
         public ICommand SelectIconCommand { get; set; }
 
         public CategoryDetailsViewModel(IPageService pageService, IRepository repository, CategoryDto category)
@@ -34,10 +29,10 @@ namespace PIMM.ViewModels
             this.pageService = pageService;
             this.repository = repository;
             Category = category;
+            MessagingCenter.Unsubscribe<FontIconViewModel, FontIcon>(this, "UpdateIcon");
             MessagingCenter.Subscribe<FontIconViewModel, FontIcon>(this, "UpdateIcon", async (vm, x) => await UpdateIcon(vm));
             SelectIconCommand = new Command(async x => await SelectIcon());
         }
-
 
         private async Task UpdateIcon(object obj)
         {
@@ -51,17 +46,14 @@ namespace PIMM.ViewModels
             await pageService.PopAsync();
         }
 
-        
-
         public string FormPurposeNewOrEdit
         {
             get { return Category.Id == 0 ? "New Category" : "Edit Selected Category"; }
         }
 
-
         private async Task SelectIcon()
         {
-            var page = new CategoryIconsPage(pageService,repository, Category.FontIconId);
+            var page = new CategoryIconsPage(pageService, repository, Category.FontIconId);
             await pageService.PushAsync(page);
         }
 
