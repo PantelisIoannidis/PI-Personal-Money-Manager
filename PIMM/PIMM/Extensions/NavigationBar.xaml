@@ -41,6 +41,7 @@
                                     FontFamily="{x:Static fa:FontAwesome.FontName}" />
             <Button Grid.Row="0" Grid.Column="2"
                                     BorderRadius="0"
+                                    FontSize="Small"
                                     Text="{Binding NavigationBar.DisplayPeriod.Description, StringFormat='{0} ▼'}"
                                     Command="{Binding NavigationBar.ChoosePeriodCommand}" />
             <Button Grid.Row="0" Grid.Column="3"

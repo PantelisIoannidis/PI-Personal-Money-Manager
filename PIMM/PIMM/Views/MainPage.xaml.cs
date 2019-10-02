@@ -60,10 +60,7 @@ namespace PIMM
         {
             base.OnCurrentPageChanged();
             string currentPageName = CurrentPage.ClassId;
-            //if (Device.RuntimePlatform == Device.Android)
-            //    CurrentPage.Title = "";
-            //else
-            //    CurrentPage.Title = currentPageName;
+            //CurrentPage.Title = currentPageName;
             this.Title = currentPageName;
         }
 

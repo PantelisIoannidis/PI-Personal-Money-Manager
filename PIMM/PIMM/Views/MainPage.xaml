@@ -25,11 +25,43 @@
                      Order="Secondary" />
     </TabbedPage.ToolbarItems>
 
-    <local:HomePage Title="Overview" ClassId="Overview - Charts"  IconImageSource="chartpie.png" x:Name="overview" BackgroundColor="{DynamicResource backgroundColor}" />
+    <local:HomePage ClassId="Overview - Charts" IconImageSource="chartpie.png" x:Name="overview" BackgroundColor="{DynamicResource backgroundColor}">
+        <local:HomePage.Title>
+            <OnPlatform x:TypeArguments="x:String">
+                <On Platform="Android"></On>
+                <On Platform="iOS"></On>
+                <On Platform="UWP">Overview - Charts</On>
+            </OnPlatform>
+        </local:HomePage.Title>
+    </local:HomePage>
 
-    <local:TransactionsPage Title="Transactions" ClassId="Transactions" IconImageSource="dollarsign.png" x:Name="transactions" BackgroundColor="{DynamicResource backgroundColor}" />
+    <local:TransactionsPage ClassId="Transactions" IconImageSource="dollarsign.png" x:Name="transactions" BackgroundColor="{DynamicResource backgroundColor}">
+        <local:TransactionsPage.Title>
+            <OnPlatform x:TypeArguments="x:String">
+                <On Platform="Android"></On>
+                <On Platform="iOS"></On>
+                <On Platform="UWP">Transactions</On>
+            </OnPlatform>
+        </local:TransactionsPage.Title>
+    </local:TransactionsPage>
 
-    <local:CategoriesPage Title="Categories" ClassId="Categories" IconImageSource="tag.png" x:Name="categories" BackgroundColor="{DynamicResource backgroundColor}" />
+    <local:CategoriesPage ClassId="Categories" IconImageSource="tag.png" x:Name="categories" BackgroundColor="{DynamicResource backgroundColor}">
+        <local:CategoriesPage.Title>
+            <OnPlatform x:TypeArguments="x:String">
+                <On Platform="Android"></On>
+                <On Platform="iOS"></On>
+                <On Platform="UWP">Categories</On>
+            </OnPlatform>
+        </local:CategoriesPage.Title>
+    </local:CategoriesPage>
 
-    <local:AccountsPage Title="Accounts" ClassId="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts" BackgroundColor="{DynamicResource backgroundColor}" />
+    <local:AccountsPage ClassId="Accounts" IconImageSource="moneyBillWave.png" x:Name="accounts" BackgroundColor="{DynamicResource backgroundColor}">
+        <local:AccountsPage.Title>
+            <OnPlatform x:TypeArguments="x:String">
+                <On Platform="Android"></On>
+                <On Platform="iOS"></On>
+                <On Platform="UWP">Accounts</On>
+            </OnPlatform>
+        </local:AccountsPage.Title>
+    </local:AccountsPage>
 </TabbedPage>
