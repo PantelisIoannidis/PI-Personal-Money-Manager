@@ -31,7 +31,11 @@
                                        Backcolor="{DynamicResource backgroundColor}" />
 
                 <Label Grid.Row="2" Grid.Column="0" Text="Description" HorizontalOptions="End" />
-                <Entry x:Name="descriptionEntry" Grid.Row="2" Grid.Column="1" Text="{Binding Category.Description}">
+                <Entry x:Name="descriptionEntry" Grid.Row="2" Grid.Column="1"
+                       Text="{Binding Category.Description}"
+                       PlaceholderColor="{DynamicResource controlTextColor}"
+                           BackgroundColor="{DynamicResource backgroundColor}"
+                           TextColor="{DynamicResource textColor}">
                     <Entry.Triggers>
                         <MultiTrigger TargetType="Entry">
                             <MultiTrigger.Conditions>

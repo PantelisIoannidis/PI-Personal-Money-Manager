@@ -12,9 +12,46 @@
         <lc:NavigationBar />
         <ScrollView>
             <StackLayout Orientation="Vertical">
+                <Label Text="Income vs Expenses" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       FontSize="Large"
+                       TextColor="{DynamicResource textColor}" />
                 <forms:ChartView x:Name="ChartPierIncomeExpense" />
-                <forms:ChartView x:Name="ChartPierCategories" />
-                <forms:ChartView x:Name="ChartPierAccounts" />
+                <BoxView HorizontalOptions="Center"
+                         WidthRequest="150"
+                         HeightRequest="1"
+                         Color="{DynamicResource seperatorColor}" />
+                <Label Text="Expenses by category" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       FontSize="Large"
+                       Margin="0,10,0,0"
+                       TextColor="{DynamicResource textColor}" />
+                <forms:ChartView x:Name="ChartPierCategoriesByExpenses" />
+                <BoxView HorizontalOptions="Center"
+                         WidthRequest="150"
+                         HeightRequest="1"
+                         Color="{DynamicResource seperatorColor}" />
+                <Label Text="Income by category" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       FontSize="Large"
+                       Margin="0,10,0,0"
+                       TextColor="{DynamicResource textColor}" />
+                <forms:ChartView x:Name="ChartPierCategoriesByIncome" />
+                <BoxView HorizontalOptions="Center"
+                         WidthRequest="150"
+                         HeightRequest="1"
+                         Color="{DynamicResource seperatorColor}" />
+                <Label Text="Expenses by account" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       FontSize="Large"
+                       Margin="0,10,0,0"
+                       TextColor="{DynamicResource textColor}" />
+                <forms:ChartView x:Name="ChartPierAccountsByExpenses" />
+                <BoxView HorizontalOptions="Center"
+                         WidthRequest="150"
+                         HeightRequest="1"
+                         Color="{DynamicResource seperatorColor}" />
+                <Label Text="Income by account" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                       FontSize="Large"
+                       Margin="0,10,0,0"
+                       TextColor="{DynamicResource textColor}" />
+                <forms:ChartView x:Name="ChartPierAccountsByIncome" />
             </StackLayout>
         </ScrollView>
     </StackLayout>

@@ -1,5 +1,6 @@
 ﻿using Microcharts;
 using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -26,25 +27,41 @@ namespace PIMM
         {
             ChartPierIncomeExpense.WidthRequest = ChartWidth * 0.5;
             ChartPierIncomeExpense.HeightRequest = ChartWidth * 0.5;
-            ChartPierIncomeExpense.Chart = new BarChart
+            ChartPierIncomeExpense.Chart = new RadialGaugeChart
             {
                 Entries = ViewModel.PrepareIncomeExpense,
                 BackgroundColor = "backgroundColor".SKFromResources(),
             };
 
-            ChartPierCategories.WidthRequest = ChartWidth * 0.5;
-            ChartPierCategories.HeightRequest = ChartWidth * 0.5;
-            ChartPierCategories.Chart = new DonutChart
+            ChartPierCategoriesByExpenses.WidthRequest = ChartWidth * 0.5;
+            ChartPierCategoriesByExpenses.HeightRequest = ChartWidth * 0.5;
+            ChartPierCategoriesByExpenses.Chart = new DonutChart
             {
-                Entries = ViewModel.PrepareCategoriesExpenses,
+                Entries = ViewModel.PrepareCategories(TransactionType.Expense),
                 BackgroundColor = "backgroundColor".SKFromResources(),
             };
 
-            ChartPierAccounts.WidthRequest = ChartWidth * 0.5;
-            ChartPierAccounts.HeightRequest = ChartWidth * 0.5;
-            ChartPierAccounts.Chart = new RadialGaugeChart
+            ChartPierCategoriesByIncome.WidthRequest = ChartWidth * 0.5;
+            ChartPierCategoriesByIncome.HeightRequest = ChartWidth * 0.5;
+            ChartPierCategoriesByIncome.Chart = new DonutChart
             {
-                Entries = ViewModel.PrepareAccounts,
+                Entries = ViewModel.PrepareCategories(TransactionType.Income),
+                BackgroundColor = "backgroundColor".SKFromResources(),
+            };
+
+            ChartPierAccountsByExpenses.WidthRequest = ChartWidth * 0.5;
+            ChartPierAccountsByExpenses.HeightRequest = ChartWidth * 0.5;
+            ChartPierAccountsByExpenses.Chart = new BarChart
+            {
+                Entries = ViewModel.PrepareAccounts(TransactionType.Expense),
+                BackgroundColor = "backgroundColor".SKFromResources(),
+            };
+
+            ChartPierAccountsByIncome.WidthRequest = ChartWidth * 0.5;
+            ChartPierAccountsByIncome.HeightRequest = ChartWidth * 0.5;
+            ChartPierAccountsByIncome.Chart = new BarChart
+            {
+                Entries = ViewModel.PrepareAccounts(TransactionType.Income),
                 BackgroundColor = "backgroundColor".SKFromResources(),
             };
         }

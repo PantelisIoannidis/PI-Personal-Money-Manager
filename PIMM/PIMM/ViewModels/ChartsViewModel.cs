@@ -1,4 +1,5 @@
 ﻿using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.Persistance;
 using SkiaSharp;
 using System.Collections.Generic;
@@ -60,59 +61,54 @@ namespace PIMM.ViewModels
             }
         }
 
-        public List<Microcharts.Entry> PrepareCategoriesExpenses
+        public List<Microcharts.Entry> PrepareCategories(TransactionType type = TransactionType.Expense)
         {
-            get
+            var first8 = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
+                .Where(x => x.Type == type)
+                .Take(8);
+            var all = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
+                .Where(x => x.Type == type);
+
+            var entries = new List<Microcharts.Entry>();
+            foreach (var entry in first8)
             {
-                var first8 = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
-                    .Where(x => x.Type == Models.TransactionType.Expense)
-                    .Take(8);
-                var all = repository.GetAmountByCategory(NavigationBar.DisplayPeriod)
-                    .Where(x => x.Type == Models.TransactionType.Expense);
-
-                var entries = new List<Microcharts.Entry>();
-                foreach (var entry in first8)
+                entries.Add(new Microcharts.Entry((float)entry.Amount)
                 {
-                    entries.Add(new Microcharts.Entry((float)entry.Amount)
-                    {
-                        Label = entry.Description,
-                        ValueLabel = entry.Amount.FormatAmount(),
-                        Color = SKColor.Parse(entry.Color)
-                    });
-                }
-                if (all.ToList().Count > 8)
-                {
-                    var otherAmount = all.Sum(x => x.Amount) - first8.Sum(x => x.Amount);
-                    entries.Add(new Microcharts.Entry((float)otherAmount)
-                    {
-                        Label = "Other",
-                        ValueLabel = otherAmount.FormatAmount(),
-                        Color = SKColor.Parse("#888888")
-                    });
-                }
-
-                return entries;
+                    Label = entry.Description,
+                    ValueLabel = entry.Amount.FormatAmount(),
+                    Color = SKColor.Parse(entry.Color)
+                });
             }
+            if (all.ToList().Count > 8)
+            {
+                var otherAmount = all.Sum(x => x.Amount) - first8.Sum(x => x.Amount);
+                entries.Add(new Microcharts.Entry((float)otherAmount)
+                {
+                    Label = "Other",
+                    ValueLabel = otherAmount.FormatAmount(),
+                    Color = SKColor.Parse("#888888")
+                });
+            }
+
+            return entries;
         }
 
-        public List<Microcharts.Entry> PrepareAccounts
+        public List<Microcharts.Entry> PrepareAccounts(TransactionType type = TransactionType.Expense)
         {
-            get
-            {
-                var data = repository.GetAmountByAccount(NavigationBar.DisplayPeriod);
+            var data = repository.GetAmountByAccount(NavigationBar.DisplayPeriod)
+                .Where(x => x.Type == type);
 
-                var entries = new List<Microcharts.Entry>();
-                foreach (var entry in data)
+            var entries = new List<Microcharts.Entry>();
+            foreach (var entry in data)
+            {
+                entries.Add(new Microcharts.Entry((float)entry.Amount)
                 {
-                    entries.Add(new Microcharts.Entry((float)entry.Amount)
-                    {
-                        Label = entry.Description,
-                        ValueLabel = entry.Amount.FormatAmount(),
-                        Color = SKColor.Parse(entry.Color)
-                    });
-                }
-                return entries;
+                    Label = entry.Description,
+                    ValueLabel = entry.Amount.FormatAmount(),
+                    Color = SKColor.Parse(entry.Color)
+                });
             }
+            return entries;
         }
     }
 }

@@ -34,10 +34,10 @@ namespace PIMM.Persistance
         public List<AmountPerAccountViewModel> GetAmountByAccount(Period period)
         {
             var result = db.Query<AmountPerAccountViewModel>(
-                @"select AccountId,AC.Description,AC.Color, sum(Amount) as Amount from 'Transaction' TR
+                @"select AccountId,AC.Description,AC.Color,TR.Type, sum(Amount) as Amount from 'Transaction' TR
                     inner join Account AC on AC.Id = TR.AccountId
                     where TR.TransactionDate between ? and ?
-                    group by AccountId
+                    group by TR.AccountId,TR.Type
                     order by Amount DESC"
                 , period.FromDate, period.ToDate);
             return result;

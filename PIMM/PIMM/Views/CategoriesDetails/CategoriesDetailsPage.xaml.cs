@@ -32,6 +32,7 @@ namespace PIMM.Views.CategoriesDetails
                 category.Color = temp_category.Color;
                 category.FontGlyph = temp_category.FontGlyph;
                 category.FontFamily = temp_category.FontFamily;
+                category.FontIconId = temp_category.FontIconId;
             }
             detailsVM.Category = category;
 

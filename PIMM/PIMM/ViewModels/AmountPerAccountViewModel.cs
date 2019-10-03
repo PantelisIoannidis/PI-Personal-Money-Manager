@@ -1,4 +1,6 @@
-﻿namespace PIMM.ViewModels
+﻿using PIMM.Models;
+
+namespace PIMM.ViewModels
 {
     public class AmountPerAccountViewModel
     {
@@ -6,5 +8,7 @@
         public string Description { get; set; }
         public string Color { get; set; }
         public decimal Amount { get; set; }
+
+        public TransactionType Type { get; set; }
     }
 }

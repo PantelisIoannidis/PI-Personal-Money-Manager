@@ -21,7 +21,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Text="Description" HorizontalOptions="End" />
-                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Description}" />
+                <Entry Grid.Row="0" Grid.Column="1"
+                       Text="{Binding Description}"
+                       PlaceholderColor="{DynamicResource controlTextColor}"
+                       BackgroundColor="{DynamicResource backgroundColor}"
+                       TextColor="{DynamicResource textColor}" />
 
                 <Label Grid.Row="1" Grid.Column="0" Text="Color" HorizontalOptions="End" />
                 <lc:ColorPicker x:Name="myWebView" Grid.Row="1" Grid.Column="1"

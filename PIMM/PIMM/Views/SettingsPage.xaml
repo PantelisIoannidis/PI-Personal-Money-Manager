@@ -17,6 +17,8 @@
                 <Label Grid.Row="0" Grid.Column="0" Text="Theme" />
                 <Picker Grid.Row="0" Grid.Column="1"
                         x:Name="themePicker" Title="Select a Theme"
+                           BackgroundColor="{DynamicResource backgroundColor}"
+                           TextColor="{DynamicResource textColor}"
                         SelectedIndexChanged="ThemePicker_SelectedIndexChanged">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
