@@ -35,19 +35,12 @@ namespace PIMM
             var theme = themePicker.Items[themePicker.SelectedIndex];
             var app = (Application.Current as App);
 
-            if (theme == Themes.Blue)
-                app.SetBlueTheme();
-
-            if (theme == Themes.Dark)
-                app.SetDarkTheme();
-
-            if (theme == Themes.Light)
-                app.SetLightTheme();
-
-            app.SetNavigationBarColor();
-
             app.Properties[Themes.ThemeKey] = theme;
             app.SavePropertiesAsync();
+
+            var themeLoader = new ThemeLoader();
+            themeLoader.LoadTheme();
+            themeLoader.SetNavigationBarColor();
 
             ExitPage();
         }

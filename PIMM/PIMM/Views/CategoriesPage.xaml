@@ -30,6 +30,7 @@
                                 Text="Income"
                                 BorderWidth="1"
                                 CornerRadius="0"
+                                TextColor="{DynamicResource seperatorColor}"
                                 BackgroundColor="{Binding IncomeBackgroundColor}"
                                 BorderColor="{DynamicResource IncomeColor}">
                 </Button>
@@ -38,6 +39,7 @@
                                 Text="Expense"
                                 BorderWidth="1"
                                 CornerRadius="0"
+                                TextColor="{DynamicResource seperatorColor}"
                                 BackgroundColor="{Binding ExpenseBackgroundColor}"
                                 BorderColor="{DynamicResource ExpenseColor}">
                 </Button>

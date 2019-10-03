@@ -64,7 +64,7 @@ namespace PIMM
         public void SetBlueTheme()
         {
             Resources["backgroundColor"] = Color.FromHex("#95afc0");
-            Resources["textColor"] = Color.FromHex("#ffffff");
+            Resources["textColor"] = Color.FromHex("#000000");
 
             Resources["barBackgroundColor"] = Color.FromHex("#192a56");
             Resources["barTextColor"] = Color.FromHex("#ffffff");

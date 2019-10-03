@@ -19,8 +19,6 @@ namespace PIMM.ViewModels
         private readonly IPageService _pageService;
         private readonly IRepository _repository;
         private Period period = (Application.Current as App).CurrentPeriod;
-        private bool isSearchVisible;
-        private bool isSetDateVisible;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,8 +27,6 @@ namespace PIMM.ViewModels
         public ICommand PreviousTimePeriodCommand { get; private set; }
         public ICommand ResetTimePeriodCommand { get; private set; }
         public ICommand SearchCommand { get; private set; }
-        public ICommand ShowSearchFieldCommand { get; private set; }
-        public ICommand ShowSetDateCommand { get; private set; }
         public ICommand SetDateCommand { get; private set; }
 
         public decimal Balance { get; private set; }
@@ -46,48 +42,6 @@ namespace PIMM.ViewModels
                 return period;
             }
             set { period = value; OnPropertyChanged(nameof(DisplayPeriod)); }
-        }
-
-        public string SetDateVisibleBackgroundColor
-        {
-            get
-            {
-                return IsSetDateVisible
-                    ? ((Color)App.Current.Resources["controlSelectedBackgroundColor"]).GetHexString()
-                    : ((Color)App.Current.Resources["controlBackgroundColor"]).GetHexString();
-            }
-        }
-
-        public string SearchVisibleBackgroundColor
-        {
-            get
-            {
-                return IsSearchVisible
-                    ? ((Color)App.Current.Resources["controlSelectedBackgroundColor"]).GetHexString()
-                    : ((Color)App.Current.Resources["controlBackgroundColor"]).GetHexString();
-            }
-        }
-
-        public bool IsSetDateVisible
-        {
-            get { return isSetDateVisible; }
-            set
-            {
-                isSetDateVisible = value;
-                OnPropertyChanged(nameof(IsSetDateVisible));
-                OnPropertyChanged(nameof(SetDateVisibleBackgroundColor));
-            }
-        }
-
-        public bool IsSearchVisible
-        {
-            get { return isSearchVisible; }
-            set
-            {
-                isSearchVisible = value;
-                OnPropertyChanged(nameof(IsSearchVisible));
-                OnPropertyChanged(nameof(SearchVisibleBackgroundColor));
-            }
         }
 
         public List<TransactionDto> Transactions
@@ -141,8 +95,6 @@ namespace PIMM.ViewModels
             PreviousTimePeriodCommand = new Command(PreviousTimePeriod);
             ResetTimePeriodCommand = new Command(ResetTimePeriod);
             SearchCommand = new Command<string>(s => Search(s));
-            ShowSearchFieldCommand = new Command(ShowSearchField);
-            ShowSetDateCommand = new Command(ShowSetDate);
             SetDateCommand = new Command(async s => await SetDate(s));
 
             CalculateSums();
@@ -154,16 +106,6 @@ namespace PIMM.ViewModels
         {
             DisplayPeriod.ResetSelectedDate((DateTime)newDate);
             MessagingCenter.Send(this, "UpdatePeriod");
-        }
-
-        private void ShowSetDate()
-        {
-            IsSetDateVisible = !IsSetDateVisible;
-        }
-
-        private void ShowSearchField()
-        {
-            IsSearchVisible = !IsSearchVisible;
         }
 
         private void Search(string s)

@@ -28,7 +28,8 @@ namespace PIMM
 
         public MainPage()
         {
-            LoadTheme();
+            var themeLoader = new ThemeLoader();
+            themeLoader.LoadTheme();
 
             InitializeComponent();
 
@@ -62,28 +63,6 @@ namespace PIMM
             string currentPageName = CurrentPage.ClassId;
             //CurrentPage.Title = currentPageName;
             this.Title = currentPageName;
-        }
-
-        private void LoadTheme()
-        {
-            var app = (Application.Current as App);
-
-            if (!app.Properties.ContainsKey(Themes.ThemeKey))
-            {
-                app.Properties[Themes.ThemeKey] = Themes.Blue;
-            }
-
-            var theme = app.Properties[Themes.ThemeKey].ToString();
-
-            if (theme == Themes.Dark)
-                app.SetDarkTheme();
-            else if (theme == Themes.Light)
-                app.SetLightTheme();
-            else if (theme == Themes.Blue)
-                app.SetBlueTheme();
-            else
-
-                app.SetNavigationBarColor();
         }
 
         protected override void OnAppearing()

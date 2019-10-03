@@ -49,97 +49,36 @@
                                     BorderRadius="0"
                                     Text="&#xf061;"
                                     FontFamily="{x:Static fa:FontAwesome.FontName}" />
-            <Button Grid.Row="0" Grid.Column="4"
-                                    Command="{Binding NavigationBar.ShowSetDateCommand}"
-                                    BorderRadius="0"
-                                    Text="&#xf133;"
-                                    BorderColor="{DynamicResource backgroundColor}"
-                                    BorderWidth="3"
-                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button"
-                                 Binding="{Binding NavigationBar.IsSetDateVisible}"
-                                    Value="true">
-                        <Setter Property="BackgroundColor"
-                                    Value="{DynamicResource controlSelectedBackgroundColor}" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="Button"
-                                 Binding="{Binding NavigationBar.IsSetDateVisible}"
-                                    Value="false">
-                        <Setter Property="BackgroundColor"
-                                    Value="{DynamicResource controlBackgroundColor}" />
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
-            <Button Grid.Row="0" Grid.Column="5"
-                                    Command="{Binding NavigationBar.ShowSearchFieldCommand}"
-                                    BorderRadius="0"
-                                    Text="&#xf002;"
-                                    BorderColor="{DynamicResource backgroundColor}"
-                                    BorderWidth="3"
-                                    FontFamily="{x:Static fa:FontAwesome.FontName}">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button"
-                                 Binding="{Binding NavigationBar.IsSearchVisible}"
-                                    Value="true">
-                        <Setter Property="BackgroundColor"
-                                    Value="{DynamicResource controlSelectedBackgroundColor}" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="Button"
-                                 Binding="{Binding NavigationBar.IsSearchVisible}"
-                                    Value="false">
-                        <Setter Property="BackgroundColor"
-                                    Value="{DynamicResource controlBackgroundColor}" />
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
+
+            <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="4" BackgroundColor="{DynamicResource controlBackgroundColor}">
+                <Switch x:Name="searchSwitch" OnColor="{DynamicResource controlTextColor}" />
+                <Label Text="Search"
+                       TextColor="{DynamicResource controlTextColor}" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="5" BackgroundColor="{DynamicResource controlBackgroundColor}">
+                <Switch x:Name="dateSwitch" OnColor="{DynamicResource controlTextColor}" />
+                <Label Text="Date"
+                       TextColor="{DynamicResource controlTextColor}" />
+            </StackLayout>
         </Grid>
 
         <StackLayout Orientation="Vertical">
             <DatePicker DateSelected="ChooseDate_DateSelected"
-                                IsVisible="False"
+                                IsVisible="{Binding Source={x:Reference dateSwitch},Path=IsToggled}"
                                 x:Name="chooseDate"
                                 TextColor="{DynamicResource textColor}"
                                 BackgroundColor="{DynamicResource backgroundColor}"
                                 Date="{Binding TransVM.TransactionDate}"
                                 Format="D">
-                <DatePicker.Triggers>
-                    <DataTrigger TargetType="DatePicker"
-                                     Binding="{Binding NavigationBar.IsSetDateVisible}"
-                                        Value="true">
-                        <Setter Property="IsVisible"
-                                        Value="True" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="DatePicker"
-                                     Binding="{Binding NavigationBar.IsSetDateVisible}"
-                                        Value="false">
-                        <Setter Property="IsVisible"
-                                        Value="False" />
-                    </DataTrigger>
-                </DatePicker.Triggers>
             </DatePicker>
             <SearchBar x:Name="SearchBar"
-                           IsVisible="False"
+                           IsVisible="{Binding Source={x:Reference searchSwitch},Path=IsToggled}"
                            PlaceholderColor="{DynamicResource controlTextColor}"
                            BackgroundColor="{DynamicResource backgroundColor}"
                            TextColor="{DynamicResource textColor}"
                            CancelButtonColor="{DynamicResource controlTextColor}"
                            SearchCommand="{Binding NavigationBar.SearchCommand}"
                            SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
-                <SearchBar.Triggers>
-                    <DataTrigger TargetType="SearchBar"
-                                 Binding="{Binding NavigationBar.IsSearchVisible}"
-                                    Value="true">
-                        <Setter Property="IsVisible"
-                                    Value="True" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="SearchBar"
-                                 Binding="{Binding NavigationBar.IsSearchVisible}"
-                                    Value="false">
-                        <Setter Property="IsVisible"
-                                    Value="False" />
-                    </DataTrigger>
-                </SearchBar.Triggers>
                 <SearchBar.Behaviors>
                     <fa:TextChangedBehavior />
                 </SearchBar.Behaviors>
