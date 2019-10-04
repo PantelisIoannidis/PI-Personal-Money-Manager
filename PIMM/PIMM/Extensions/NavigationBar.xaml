@@ -15,8 +15,8 @@
             <conv:DateFormatConverter x:Key="DateFormatConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <StackLayout Orientation="Vertical" Padding="5">
-        <Grid ColumnSpacing="0" Margin="5">
+    <StackLayout Orientation="Vertical" Padding="2,8">
+        <Grid ColumnSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>

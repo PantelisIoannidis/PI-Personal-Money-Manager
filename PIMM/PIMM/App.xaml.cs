@@ -64,7 +64,8 @@ namespace PIMM
         public void SetBlueTheme()
         {
             Resources["backgroundColor"] = Color.FromHex("#95afc0");
-            Resources["textColor"] = Color.FromHex("#000000");
+            Resources["textColor"] = Color.FromHex("#ffffff");
+            Resources["secTextColor"] = Color.FromHex("#ffffff");
 
             Resources["barBackgroundColor"] = Color.FromHex("#192a56");
             Resources["barTextColor"] = Color.FromHex("#ffffff");
@@ -89,6 +90,7 @@ namespace PIMM
         {
             Resources["backgroundColor"] = Color.FromHex("#3f3f46");
             Resources["textColor"] = Color.FromHex("#ffffff");
+            Resources["secTextColor"] = Color.FromHex("#ffffff");
 
             Resources["barBackgroundColor"] = Color.FromHex("#252526");
             Resources["barTextColor"] = Color.FromHex("#ffffff");
@@ -113,6 +115,7 @@ namespace PIMM
         {
             Resources["backgroundColor"] = Color.FromHex("#ffffff");
             Resources["textColor"] = Color.FromHex("#000000");
+            Resources["secTextColor"] = Color.FromHex("#ffffff");
 
             Resources["barBackgroundColor"] = Color.FromHex("#0e520a");
             Resources["barTextColor"] = Color.FromHex("#ffffff");

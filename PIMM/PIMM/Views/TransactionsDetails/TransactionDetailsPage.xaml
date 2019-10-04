@@ -29,16 +29,18 @@
                 <Button Grid.Row="0" Grid.Column="1"
                                 Command="{Binding IncomeSelectedCommand}"
                                 Text="Income"
-                                BorderWidth="1"
+                                BorderWidth="2"
                                 CornerRadius="0"
+                                TextColor="{DynamicResource secTextColor}"
                                 BackgroundColor="{Binding TransVM.IncomeBackgroundColor}"
                                 BorderColor="{DynamicResource IncomeColor}">
                 </Button>
                 <Button Grid.Row="0" Grid.Column="2"
                                 Command="{Binding ExpenseSelectedCommand}"
                                 Text="Expense"
-                                BorderWidth="1"
+                                BorderWidth="2"
                                 CornerRadius="0"
+                                TextColor="{DynamicResource secTextColor}"
                                 BackgroundColor="{Binding TransVM.ExpenseBackgroundColor}"
                                 BorderColor="{DynamicResource ExpenseColor}">
                 </Button>

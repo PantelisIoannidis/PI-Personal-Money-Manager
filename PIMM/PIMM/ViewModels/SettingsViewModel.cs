@@ -28,6 +28,8 @@ namespace PIMM.ViewModels
             {
                 await initializeDatabase.EraseDatabase();
                 MessagingCenter.Send(this, "UpdateTransactionsAfterReset");
+                MessagingCenter.Send(this, "UpdateCategoryAfterReset");
+                MessagingCenter.Send(this, "UpdateAccountsAfterReset");
                 await pageService.PopAsync();
             }
         }

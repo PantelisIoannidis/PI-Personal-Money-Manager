@@ -20,6 +20,7 @@
 
             <Color x:Key="backgroundColor">#95afc0</Color>
             <Color x:Key="textColor">Black</Color>
+            <Color x:Key="secTextColor">Black</Color>
 
             <!--Transaction amount colors-->
             <Color x:Key="amountPositiveColor">#041f08</Color>

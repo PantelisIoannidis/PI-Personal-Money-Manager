@@ -21,14 +21,17 @@ namespace PIMM
             repository = new Repository();
             accounts = repository.GetAccountsAsViewModels();
             accountsViewModel = new AccountsViewModel(accounts, new PageService(), repository);
-            MessagingCenter.Unsubscribe<AccountsViewModel>(this, "DeleteAccounts");
-            MessagingCenter.Unsubscribe<AccountsViewModel>(this, "RefreshAccounts");
             MessagingCenter.Subscribe<AccountsViewModel>(this, "DeleteAccounts", RefreshAccounts);
             MessagingCenter.Subscribe<AccountsViewModel>(this, "RefreshAccounts", RefreshAccounts);
+            MessagingCenter.Subscribe<SettingsViewModel>(this, "UpdateAccountsAfterReset", RefreshAccounts);
             BindingContext = accountsViewModel;
         }
 
-        private void RefreshAccounts(AccountsViewModel obj)
+        private void RefreshAccounts(AccountsViewModel obj) => RefreshAccounts();
+
+        private void RefreshAccounts(SettingsViewModel obj) => RefreshAccounts();
+
+        private void RefreshAccounts()
         {
             accounts = repository.GetAccountsAsViewModels();
             accountsViewModel.Accounts = accounts;
