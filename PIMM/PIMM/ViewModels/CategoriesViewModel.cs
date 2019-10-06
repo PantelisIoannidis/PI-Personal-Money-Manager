@@ -116,7 +116,8 @@ namespace PIMM.ViewModels
         {
             var vm = new CategoryDto()
             {
-                Type = SelectedType
+                Type = SelectedType,
+                Description = "Default"
             };
             categoriesDetailsPage.SetCategoryDetailsViewModel(vm);
             await _pageService.PushAsync(categoriesDetailsPage);

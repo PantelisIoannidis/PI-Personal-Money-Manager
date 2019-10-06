@@ -42,6 +42,7 @@ namespace PIMM.Persistance
                 CreateCetegories();
                 CreateAcounts();
                 PrepareIcons();
+                CreateIcons();
             }
         }
 
@@ -100,25 +101,25 @@ namespace PIMM.Persistance
             };
             int i = 0;
 
-            CreateCategory("Salary", randomColors[i++], TransactionType.Income, nameof(FontAwesomeSolid.Dollarsign), FontAwesomeSolid.Dollarsign, FontAwesome.FontName);
-            CreateCategory("Cash", randomColors[i++], TransactionType.Income, nameof(FontAwesomeSolid.PiggyBank), FontAwesomeSolid.PiggyBank, FontAwesome.FontName);
+            CreateCategory("Salary", randomColors[i++], TransactionType.Income, nameof(FontAwesomeSolid.dollar_sign), FontAwesomeSolid.dollar_sign, FontAwesome.FontName);
+            CreateCategory("Cash", randomColors[i++], TransactionType.Income, nameof(FontAwesomeSolid.piggy_bank), FontAwesomeSolid.piggy_bank, FontAwesome.FontName);
 
-            CreateCategory("Home", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Home), FontAwesomeSolid.Home, FontAwesome.FontName);
-            CreateCategory("Shopping", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Shoppingcart), FontAwesomeSolid.Shoppingcart, FontAwesome.FontName);
-            CreateCategory("Groceries", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Shoppingbasket), FontAwesomeSolid.Shoppingbasket, FontAwesome.FontName);
-            CreateCategory("Loan", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.HandHoldingUsd), FontAwesomeSolid.HandHoldingUsd, FontAwesome.FontName);
-            CreateCategory("Utilities", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Tint), FontAwesomeSolid.Tint, FontAwesome.FontName);
-            CreateCategory("Clothes", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.TShirt), FontAwesomeSolid.TShirt, FontAwesome.FontName);
-            CreateCategory("Eating Out", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Utensils), FontAwesomeSolid.Utensils, FontAwesome.FontName);
-            CreateCategory("Entertainment", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Gamepad), FontAwesomeSolid.Gamepad, FontAwesome.FontName);
-            CreateCategory("Fuel", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.GasPump), FontAwesomeSolid.GasPump, FontAwesome.FontName);
-            CreateCategory("General", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Asterisk), FontAwesomeSolid.Shoppingbasket, FontAwesome.FontName);
-            CreateCategory("Gifts", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Gift), FontAwesomeSolid.Gift, FontAwesome.FontName);
-            CreateCategory("Vacations", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Suitcase), FontAwesomeSolid.Suitcase, FontAwesome.FontName);
-            CreateCategory("Kids", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Child), FontAwesomeSolid.Child, FontAwesome.FontName);
-            CreateCategory("Pets", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Cat), FontAwesomeSolid.Cat, FontAwesome.FontName);
-            CreateCategory("Sports", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.Dumbbell), FontAwesomeSolid.Dumbbell, FontAwesome.FontName);
-            CreateCategory("Travel", randomColors[i], TransactionType.Expense, nameof(FontAwesomeSolid.Subway), FontAwesomeSolid.Subway, FontAwesome.FontName);
+            CreateCategory("Home", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.home), FontAwesomeSolid.home, FontAwesome.FontName);
+            CreateCategory("Shopping", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.shopping_cart), FontAwesomeSolid.shopping_cart, FontAwesome.FontName);
+            CreateCategory("Groceries", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.shopping_basket), FontAwesomeSolid.shopping_basket, FontAwesome.FontName);
+            CreateCategory("Loan", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.hand_holding_usd), FontAwesomeSolid.hand_holding_usd, FontAwesome.FontName);
+            CreateCategory("Utilities", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.tint), FontAwesomeSolid.tint, FontAwesome.FontName);
+            CreateCategory("Clothes", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.tshirt), FontAwesomeSolid.tshirt, FontAwesome.FontName);
+            CreateCategory("Eating Out", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.utensils), FontAwesomeSolid.utensils, FontAwesome.FontName);
+            CreateCategory("Entertainment", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.gamepad), FontAwesomeSolid.gamepad, FontAwesome.FontName);
+            CreateCategory("Fuel", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.gas_pump), FontAwesomeSolid.gas_pump, FontAwesome.FontName);
+            CreateCategory("General", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.asterisk), FontAwesomeSolid.shopping_basket, FontAwesome.FontName);
+            CreateCategory("Gifts", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.gift), FontAwesomeSolid.gift, FontAwesome.FontName);
+            CreateCategory("Vacations", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.suitcase), FontAwesomeSolid.suitcase, FontAwesome.FontName);
+            CreateCategory("Kids", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.child), FontAwesomeSolid.child, FontAwesome.FontName);
+            CreateCategory("Pets", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.cat), FontAwesomeSolid.cat, FontAwesome.FontName);
+            CreateCategory("Sports", randomColors[i++], TransactionType.Expense, nameof(FontAwesomeSolid.dumbbell), FontAwesomeSolid.dumbbell, FontAwesome.FontName);
+            CreateCategory("Travel", randomColors[i], TransactionType.Expense, nameof(FontAwesomeSolid.subway), FontAwesomeSolid.subway, FontAwesome.FontName);
         }
 
         private void CreateCategory(string categoryName, string color, TransactionType type, string fontName, string fontGlyph, string fontFamily)
@@ -158,9 +159,8 @@ namespace PIMM.Persistance
             db.Insert(account);
         }
 
-        private List<FontIcon> PrepareIcons()
+        private void PrepareIcons()
         {
-            List<FontIcon> fontAwesomeSolidIcons = new List<FontIcon>();
             FieldInfo[] field_infos = typeof(FontAwesomeSolid).GetFields(
                     BindingFlags.FlattenHierarchy |
                     BindingFlags.Instance |
@@ -170,11 +170,10 @@ namespace PIMM.Persistance
             foreach (FieldInfo info in field_infos)
             {
                 var infoName = info.ToString().Replace("System.String ", "");
-                if (info.IsStatic
-                    && !infoName.Contains("FontName")
-                    && fontAwesomeSolidIcons.Exists(c => c.Description == infoName))
+                if (!infoName.Contains("FontName")
+                    && !fontList.Exists(c => c.Description == infoName))
                 {
-                    fontAwesomeSolidIcons.Add(new FontIcon
+                    fontList.Add(new FontIcon
                     {
                         Description = infoName,
                         Glyph = info.GetValue(null).ToString(),
@@ -182,7 +181,15 @@ namespace PIMM.Persistance
                     });
                 }
             }
-            return fontAwesomeSolidIcons;
+        }
+
+        private void CreateIcons()
+        {
+            foreach (var item in fontList)
+            {
+                if (db.Table<FontIcon>().Count(x => x.Id == item.Id) <= 0)
+                    db.Insert(item);
+            }
         }
 
         private void InsertSampleData()
