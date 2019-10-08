@@ -77,6 +77,7 @@ namespace PIMM.ViewModels
         {
             TransVM.Type = TransactionType.Expense;
             TransVM.Description = TransVM.CurrentCategory.Description;
+            TransVM.CategoryId = TransVM.CurrentCategory.Id;
             OnPropertyChanged(nameof(TransVM));
         }
 
@@ -84,6 +85,7 @@ namespace PIMM.ViewModels
         {
             TransVM.Type = TransactionType.Income;
             TransVM.Description = TransVM.CurrentCategory.Description;
+            TransVM.CategoryId = TransVM.CurrentCategory.Id;
             OnPropertyChanged(nameof(TransVM));
         }
 

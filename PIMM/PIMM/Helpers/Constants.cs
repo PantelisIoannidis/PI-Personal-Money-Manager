@@ -2,7 +2,7 @@
 {
     public static class DatabaseConsts
     {
-        public static string DatabaseName = "PIMMv006.db3";
+        public static string DatabaseName = "PIMMv007.db3";
     }
 
     public static class Themes
