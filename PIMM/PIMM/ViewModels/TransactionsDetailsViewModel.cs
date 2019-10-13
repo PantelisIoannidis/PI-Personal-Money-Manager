@@ -1,4 +1,5 @@
-﻿using PIMM.Models;
+﻿using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.Persistance;
 using PIMM.Views.TransactionsDetails;
 using System.ComponentModel;
@@ -92,7 +93,7 @@ namespace PIMM.ViewModels
         private async Task Save()
         {
             repository.UpdateTransaction(TransVM);
-            MessagingCenter.Send(this, "UpdateTransactions");
+            MessagingCenter.Send(this, MessagingString.UpdateTransactions);
             await pageService.PopAsync();
         }
 

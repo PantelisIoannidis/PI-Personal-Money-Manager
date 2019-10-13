@@ -1,4 +1,5 @@
-﻿using PIMM.Persistance;
+﻿using PIMM.Helpers;
+using PIMM.Persistance;
 using PIMM.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace PIMM.Views.AccountsDetails
             {
                 color = r.Result;
                 vm.Color = color;
-                MessagingCenter.Send(this, "UpdateAccount", vm);
+                MessagingCenter.Send(this, MessagingString.UpdateAccount, vm);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }

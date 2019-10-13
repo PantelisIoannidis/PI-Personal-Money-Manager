@@ -91,7 +91,7 @@ namespace PIMM.ViewModels
             if (deleteConfirmation)
             {
                 repository.DeleteTransaction(transactions);
-                MessagingCenter.Send(this, "DeleteTransactions");
+                MessagingCenter.Send(this, MessagingString.DeleteTransactions);
             }
         }
 
@@ -103,7 +103,7 @@ namespace PIMM.ViewModels
         private void CmdRefresh()
         {
             IsRefreshing = true;
-            MessagingCenter.Send(this, "RefreshTransactions");
+            MessagingCenter.Send(this, MessagingString.RefreshTransactions);
             IsRefreshing = false;
         }
 

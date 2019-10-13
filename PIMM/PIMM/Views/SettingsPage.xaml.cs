@@ -47,7 +47,7 @@ namespace PIMM
 
         private async Task ExitPage()
         {
-            MessagingCenter.Send(this, "UpdateTransactionsAfterSettingsChange");
+            MessagingCenter.Send(this, MessagingString.UpdateTransactionsAfterSettingsChange);
             await pageService.PopAsync();
         }
     }

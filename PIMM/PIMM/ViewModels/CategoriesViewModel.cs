@@ -51,8 +51,8 @@ namespace PIMM.ViewModels
             SearchCommand = new Command<string>(s => Search(s));
             IncomeSelectedCommand = new Command(IncomeSelected);
             ExpenseSelectedCommand = new Command(ExpenseSelected);
-            MessagingCenter.Unsubscribe<CategoryDetailsViewModel, CategoryDto>(this, "UpdateCategory");
-            MessagingCenter.Subscribe<CategoriesDetailsPage, CategoryDto>(this, "UpdateCategory", async (page, vm) => { await UpdateCategory(page, vm); });
+            MessagingCenter.Unsubscribe<CategoryDetailsViewModel, CategoryDto>(this, MessagingString.UpdateCategory);
+            MessagingCenter.Subscribe<CategoriesDetailsPage, CategoryDto>(this, MessagingString.UpdateCategory, async (page, vm) => { await UpdateCategory(page, vm); });
         }
 
         private TransactionType selectedType;
@@ -127,7 +127,7 @@ namespace PIMM.ViewModels
         {
             await _pageService.PopAsync();
             _repository.UpdateCategory(vm);
-            MessagingCenter.Send(this, "RefreshCategory");
+            MessagingCenter.Send(this, MessagingString.RefreshCategory);
         }
 
         private async Task EditAction(CategoryDto vm)
@@ -149,7 +149,7 @@ namespace PIMM.ViewModels
                 }
                 else
                 {
-                    MessagingCenter.Send(this, "DeleteCategories");
+                    MessagingCenter.Send(this, MessagingString.DeleteCategories);
                 }
             }
         }
@@ -210,7 +210,7 @@ namespace PIMM.ViewModels
         private void CmdRefresh()
         {
             IsRefreshing = true;
-            MessagingCenter.Send(this, "RefreshCategory");
+            MessagingCenter.Send(this, MessagingString.RefreshCategory);
             IsRefreshing = false;
         }
 

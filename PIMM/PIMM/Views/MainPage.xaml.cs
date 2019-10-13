@@ -49,12 +49,12 @@ namespace PIMM
             overview.BindingContext = charts;
             transactions.BindingContext = transactionsViewModel;
 
-            MessagingCenter.Subscribe<NavigationBarViewModel>(this, "UpdatePeriod", RefreshTransactions);
-            MessagingCenter.Subscribe<SettingsPage>(this, "UpdateTransactionsAfterSettingsChange", RefreshTransactions);
-            MessagingCenter.Subscribe<SettingsViewModel>(this, "UpdateTransactionsAfterReset", RefreshTransactions);
-            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, "UpdateTransactions", RefreshTransactions);
-            MessagingCenter.Subscribe<TransactionsViewModel>(this, "DeleteTransactions", RefreshTransactions);
-            MessagingCenter.Subscribe<TransactionsViewModel>(this, "RefreshTransactions", RefreshTransactions);
+            MessagingCenter.Subscribe<NavigationBarViewModel>(this, MessagingString.UpdatePeriod, RefreshTransactions);
+            MessagingCenter.Subscribe<SettingsPage>(this, MessagingString.UpdateTransactionsAfterSettingsChange, RefreshTransactions);
+            MessagingCenter.Subscribe<SettingsViewModel>(this, MessagingString.UpdateTransactionsAfterReset, RefreshTransactions);
+            MessagingCenter.Subscribe<TransactionsDetailsViewModel>(this, MessagingString.UpdateTransactions, RefreshTransactions);
+            MessagingCenter.Subscribe<TransactionsViewModel>(this, MessagingString.DeleteTransactions, RefreshTransactions);
+            MessagingCenter.Subscribe<TransactionsViewModel>(this, MessagingString.RefreshTransactions, RefreshTransactions);
         }
 
         protected override void OnCurrentPageChanged()
@@ -94,7 +94,7 @@ namespace PIMM
         {
             var transactions = repository.GetTransactions(period);
             navigationBarViewModel.Transactions = transactions;
-            MessagingCenter.Send(this, "UpdateCharts");
+            MessagingCenter.Send(this, MessagingString.UpdateCharts);
         }
 
         public MainPageViewModel ViewModel

@@ -1,4 +1,5 @@
-﻿using PIMM.Persistance;
+﻿using PIMM.Helpers;
+using PIMM.Persistance;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -27,9 +28,9 @@ namespace PIMM.ViewModels
             if (response)
             {
                 await initializeDatabase.EraseDatabase();
-                MessagingCenter.Send(this, "UpdateTransactionsAfterReset");
-                MessagingCenter.Send(this, "UpdateCategoryAfterReset");
-                MessagingCenter.Send(this, "UpdateAccountsAfterReset");
+                MessagingCenter.Send(this, MessagingString.UpdateTransactionsAfterReset);
+                MessagingCenter.Send(this, MessagingString.UpdateCategoryAfterReset);
+                MessagingCenter.Send(this, MessagingString.UpdateAccountsAfterReset);
                 await pageService.PopAsync();
             }
         }

@@ -18,7 +18,7 @@ namespace PIMM.Helpers
         {
             if (!app.Properties.ContainsKey(Themes.ThemeKey))
             {
-                app.Properties[Themes.ThemeKey] = Themes.Blue;
+                app.Properties[Themes.ThemeKey] = Themes.Dark;
             }
 
             var theme = app.Properties[Themes.ThemeKey].ToString();

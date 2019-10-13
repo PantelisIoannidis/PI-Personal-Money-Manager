@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using PIMM.Helpers;
 
 namespace PIMM.ViewModels
 {
@@ -42,8 +43,8 @@ namespace PIMM.ViewModels
             EditActionCommand = new Command<AccountDto>(async vm => await EditAction(vm));
             NewAccountCommand = new Command<AccountDto>(async vm => await NewAction());
             SearchCommand = new Command<string>(s => Search(s));
-            MessagingCenter.Unsubscribe<AccountsDetailsPage, AccountDto>(this, "UpdateAccount");
-            MessagingCenter.Subscribe<AccountsDetailsPage, AccountDto>(this, "UpdateAccount", async (page, vm) => { await UpdateAccount(page, vm); });
+            MessagingCenter.Unsubscribe<AccountsDetailsPage, AccountDto>(this, MessagingString.UpdateAccount);
+            MessagingCenter.Subscribe<AccountsDetailsPage, AccountDto>(this, MessagingString.UpdateAccount, async (page, vm) => { await UpdateAccount(page, vm); });
         }
 
         private async Task NewAction()
@@ -60,7 +61,7 @@ namespace PIMM.ViewModels
         {
             await _pageService.PopAsync();
             _repository.UpdateAccount(vm);
-            MessagingCenter.Send(this, "RefreshAccounts");
+            MessagingCenter.Send(this, MessagingString.RefreshAccounts);
         }
 
         private async Task EditAction(AccountDto vm)
@@ -81,7 +82,7 @@ namespace PIMM.ViewModels
                 }
                 else
                 {
-                    MessagingCenter.Send(this, "DeleteAccounts");
+                    MessagingCenter.Send(this, MessagingString.DeleteAccounts);
                 }
             }
         }
@@ -142,7 +143,7 @@ namespace PIMM.ViewModels
         private void CmdRefresh()
         {
             IsRefreshing = true;
-            MessagingCenter.Send(this, "RefreshAccounts");
+            MessagingCenter.Send(this, MessagingString.RefreshAccounts);
             IsRefreshing = false;
         }
 

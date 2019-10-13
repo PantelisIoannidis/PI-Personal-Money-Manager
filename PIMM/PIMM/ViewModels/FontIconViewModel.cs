@@ -1,4 +1,5 @@
-﻿using PIMM.Models;
+﻿using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.Persistance;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace PIMM.ViewModels
         {
             SelectedIcon = (fonticon as FontIcon);
 
-            MessagingCenter.Send<FontIconViewModel, FontIcon>(this, "UpdateIcon", SelectedIcon);
+            MessagingCenter.Send<FontIconViewModel, FontIcon>(this, MessagingString.UpdateIcon, SelectedIcon);
         }
 
         private void Search(string s)

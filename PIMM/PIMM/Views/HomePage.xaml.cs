@@ -20,7 +20,7 @@ namespace PIMM
         public HomePage()
         {
             InitializeComponent();
-            MessagingCenter.Subscribe<MainPage>(this, "UpdateCharts", UpdateCharts);
+            MessagingCenter.Subscribe<MainPage>(this, MessagingString.UpdateCharts, UpdateCharts);
         }
 
         private void UpdateCharts(MainPage obj)

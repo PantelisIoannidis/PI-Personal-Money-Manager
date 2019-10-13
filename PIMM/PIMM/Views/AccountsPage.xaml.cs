@@ -1,4 +1,5 @@
-﻿using PIMM.Persistance;
+﻿using PIMM.Helpers;
+using PIMM.Persistance;
 using PIMM.ViewModels;
 using System.Collections.Generic;
 
@@ -21,9 +22,9 @@ namespace PIMM
             repository = new Repository();
             accounts = repository.GetAccountsAsViewModels();
             accountsViewModel = new AccountsViewModel(accounts, new PageService(), repository);
-            MessagingCenter.Subscribe<AccountsViewModel>(this, "DeleteAccounts", RefreshAccounts);
-            MessagingCenter.Subscribe<AccountsViewModel>(this, "RefreshAccounts", RefreshAccounts);
-            MessagingCenter.Subscribe<SettingsViewModel>(this, "UpdateAccountsAfterReset", RefreshAccounts);
+            MessagingCenter.Subscribe<AccountsViewModel>(this, MessagingString.DeleteAccounts, RefreshAccounts);
+            MessagingCenter.Subscribe<AccountsViewModel>(this, MessagingString.RefreshAccounts, RefreshAccounts);
+            MessagingCenter.Subscribe<SettingsViewModel>(this, MessagingString.UpdateAccountsAfterReset, RefreshAccounts);
             BindingContext = accountsViewModel;
         }
 

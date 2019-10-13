@@ -1,4 +1,5 @@
-﻿using PIMM.Persistance;
+﻿using PIMM.Helpers;
+using PIMM.Persistance;
 using PIMM.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,9 @@ namespace PIMM
             categories = repository.GetCategoriesAsViewModels();
             categoriesViewModel = new CategoriesViewModel(categories, new PageService(), repository);
 
-            MessagingCenter.Subscribe<CategoriesViewModel>(this, "DeleteCategory", RefreshCategories);
-            MessagingCenter.Subscribe<CategoriesViewModel>(this, "RefreshCategory", RefreshCategories);
-            MessagingCenter.Subscribe<SettingsViewModel>(this, "UpdateCategoryAfterReset", RefreshCategories);
+            MessagingCenter.Subscribe<CategoriesViewModel>(this, MessagingString.DeleteCategory, RefreshCategories);
+            MessagingCenter.Subscribe<CategoriesViewModel>(this, MessagingString.RefreshCategory, RefreshCategories);
+            MessagingCenter.Subscribe<SettingsViewModel>(this, MessagingString.UpdateCategoryAfterReset, RefreshCategories);
             BindingContext = categoriesViewModel;
         }
 

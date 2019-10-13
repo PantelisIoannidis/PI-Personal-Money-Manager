@@ -1,4 +1,5 @@
-﻿using PIMM.Models;
+﻿using PIMM.Helpers;
+using PIMM.Models;
 using PIMM.Persistance;
 using PIMM.Views.CategoriesDetails;
 using System.ComponentModel;
@@ -29,8 +30,8 @@ namespace PIMM.ViewModels
             this.pageService = pageService;
             this.repository = repository;
             Category = category;
-            MessagingCenter.Unsubscribe<FontIconViewModel, FontIcon>(this, "UpdateIcon");
-            MessagingCenter.Subscribe<FontIconViewModel, FontIcon>(this, "UpdateIcon", async (vm, x) => await UpdateIcon(vm));
+            MessagingCenter.Unsubscribe<FontIconViewModel, FontIcon>(this, MessagingString.UpdateIcon);
+            MessagingCenter.Subscribe<FontIconViewModel, FontIcon>(this, MessagingString.UpdateIcon, async (vm, x) => await UpdateIcon(vm));
             SelectIconCommand = new Command(async x => await SelectIcon());
         }
 

@@ -1,4 +1,5 @@
-﻿using PIMM.Persistance;
+﻿using PIMM.Helpers;
+using PIMM.Persistance;
 using PIMM.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace PIMM.Views.CategoriesDetails
                 color = r.Result;
                 detailsVM.Category.Color = color;
                 //detailsVM.Unsubscribe();
-                MessagingCenter.Send(this, "UpdateCategory", detailsVM.Category);
+                MessagingCenter.Send(this, MessagingString.UpdateCategory, detailsVM.Category);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
