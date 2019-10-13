@@ -201,7 +201,7 @@ namespace PIMM.Persistance
             var transactionsWithThatCategoryInUse =
                 db.ExecuteScalar<int>(@"SELECT COUNT(*) FROM 'Transaction' WHERE CategoryId = ? ", category.Id);
             if (transactionsWithThatCategoryInUse > 0)
-                return $"This category is used in {transactionsWithThatCategoryInUse} transactions and it cannot be erased.";
+                return $"This category is used in {transactionsWithThatCategoryInUse}  transactions and it cannot be erased.";
 
             db.Delete(category);
             return "OK";

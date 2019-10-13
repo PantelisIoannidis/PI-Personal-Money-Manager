@@ -19,7 +19,7 @@
         public static string DeleteAccounts = "DeleteAccounts";
         public static string UpdateCategory = "UpdateCategory";
         public static string RefreshCategory = "RefreshCategory";
-        public static string DeleteCategories = "DeleteCategories";
+        public static string DeleteCategoy = "DeleteCategory";
         public static string DeleteCategory = "DeleteCategory";
         public static string UpdateIcon = "UpdateIcon";
         public static string UpdatePeriod = "UpdatePeriod";

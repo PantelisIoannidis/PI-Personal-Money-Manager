@@ -1,5 +1,7 @@
-﻿using PIMM.Helpers;
+﻿using AutoMapper;
+using PIMM.Helpers;
 using PIMM.Models;
+using PIMM.Models.ViewModels;
 using PIMM.Persistance;
 using PIMM.Views.TransactionsDetails;
 using System.ComponentModel;
@@ -36,17 +38,52 @@ namespace PIMM.ViewModels
             }
         }
 
-        public TransactionsDetailsViewModel(IPageService pageService, IRepository repository, UpdateTransactionDto transactionDto)
+        public TransactionsDetailsViewModel(IPageService pageService, IRepository repository, TransactionDto transactionDto)
         {
             this.pageService = pageService;
             this.repository = repository;
-            TransVM = transactionDto;
+            CheckIfCategoriesAndAccountsExistsAsync().ContinueWith(r =>
+            {
+                var result = r.Result;
+                if (!result)
+                    return;
+                prepareViewModel(transactionDto);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
 
             SaveCommand = new Command(async x => await Save());
             IncomeSelectedCommand = new Command(IncomeSelected);
             ExpenseSelectedCommand = new Command(ExpenseSelected);
             SelectedAccountCommand = new Command(async x => await SelectedAccount());
             SelectedCategoryCommand = new Command(async x => await SelectedCategory());
+        }
+
+        private void prepareViewModel(TransactionDto vm)
+        {
+            this.TransVM = Mapper.Map<TransactionDto, UpdateTransactionDto>(vm);
+            TransVM = repository.PopulateTransactionWithConnectedLists(TransVM);
+            if (TransVM.CategoryId == 0)
+                TransVM.CategoryId = TransVM.CurrentCategory.Id;
+            if (TransVM.AccountId <= 0)
+                TransVM.AccountId = TransVM.CurrentAccount.Id;
+            if (string.IsNullOrEmpty(TransVM.Description))
+                TransVM.Description = TransVM.CurrentCategory.Description;
+        }
+
+        private async Task<bool> CheckIfCategoriesAndAccountsExistsAsync()
+        {
+            var result = false;
+            if (repository.GetAllCategories().Count > 0)
+                result = true;
+            if (repository.GetAllAccounts().Count > 0)
+                result = true;
+
+            if (result == false)
+            {
+                await pageService.DisplayAlert("Can't create trancaction"
+                    , "You have to create categories and accounts first.", "Ok");
+                await pageService.PopAsync();
+            }
+            return result;
         }
 
         private async Task SelectedCategory()

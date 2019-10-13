@@ -2,6 +2,7 @@
 using PIMM.Persistance;
 using PIMM.ViewModels;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -30,6 +31,18 @@ namespace PIMM.Views.CategoriesDetails
             if (category.Id <= 0)
             {
                 var temp_category = repository.GetFirstCategory(category.Type);
+                if (temp_category == null)
+                {
+                    var aFont = repository.GetAllFontIcons().FirstOrDefault();
+                    temp_category = new CategoryDto
+                    {
+                        Color = "#153ed4",
+                        FontFamily = aFont.FontFamily,
+                        FontGlyph = aFont.Glyph,
+                        FontIconId = aFont.Id
+                    };
+                }
+
                 category.Color = temp_category.Color;
                 category.FontGlyph = temp_category.FontGlyph;
                 category.FontFamily = temp_category.FontFamily;

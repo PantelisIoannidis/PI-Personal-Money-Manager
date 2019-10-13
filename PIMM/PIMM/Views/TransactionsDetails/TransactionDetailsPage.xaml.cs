@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using PIMM.Models.ViewModels;
 using PIMM.Persistance;
 using PIMM.ViewModels;
@@ -23,21 +24,8 @@ namespace PIMM.Views.TransactionDetails
             this.pageService = pageService;
             this.repository = repository;
 
-            prepareViewModel(transaction);
-            transDetailVM = new TransactionsDetailsViewModel(pageService, repository, newTransVM);
+            transDetailVM = new TransactionsDetailsViewModel(pageService, repository, transaction);
             BindingContext = transDetailVM;
-        }
-
-        private void prepareViewModel(TransactionDto vm)
-        {
-            this.newTransVM = Mapper.Map<TransactionDto, UpdateTransactionDto>(vm);
-            newTransVM = repository.PopulateTransactionWithConnectedLists(newTransVM);
-            if (newTransVM.CategoryId == 0)
-                newTransVM.CategoryId = newTransVM.CurrentCategory.Id;
-            if (newTransVM.AccountId <= 0)
-                newTransVM.AccountId = newTransVM.CurrentAccount.Id;
-            if (string.IsNullOrEmpty(newTransVM.Description))
-                newTransVM.Description = newTransVM.CurrentCategory.Description;
         }
 
         public TransactionsDetailsViewModel ViewModel

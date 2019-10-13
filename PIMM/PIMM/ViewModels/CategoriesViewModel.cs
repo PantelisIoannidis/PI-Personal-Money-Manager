@@ -149,7 +149,7 @@ namespace PIMM.ViewModels
                 }
                 else
                 {
-                    MessagingCenter.Send(this, MessagingString.DeleteCategories);
+                    MessagingCenter.Send(this, MessagingString.DeleteCategoy);
                 }
             }
         }
