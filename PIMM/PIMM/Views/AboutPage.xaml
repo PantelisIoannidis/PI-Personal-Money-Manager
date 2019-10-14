@@ -14,6 +14,22 @@
             <Label Text=" Copyright 2019 Pantelis Ioannidis " FontSize="Large"
                 VerticalOptions="Center"
                 HorizontalOptions="CenterAndExpand" />
+            <BoxView HorizontalOptions="Center" MinimumWidthRequest="200" HeightRequest="2" />
+            <Label FontSize="Large" HorizontalOptions="Center">
+                Disclaimer
+            </Label>
+            <Label FontSize="Small" HorizontalOptions="Center">
+                Last updated: October 14, 2019
+            </Label>
+            <Label FontSize="Small" HorizontalOptions="Start">
+                The information contained on PI Personal Money Manager mobile app (the "Service") is for general information purposes only.
+            </Label>
+            <Label FontSize="Small" HorizontalOptions="Start">
+                assumes no responsibility for errors or omissions in the contents on the Service.
+            </Label>
+            <Label FontSize="Small" HorizontalOptions="Start">
+                In no event shall  be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service.  reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
