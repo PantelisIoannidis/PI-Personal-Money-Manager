@@ -52,19 +52,20 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="7*" />
                                     <ColumnDefinition Width="5*" />
-                                    <ColumnDefinition Width="4*" />
-                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Grid.Row="0"
-                                   FontSize="Large"
+                                   FontSize="Medium"
                                    Text="{Binding Glyph}"
                                    FontFamily="{Binding FontFamily}"
                                    TextColor="{Binding GlyphColor}" />
                                 <Label Grid.Column="1" Grid.Row="0"
                                    Text="&#xf111;"
+                                   FontSize="Micro"
                                    FontFamily="{x:Static fa:FontAwesome.FontName}"
                                    TextColor="{Binding AccountColor}" />
                                 <Label Grid.Column="2" Grid.Row="0"
@@ -72,6 +73,7 @@
                                    TextColor="{DynamicResource textColor}"
                                    Text="{Binding Description}" />
                                 <Label Grid.Column="3" Grid.Row="0"
+                                   FontSize="Micro"
                                    HorizontalTextAlignment="End"
                                    Text="{Binding FormattedDate}" />
                                 <Label Grid.Column="4" Grid.Row="0"
